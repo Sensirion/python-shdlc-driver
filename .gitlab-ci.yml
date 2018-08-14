@@ -1,0 +1,68 @@
+stages:
+  - build
+  - deploy
+
+check_rst_syntax:
+  stage: build
+  tags: [linux, docker]
+  image: sensirion/python
+  script:
+    - rst-lint *.rst
+
+build_package:linux_py2:
+  stage: build
+  tags: [linux, docker]
+  image: sensirion/python
+  script:
+    - pip install -e .[test]
+    - flake8 sensirion_shdlc_driver
+    - pytest
+    - python setup.py sdist
+    - python setup.py bdist_wheel
+  artifacts:
+    expire_in: 1 week
+    paths: [dist]
+      
+build_package:linux_py3:
+  stage: build
+  tags: [linux, docker]
+  image: sensirion/python3
+  script:
+    - pip install -e .[test]
+    - flake8 sensirion_shdlc_driver
+    - pytest
+    - python3 setup.py bdist_wheel
+  artifacts:
+    expire_in: 1 week
+    paths: [dist]
+
+build_package:windows:
+  stage: build
+  tags: [windows, x86_64, python27]
+  script:
+    - pip install -e .[test]
+    - flake8 sensirion_shdlc_driver
+    - pytest
+    - python setup.py bdist_wheel -q
+  artifacts:
+    expire_in: 1 week
+    paths: [dist]
+
+deploy_staging:
+    stage: deploy
+    tags: [linux, docker]
+    image: sensirion/python
+    dependencies:
+      - build_package:linux_py2
+      - build_package:linux_py3
+      - build_package:windows
+    environment:
+      name: $DEVPI_GROUP/staging
+      url: https://pypi.sensirion.lokal/$DEVPI_GROUP/staging/sensirion-shdlc-driver
+    only:
+      - master
+      - tags
+    script:
+      - devpi use https://pypi.sensirion.lokal/$DEVPI_GROUP/staging
+      - devpi login $DEVPI_GROUP --password=$DEVPI_PW
+      - devpi upload --from-dir dist

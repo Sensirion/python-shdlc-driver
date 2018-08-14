@@ -1,0 +1,62 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+(c) Copyright 2018 Sensirion AG, Switzerland
+"""
+
+from __future__ import absolute_import, division, print_function, unicode_literals
+from setuptools import setup, find_packages
+import os
+import re
+
+
+# Read version number from version.py
+version_line = open("sensirion_shdlc_driver/version.py", "rt").read()
+result = re.search(r"^version = ['\"]([^'\"]*)['\"]", version_line, re.M)
+if result:
+    version_string = result.group(1)
+else:
+    raise RuntimeError("Unable to find version string")
+
+
+# Use README.rst and CHANGELOG.rst as package description
+readme = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
+changelog = open(os.path.join(os.path.dirname(__file__), 'CHANGELOG.rst')).read()
+long_description = readme.strip() + "\n\n" + changelog.strip() + "\n"
+
+
+setup(
+    name='sensirion-shdlc-driver',
+    version=version_string,
+    author='Urban Bruhin',
+    author_email='urban.bruhin@sensirion.com',
+    description='Base Driver for Communicating With Sensirion SHDLC Devices',
+    license='BSD',
+    keywords='shdlc sensirion sensor driver',
+    url='https://github.com/sensirion/python-shdlc-driver',
+    packages=find_packages(exclude=['tests', 'tests.*']),
+    long_description=long_description,
+    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4',
+    setup_requires=[
+        'pytest-runner~=4.2',
+    ],
+    install_requires=[
+    ],
+    extras_require={
+        'test': [
+            'flake8~=3.5.0',
+            'pytest~=3.5.0',
+            'pytest-cov~=2.5.1',
+        ]
+    },
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Topic :: System :: Hardware :: Hardware Drivers'
+    ]
+)
