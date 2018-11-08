@@ -42,9 +42,9 @@ setup(
     ],
     extras_require={
         'test': [
-            'flake8~=3.5.0',
-            'pytest~=3.5.0',
-            'pytest-cov~=2.5.1',
+            'flake8~=3.6.0',
+            'pytest~=3.10.0',
+            'pytest-cov~=2.6.0',
         ]
     },
     classifiers=[
