@@ -40,6 +40,7 @@ setup(
         'pytest-runner~=4.2',
     ],
     install_requires=[
+        'pyserial~=3.0',
     ],
     extras_require={
         'test': [
