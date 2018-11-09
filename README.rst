@@ -37,4 +37,11 @@ Usage
 -----
 .. sourcecode:: python
     
-    import sensirion_shdlc_driver
+    from sensirion_shdlc_driver import ShdlcSerialPort, ShdlcConnection, ShdlcDevice
+    
+    with ShdlcSerialPort(port='COM1', baudrate=115200) as port:
+        device = ShdlcDevice(ShdlcConnection(port), slave_address=0)
+        print("Product Name: {}".format(device.get_product_name()))
+        print("Article Code: {}".format(device.get_article_code()))
+        print("Serial Number: {}".format(device.get_serial_number()))
+        print("Version: {}".format(device.get_version()))
