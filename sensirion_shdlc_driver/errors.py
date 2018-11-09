@@ -95,3 +95,82 @@ class ShdlcDeviceError(ShdlcError):
         :rtype: string
         """
         return self._error_message
+
+
+class ShdlcCommandDataSizeError(ShdlcDeviceError):
+    """
+    SHDLC device error for wrong data size.
+    """
+    def __init__(self):
+        super(ShdlcCommandDataSizeError, self).__init__(
+            1, "Illegal data size of the MOSI frame. Either a wrong command "
+               "was sent, or the device firmware does not support the "
+               "requested feature."
+        )
+
+
+class ShdlcUnknownCommandError(ShdlcDeviceError):
+    """
+    SHDLC device error for unknown command.
+    """
+    def __init__(self):
+        super(ShdlcUnknownCommandError, self).__init__(
+            2, "Unknown command. Check if you sent the correct command and if "
+               "the firmware on the device supports it."
+        )
+
+
+class ShdlcAccessRightError(ShdlcDeviceError):
+    """
+    SHDLC device error for wrong access right.
+    """
+    def __init__(self):
+        super(ShdlcAccessRightError, self).__init__(
+            3, "No access right for this command. Higher access rights are "
+               "required to execute this command."
+        )
+
+
+class ShdlcCommandParameterError(ShdlcDeviceError):
+    """
+    SHDLC device error for illegal command parameter.
+    """
+    def __init__(self):
+        super(ShdlcCommandParameterError, self).__init__(
+            4, "Parameter out of range. Check if you sent the correct command "
+               "parameters and if the firmware on the device supports them."
+        )
+
+
+class ShdlcChecksumError(ShdlcDeviceError):
+    """
+    SHDLC device error for wrong checksum.
+    """
+    def __init__(self):
+        super(ShdlcChecksumError, self).__init__(
+            5, "Wrong checksum received."
+        )
+
+
+class ShdlcFirmwareUpdateError(ShdlcDeviceError):
+    """
+    SHDLC device error for firmware update failure.
+    """
+    def __init__(self):
+        super(ShdlcFirmwareUpdateError, self).__init__(
+            6, "Firmware update operation failed. Flash couldn't be written "
+               "or flash validation failed."
+        )
+
+
+"""
+List containing all device errors specified in this file.
+"""
+SHDLC_DEVICE_ERROR_LIST = [
+    ShdlcCommandDataSizeError(),
+    ShdlcUnknownCommandError(),
+    ShdlcAccessRightError(),
+    ShdlcCommandParameterError(),
+    ShdlcChecksumError(),
+    ShdlcFirmwareUpdateError(),
+]
