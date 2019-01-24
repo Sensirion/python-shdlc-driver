@@ -19,7 +19,8 @@ you're very welcome to open issues or create pull requests :)
 
 ## Usage
 
-See package description in [README.rst](README.rst).
+See package description in [README.rst](README.rst) and user manual at
+https://sensirion.github.io/python-shdlc-driver/.
 
 ## License
 
