@@ -6,8 +6,6 @@ transmit and receive SHDLC frames over the serial port and provides some
 generic commands (e.g. reading the serial number of a device).
 
 
-Test
-
 Contents
 --------
 

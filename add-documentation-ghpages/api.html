@@ -1002,30 +1002,19 @@ for the “Get Version” command.</p>
 </div>
 <div class="section" id="exceptions">
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
-digraph inheritance42b56db99d {
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;sensirion_shdlc_driver.errors.ShdlcAccessRightError&quot; [URL=&quot;#sensirion_shdlc_driver.errors.ShdlcAccessRightError&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcDeviceError&quot; -&gt; &quot;sensirion_shdlc_driver.errors.ShdlcAccessRightError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcChecksumError&quot; [URL=&quot;#sensirion_shdlc_driver.errors.ShdlcChecksumError&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcDeviceError&quot; -&gt; &quot;sensirion_shdlc_driver.errors.ShdlcChecksumError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError&quot; [URL=&quot;#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcDeviceError&quot; -&gt; &quot;sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcCommandParameterError&quot; [URL=&quot;#sensirion_shdlc_driver.errors.ShdlcCommandParameterError&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcDeviceError&quot; -&gt; &quot;sensirion_shdlc_driver.errors.ShdlcCommandParameterError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcDeviceError&quot; [URL=&quot;#sensirion_shdlc_driver.errors.ShdlcDeviceError&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcError&quot; -&gt; &quot;sensirion_shdlc_driver.errors.ShdlcDeviceError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcError&quot; [URL=&quot;#sensirion_shdlc_driver.errors.ShdlcError&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError&quot; [URL=&quot;#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcDeviceError&quot; -&gt; &quot;sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcResponseError&quot; [URL=&quot;#sensirion_shdlc_driver.errors.ShdlcResponseError&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcError&quot; -&gt; &quot;sensirion_shdlc_driver.errors.ShdlcResponseError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcTimeoutError&quot; [URL=&quot;#sensirion_shdlc_driver.errors.ShdlcTimeoutError&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcError&quot; -&gt; &quot;sensirion_shdlc_driver.errors.ShdlcTimeoutError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcUnknownCommandError&quot; [URL=&quot;#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;];
-  &quot;sensirion_shdlc_driver.errors.ShdlcDeviceError&quot; -&gt; &quot;sensirion_shdlc_driver.errors.ShdlcUnknownCommandError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<span class="target" id="module-sensirion_shdlc_driver.errors"></span><dl class="exception">
+<div class="graphviz"><img src="_images/inheritance-35f2c29374a263b2007054f9e503959c3905c547.png" alt="Inheritance diagram of sensirion_shdlc_driver.errors" usemap="#inheritance42b56db99d" class="inheritance graphviz" /></div>
+<map id="inheritance42b56db99d" name="inheritance42b56db99d">
+<area shape="rect" id="node1" href="#sensirion_shdlc_driver.errors.ShdlcAccessRightError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcAccessRightError" alt="" coords="505,4,745,21"/>
+<area shape="rect" id="node2" href="#sensirion_shdlc_driver.errors.ShdlcDeviceError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcDeviceError" alt="" coords="230,89,447,106"/>
+<area shape="rect" id="node3" href="#sensirion_shdlc_driver.errors.ShdlcChecksumError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcChecksumError" alt="" coords="509,37,742,55"/>
+<area shape="rect" id="node4" href="#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError" alt="" coords="489,71,762,89"/>
+<area shape="rect" id="node5" href="#sensirion_shdlc_driver.errors.ShdlcCommandParameterError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcCommandParameterError" alt="" coords="486,105,764,122"/>
+<area shape="rect" id="node7" href="#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError" alt="" coords="496,139,754,156"/>
+<area shape="rect" id="node10" href="#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcUnknownCommandError" alt="" coords="489,173,762,190"/>
+<area shape="rect" id="node6" href="#sensirion_shdlc_driver.errors.ShdlcError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcError" alt="" coords="4,122,191,140"/>
+<area shape="rect" id="node8" href="#sensirion_shdlc_driver.errors.ShdlcResponseError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcResponseError" alt="" coords="224,122,453,140"/>
+<area shape="rect" id="node9" href="#sensirion_shdlc_driver.errors.ShdlcTimeoutError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcTimeoutError" alt="" coords="227,156,450,174"/>
+</map><span class="target" id="module-sensirion_shdlc_driver.errors"></span><dl class="exception">
 <dt id="sensirion_shdlc_driver.errors.ShdlcAccessRightError">
 <em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcAccessRightError</code><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcAccessRightError" title="Permalink to this definition">¶</a></dt>
 <dd><p>SHDLC device error for wrong access right.</p>

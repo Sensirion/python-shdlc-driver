@@ -1,0 +1,12 @@
+<map id="inheritance42b56db99d" name="inheritance42b56db99d">
+<area shape="rect" id="node1" href="#sensirion_shdlc_driver.errors.ShdlcAccessRightError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcAccessRightError" alt="" coords="505,4,745,21"/>
+<area shape="rect" id="node2" href="#sensirion_shdlc_driver.errors.ShdlcDeviceError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcDeviceError" alt="" coords="230,89,447,106"/>
+<area shape="rect" id="node3" href="#sensirion_shdlc_driver.errors.ShdlcChecksumError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcChecksumError" alt="" coords="509,37,742,55"/>
+<area shape="rect" id="node4" href="#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError" alt="" coords="489,71,762,89"/>
+<area shape="rect" id="node5" href="#sensirion_shdlc_driver.errors.ShdlcCommandParameterError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcCommandParameterError" alt="" coords="486,105,764,122"/>
+<area shape="rect" id="node7" href="#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError" alt="" coords="496,139,754,156"/>
+<area shape="rect" id="node10" href="#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcUnknownCommandError" alt="" coords="489,173,762,190"/>
+<area shape="rect" id="node6" href="#sensirion_shdlc_driver.errors.ShdlcError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcError" alt="" coords="4,122,191,140"/>
+<area shape="rect" id="node8" href="#sensirion_shdlc_driver.errors.ShdlcResponseError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcResponseError" alt="" coords="224,122,453,140"/>
+<area shape="rect" id="node9" href="#sensirion_shdlc_driver.errors.ShdlcTimeoutError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcTimeoutError" alt="" coords="227,156,450,174"/>
+</map>
