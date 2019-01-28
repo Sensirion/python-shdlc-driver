@@ -11,4 +11,7 @@ Contents
 
 .. toctree::
 
+   shdlc
+   installation
+   quickstart
    api
