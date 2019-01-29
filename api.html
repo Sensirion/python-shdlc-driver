@@ -168,27 +168,11 @@
 <h2>ShdlcPort<a class="headerlink" href="#shdlcport" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sensirion_shdlc_driver.port.ShdlcPort">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.port.</code><code class="descname">ShdlcPort</code><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.port.</code><code class="descname">ShdlcPort</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort" title="Permalink to this definition">¶</a></dt>
 <dd><p>Common interface for all communication ports for transceiving SHDLC frames.</p>
 <p>Concrete implementations may use the serial port or another interface for
 transceiving SHDLC frames. All methods must be implemented thread-safe,
 i.e. allowing them to be called from multiple threads at the same time.</p>
-<dl class="attribute">
-<dt id="sensirion_shdlc_driver.port.ShdlcPort.bitrate">
-<code class="descname">bitrate</code><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort.bitrate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the current bitrate.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Bitrate in bit/s.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="attribute">
 <dt id="sensirion_shdlc_driver.port.ShdlcPort.description">
 <code class="descname">description</code><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort.description" title="Permalink to this definition">¶</a></dt>
@@ -205,9 +189,25 @@ i.e. allowing them to be called from multiple threads at the same time.</p>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.port.ShdlcPort.bitrate">
+<code class="descname">bitrate</code><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort.bitrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current bitrate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Bitrate in bit/s.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="sensirion_shdlc_driver.port.ShdlcPort.transceive">
-<code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort.transceive" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcPort.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort.transceive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send SHDLC frame to port and return received response frame.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -242,7 +242,7 @@ time until the first byte is received).</li>
 
 <dl class="class">
 <dt id="sensirion_shdlc_driver.port.ShdlcSerialPort">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.port.</code><code class="descname">ShdlcSerialPort</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.port.</code><code class="descname">ShdlcSerialPort</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort" title="Permalink to this definition">¶</a></dt>
 <dd><p>SHDLC transceiver for the serial port (e.g. UART/RS232/RS485).</p>
 <p>This class implements the ShdlcPort interface for the serial port.</p>
 <div class="admonition note">
@@ -253,7 +253,7 @@ using it.</p>
 </div>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open the serial port. Throws an exception if the port cannot be opened.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -264,6 +264,22 @@ using it.</p>
 <li><strong>baudrate</strong> (<em>int</em>) – The baudrate in bit/s.</li>
 </ul>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.description">
+<code class="descname">description</code><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a description of the port.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Description string.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
 </tr>
 </tbody>
 </table>
@@ -286,30 +302,8 @@ using it.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Close (release) the serial port.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.description">
-<code class="descname">description</code><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.description" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a description of the port.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Description string.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
 <dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.transceive">
-<code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.transceive" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.transceive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send SHDLC frame to port and return received response frame.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -340,6 +334,12 @@ time until the first byte is received).</li>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close (release) the serial port.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -347,7 +347,7 @@ time until the first byte is received).</li>
 <h2>ShdlcConnection<a class="headerlink" href="#shdlcconnection" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sensirion_shdlc_driver.connection.ShdlcConnection">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.connection.</code><code class="descname">ShdlcConnection</code><span class="sig-paren">(</span><em>port</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.connection.ShdlcConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.connection.</code><code class="descname">ShdlcConnection</code><span class="sig-paren">(</span><em>port</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/connection.html#ShdlcConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.connection.ShdlcConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class represents the connection to an SHDLC bus. So you need to
 instantiate one object per bus, no matter how many devices are connected
 to that bus system.</p>
@@ -356,7 +356,7 @@ receive their response. Handling of communication errors (e.g. timeout or
 checksum errors) and device errors is done in this class.</p>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.connection.ShdlcConnection.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>port</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.connection.ShdlcConnection.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>port</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/connection.html#ShdlcConnection.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.connection.ShdlcConnection.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open an SHDLC connection on a specific port.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -374,9 +374,25 @@ the ShdlcPort interface)</td>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.connection.ShdlcConnection.port">
+<code class="descname">port</code><a class="headerlink" href="#sensirion_shdlc_driver.connection.ShdlcConnection.port" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the underlying port.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An ShdlcPort object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcPort" title="sensirion_shdlc_driver.port.ShdlcPort">ShdlcPort</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="sensirion_shdlc_driver.connection.ShdlcConnection.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command</em>, <em>wait_post_process=True</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.connection.ShdlcConnection.execute" title="Permalink to this definition">¶</a></dt>
+<code class="descname">execute</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command</em>, <em>wait_post_process=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/connection.html#ShdlcConnection.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.connection.ShdlcConnection.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute an ShdlcCommand and return the interpreted response. Executing
 a command means:</p>
 <ul class="simple">
@@ -408,25 +424,9 @@ until post processing is done.</li>
 </table>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="sensirion_shdlc_driver.connection.ShdlcConnection.port">
-<code class="descname">port</code><a class="headerlink" href="#sensirion_shdlc_driver.connection.ShdlcConnection.port" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the underlying port.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An ShdlcPort object.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcPort" title="sensirion_shdlc_driver.port.ShdlcPort">ShdlcPort</a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="method">
 <dt id="sensirion_shdlc_driver.connection.ShdlcConnection.transceive">
-<code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.connection.ShdlcConnection.transceive" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/connection.html#ShdlcConnection.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.connection.ShdlcConnection.transceive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send a raw SHDLC command and return the received raw response.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -458,7 +458,7 @@ time until the first byte is received).</li>
 <h2>ShdlcDevice<a class="headerlink" href="#shdlcdevice" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sensirion_shdlc_driver.device.ShdlcDevice">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.device.</code><code class="descname">ShdlcDevice</code><span class="sig-paren">(</span><em>connection</em>, <em>slave_address</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.device.</code><code class="descname">ShdlcDevice</code><span class="sig-paren">(</span><em>connection</em>, <em>slave_address</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for all SHDLC devices, providing only common SHDLC commands.
 For device-specific commands, there are derived classes available.</p>
 <p>This is a low-level driver which just provides all SHDLC commands as Python
@@ -472,7 +472,7 @@ times over the SHDLC interface to the device. This makes the driver
 (nearly) stateless.</p>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.device.ShdlcDevice.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>connection</em>, <em>slave_address</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>connection</em>, <em>slave_address</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an SHDLC device instance on an SHDLC connection.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -512,161 +512,17 @@ ShdlcConnection object)</li>
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.device_reset">
-<code class="descname">device_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.device_reset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Execute a device reset (reboot firmware, similar to power cycle).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.execute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Execute an SHDLC command.</p>
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.slave_address">
+<code class="descname">slave_address</code><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.slave_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the slave address (not read from the device!).</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>command</strong> (<a class="reference internal" href="#sensirion_shdlc_driver.command.ShdlcCommand" title="sensirion_shdlc_driver.command.ShdlcCommand"><em>ShdlcCommand</em></a>) – The command to execute.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The interpreted response of the executed command.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_article_code">
-<code class="descname">get_article_code</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_article_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the article code of the device.</p>
-<p>Note: This command is not supported by every product type.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The article code as an ASCII string.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_error_state">
-<code class="descname">get_error_state</code><span class="sig-paren">(</span><em>clear=True</em>, <em>as_exception=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_error_state" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get and optionally clear the device error state and the last error. The
-state and error code interpretation depends on the connected device
-type.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>clear</strong> (<em>bool</em>) – If true, the error state on the device gets cleared.</li>
-<li><strong>as_exception</strong> (<em>bool</em>) – If true, the error state is returned as an
-ShdlcDeviceError object instead of a byte.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The device_state as a 32bit unsigned integer containing all
-error flags, and the last error which occurred on the device.
-If as_exception is True, it’s returned as an ShdlcDeviceError
-object or None, otherwise as a byte.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int, byte/ShdlcDeviceError/None</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_product_name">
-<code class="descname">get_product_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_product_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the product name of the device.</p>
-<p>Note: This command is not supported by every product type.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The product name as an ASCII string.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_product_subtype">
-<code class="descname">get_product_subtype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_product_subtype" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the product subtype. Some product types exist in multiple slightly
-different variants, this command allows to determine the exact variant
-of the connected device. Sometimes this is called “device subtype”.</p>
-<p>Note: This command is not supported by every product type.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The product subtype as a byte (the interpretation depends on
-the connected product type).</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The slave address.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">byte</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_product_type">
-<code class="descname">get_product_type</code><span class="sig-paren">(</span><em>as_int=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_product_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the product type. The product type (sometimes also called “device
-type”) can be used to detect what kind of SHDLC product is connected.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>as_int</strong> (<em>bool</em>) – If True, the product type is returned as an
-integer, otherwise as a string of hexadecimal
-digits (default).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The product type as an integer or string of hexadecimal
-digits.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string/int</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_serial_number">
-<code class="descname">get_serial_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_serial_number" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the serial number of the device.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The serial number as an ASCII string.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_version">
-<code class="descname">get_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_version" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the version of the device firmware, hardware and SHDLC protocol.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The device version as a Version object.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#sensirion_shdlc_driver.types.Version" title="sensirion_shdlc_driver.types.Version">Version</a></td>
 </tr>
 </tbody>
 </table>
@@ -697,20 +553,164 @@ send the first command to the device.</p>
 </table>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.slave_address">
-<code class="descname">slave_address</code><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.slave_address" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the slave address (not read from the device!).</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute an SHDLC command.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The slave address.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>command</strong> (<a class="reference internal" href="#sensirion_shdlc_driver.command.ShdlcCommand" title="sensirion_shdlc_driver.command.ShdlcCommand"><em>ShdlcCommand</em></a>) – The command to execute.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The interpreted response of the executed command.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_product_type">
+<code class="descname">get_product_type</code><span class="sig-paren">(</span><em>as_int=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.get_product_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_product_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the product type. The product type (sometimes also called “device
+type”) can be used to detect what kind of SHDLC product is connected.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>as_int</strong> (<em>bool</em>) – If True, the product type is returned as an
+integer, otherwise as a string of hexadecimal
+digits (default).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The product type as an integer or string of hexadecimal
+digits.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string/int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_product_subtype">
+<code class="descname">get_product_subtype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.get_product_subtype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_product_subtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the product subtype. Some product types exist in multiple slightly
+different variants, this command allows to determine the exact variant
+of the connected device. Sometimes this is called “device subtype”.</p>
+<p>Note: This command is not supported by every product type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The product subtype as a byte (the interpretation depends on
+the connected product type).</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">byte</td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_product_name">
+<code class="descname">get_product_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.get_product_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_product_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the product name of the device.</p>
+<p>Note: This command is not supported by every product type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The product name as an ASCII string.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_article_code">
+<code class="descname">get_article_code</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.get_article_code"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_article_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the article code of the device.</p>
+<p>Note: This command is not supported by every product type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The article code as an ASCII string.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_serial_number">
+<code class="descname">get_serial_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.get_serial_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_serial_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the serial number of the device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The serial number as an ASCII string.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_version">
+<code class="descname">get_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.get_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the version of the device firmware, hardware and SHDLC protocol.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The device version as a Version object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#sensirion_shdlc_driver.types.Version" title="sensirion_shdlc_driver.types.Version">Version</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_error_state">
+<code class="descname">get_error_state</code><span class="sig-paren">(</span><em>clear=True</em>, <em>as_exception=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.get_error_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_error_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and optionally clear the device error state and the last error. The
+state and error code interpretation depends on the connected device
+type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>clear</strong> (<em>bool</em>) – If true, the error state on the device gets cleared.</li>
+<li><strong>as_exception</strong> (<em>bool</em>) – If true, the error state is returned as an
+ShdlcDeviceError object instead of a byte.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The device_state as a 32bit unsigned integer containing all
+error flags, and the last error which occurred on the device.
+If as_exception is True, it’s returned as an ShdlcDeviceError
+object or None, otherwise as a byte.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int, byte/ShdlcDeviceError/None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.device_reset">
+<code class="descname">device_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.device_reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.device_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a device reset (reboot firmware, similar to power cycle).</p>
 </dd></dl>
 
 </dd></dl>
@@ -720,11 +720,11 @@ send the first command to the device.</p>
 <h2>ShdlcCommand<a class="headerlink" href="#shdlccommand" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sensirion_shdlc_driver.command.ShdlcCommand">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.command.</code><code class="descname">ShdlcCommand</code><span class="sig-paren">(</span><em>id</em>, <em>data</em>, <em>max_response_time</em>, <em>min_response_length=0</em>, <em>max_response_length=255</em>, <em>post_processing_time=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.command.ShdlcCommand" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.command.</code><code class="descname">ShdlcCommand</code><span class="sig-paren">(</span><em>id</em>, <em>data</em>, <em>max_response_time</em>, <em>min_response_length=0</em>, <em>max_response_length=255</em>, <em>post_processing_time=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/command.html#ShdlcCommand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.command.ShdlcCommand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for all SHDLC commands.</p>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.command.ShdlcCommand.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>id</em>, <em>data</em>, <em>max_response_time</em>, <em>min_response_length=0</em>, <em>max_response_length=255</em>, <em>post_processing_time=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.command.ShdlcCommand.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>id</em>, <em>data</em>, <em>max_response_time</em>, <em>min_response_length=0</em>, <em>max_response_length=255</em>, <em>post_processing_time=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/command.html#ShdlcCommand.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.command.ShdlcCommand.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -747,38 +747,6 @@ needs for post processing
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="sensirion_shdlc_driver.command.ShdlcCommand.check_response_length">
-<code class="descname">check_response_length</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.command.ShdlcCommand.check_response_length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if the response length is correct.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Raw data (payload) received from the device.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#sensirion_shdlc_driver.errors.ShdlcResponseError" title="sensirion_shdlc_driver.errors.ShdlcResponseError"><strong>ShdlcResponseError</strong></a> – If length is wrong.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sensirion_shdlc_driver.command.ShdlcCommand.data">
-<code class="descname">data</code><a class="headerlink" href="#sensirion_shdlc_driver.command.ShdlcCommand.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the command data (payload).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Command data (length 0..255).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bytes</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="attribute">
 <dt id="sensirion_shdlc_driver.command.ShdlcCommand.id">
 <code class="descname">id</code><a class="headerlink" href="#sensirion_shdlc_driver.command.ShdlcCommand.id" title="Permalink to this definition">¶</a></dt>
@@ -795,21 +763,17 @@ needs for post processing
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="sensirion_shdlc_driver.command.ShdlcCommand.interpret_response">
-<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.command.ShdlcCommand.interpret_response" title="Permalink to this definition">¶</a></dt>
-<dd><p>Interpret the response to this command received from the device. This
-converts the raw byte array to the actual data type(s) depending on the
-sent command.</p>
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.command.ShdlcCommand.data">
+<code class="descname">data</code><a class="headerlink" href="#sensirion_shdlc_driver.command.ShdlcCommand.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the command data (payload).</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Raw data (payload) received from the device.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Command data (length 0..255).</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Interpreted response. Data type and meaning depends on the
-sent command. None for commands without response data. See the
-actual command implementation for details.</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bytes</td>
 </tr>
 </tbody>
 </table>
@@ -851,30 +815,541 @@ a device reset) are executed after the response is sent.</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="sensirion_shdlc_driver.command.ShdlcCommand.check_response_length">
+<code class="descname">check_response_length</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/command.html#ShdlcCommand.check_response_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.command.ShdlcCommand.check_response_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the response length is correct.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Raw data (payload) received from the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#sensirion_shdlc_driver.errors.ShdlcResponseError" title="sensirion_shdlc_driver.errors.ShdlcResponseError"><strong>ShdlcResponseError</strong></a> – If length is wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.command.ShdlcCommand.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/command.html#ShdlcCommand.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.command.ShdlcCommand.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpret the response to this command received from the device. This
+converts the raw byte array to the actual data type(s) depending on the
+sent command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Raw data (payload) received from the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Interpreted response. Data type and meaning depends on the
+sent command. None for commands without response data. See the
+actual command implementation for details.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <span class="target" id="module-sensirion_shdlc_driver.commands.device_info"></span><dl class="class">
 <dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_info.</code><code class="descname">ShdlcCmdDeviceInfoBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_info.</code><code class="descname">ShdlcCmdDeviceInfoBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdDeviceInfoBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>SHDLC command 0xD0: “Device Information”.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdDeviceInfoBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_info.</code><code class="descname">ShdlcCmdGetProductType</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetProductType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetProductType.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetProductType.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpret the response to this command received from the device. This
+converts the raw byte array to the actual data type(s) depending on the
+sent command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Raw data (payload) received from the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Interpreted response. Data type and meaning depends on the
+sent command. None for commands without response data. See the
+actual command implementation for details.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_info.</code><code class="descname">ShdlcCmdGetProductName</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetProductName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetProductName.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetProductName.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpret the response to this command received from the device. This
+converts the raw byte array to the actual data type(s) depending on the
+sent command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Raw data (payload) received from the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Interpreted response. Data type and meaning depends on the
+sent command. None for commands without response data. See the
+actual command implementation for details.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_info.</code><code class="descname">ShdlcCmdGetArticleCode</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetArticleCode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetArticleCode.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetArticleCode.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpret the response to this command received from the device. This
+converts the raw byte array to the actual data type(s) depending on the
+sent command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Raw data (payload) received from the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Interpreted response. Data type and meaning depends on the
+sent command. None for commands without response data. See the
+actual command implementation for details.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_info.</code><code class="descname">ShdlcCmdGetSerialNumber</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetSerialNumber"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetSerialNumber.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetSerialNumber.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpret the response to this command received from the device. This
+converts the raw byte array to the actual data type(s) depending on the
+sent command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Raw data (payload) received from the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Interpreted response. Data type and meaning depends on the
+sent command. None for commands without response data. See the
+actual command implementation for details.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_info.</code><code class="descname">ShdlcCmdGetProductSubType</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetProductSubType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetProductSubType.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdGetProductSubType.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpret the response to this command received from the device. This
+converts the raw byte array to the actual data type(s) depending on the
+sent command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Raw data (payload) received from the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Interpreted response. Data type and meaning depends on the
+sent command. None for commands without response data. See the
+actual command implementation for details.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <span class="target" id="module-sensirion_shdlc_driver.commands.device_reset"></span><dl class="class">
 <dt id="sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_reset.</code><code class="descname">ShdlcCmdDeviceResetBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_reset.</code><code class="descname">ShdlcCmdDeviceResetBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_reset.html#ShdlcCmdDeviceResetBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>SHDLC command 0xD3: “Device Reset”.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_reset.html#ShdlcCmdDeviceResetBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_reset.</code><code class="descname">ShdlcCmdDeviceReset</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_reset.html#ShdlcCmdDeviceReset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_reset.html#ShdlcCmdDeviceReset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <span class="target" id="module-sensirion_shdlc_driver.commands.device_version"></span><dl class="class">
 <dt id="sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_version.</code><code class="descname">ShdlcCmdDeviceVersionBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_version.</code><code class="descname">ShdlcCmdDeviceVersionBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_version.html#ShdlcCmdDeviceVersionBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>SHDLC command 0xD1: “Get Version”.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_version.html#ShdlcCmdDeviceVersionBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_version.</code><code class="descname">ShdlcCmdGetVersion</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_version.html#ShdlcCmdGetVersion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_version.html#ShdlcCmdGetVersion.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_version.html#ShdlcCmdGetVersion.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpret the response to this command received from the device. This
+converts the raw byte array to the actual data type(s) depending on the
+sent command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Raw data (payload) received from the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Interpreted response. Data type and meaning depends on the
+sent command. None for commands without response data. See the
+actual command implementation for details.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <span class="target" id="module-sensirion_shdlc_driver.commands.error_state"></span><dl class="class">
 <dt id="sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.error_state.</code><code class="descname">ShdlcCmdErrorStateBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.error_state.</code><code class="descname">ShdlcCmdErrorStateBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/error_state.html#ShdlcCmdErrorStateBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>SHDLC command 0xD2: “Device Error State”.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/error_state.html#ShdlcCmdErrorStateBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.error_state.</code><code class="descname">ShdlcCmdGetErrorState</code><span class="sig-paren">(</span><em>clear</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/error_state.html#ShdlcCmdGetErrorState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>clear</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/error_state.html#ShdlcCmdGetErrorState.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/error_state.html#ShdlcCmdGetErrorState.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return int, byte:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Device state (32 flags as integer) and the last
+error (byte) which occurred on the device.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -882,11 +1357,11 @@ a device reset) are executed after the response is sent.</p>
 <h2>Types<a class="headerlink" href="#types" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sensirion_shdlc_driver.types.FirmwareVersion">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.types.</code><code class="descname">FirmwareVersion</code><span class="sig-paren">(</span><em>major</em>, <em>minor</em>, <em>debug</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.types.FirmwareVersion" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.types.</code><code class="descname">FirmwareVersion</code><span class="sig-paren">(</span><em>major</em>, <em>minor</em>, <em>debug</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/types.html#FirmwareVersion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.types.FirmwareVersion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class representing the firmware version of an SHDLC device.</p>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.types.FirmwareVersion.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>major</em>, <em>minor</em>, <em>debug</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.types.FirmwareVersion.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>major</em>, <em>minor</em>, <em>debug</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/types.html#FirmwareVersion.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.types.FirmwareVersion.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -905,18 +1380,19 @@ a device reset) are executed after the response is sent.</p>
 
 <dl class="method">
 <dt id="sensirion_shdlc_driver.types.FirmwareVersion.__str__">
-<code class="descname">__str__</code><span class="sig-paren">(</span><em>) &lt;==&gt; str(x</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.types.FirmwareVersion.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/types.html#FirmwareVersion.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.types.FirmwareVersion.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="sensirion_shdlc_driver.types.HardwareVersion">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.types.</code><code class="descname">HardwareVersion</code><span class="sig-paren">(</span><em>major</em>, <em>minor</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.types.HardwareVersion" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.types.</code><code class="descname">HardwareVersion</code><span class="sig-paren">(</span><em>major</em>, <em>minor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/types.html#HardwareVersion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.types.HardwareVersion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class representing the hardware version of an SHDLC device.</p>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.types.HardwareVersion.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>major</em>, <em>minor</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.types.HardwareVersion.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>major</em>, <em>minor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/types.html#HardwareVersion.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.types.HardwareVersion.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -934,18 +1410,19 @@ a device reset) are executed after the response is sent.</p>
 
 <dl class="method">
 <dt id="sensirion_shdlc_driver.types.HardwareVersion.__str__">
-<code class="descname">__str__</code><span class="sig-paren">(</span><em>) &lt;==&gt; str(x</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.types.HardwareVersion.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/types.html#HardwareVersion.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.types.HardwareVersion.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="sensirion_shdlc_driver.types.ProtocolVersion">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.types.</code><code class="descname">ProtocolVersion</code><span class="sig-paren">(</span><em>major</em>, <em>minor</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.types.ProtocolVersion" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.types.</code><code class="descname">ProtocolVersion</code><span class="sig-paren">(</span><em>major</em>, <em>minor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/types.html#ProtocolVersion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.types.ProtocolVersion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class representing the SHDLC protocol version of an SHDLC device.</p>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.types.ProtocolVersion.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>major</em>, <em>minor</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.types.ProtocolVersion.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>major</em>, <em>minor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/types.html#ProtocolVersion.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.types.ProtocolVersion.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -963,19 +1440,20 @@ a device reset) are executed after the response is sent.</p>
 
 <dl class="method">
 <dt id="sensirion_shdlc_driver.types.ProtocolVersion.__str__">
-<code class="descname">__str__</code><span class="sig-paren">(</span><em>) &lt;==&gt; str(x</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.types.ProtocolVersion.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/types.html#ProtocolVersion.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.types.ProtocolVersion.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="sensirion_shdlc_driver.types.Version">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.types.</code><code class="descname">Version</code><span class="sig-paren">(</span><em>firmware</em>, <em>hardware</em>, <em>protocol</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.types.Version" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.types.</code><code class="descname">Version</code><span class="sig-paren">(</span><em>firmware</em>, <em>hardware</em>, <em>protocol</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/types.html#Version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.types.Version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class representing all version numbers of an SHDLC device. This is used
 for the “Get Version” command.</p>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.types.Version.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>firmware</em>, <em>hardware</em>, <em>protocol</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.types.Version.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>firmware</em>, <em>hardware</em>, <em>protocol</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/types.html#Version.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.types.Version.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -994,59 +1472,94 @@ for the “Get Version” command.</p>
 
 <dl class="method">
 <dt id="sensirion_shdlc_driver.types.Version.__str__">
-<code class="descname">__str__</code><span class="sig-paren">(</span><em>) &lt;==&gt; str(x</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.types.Version.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/types.html#Version.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.types.Version.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
 
 </dd></dl>
 
 </div>
 <div class="section" id="exceptions">
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
-<div class="graphviz"><img src="_images/inheritance-35f2c29374a263b2007054f9e503959c3905c547.png" alt="Inheritance diagram of sensirion_shdlc_driver.errors" usemap="#inheritance42b56db99d" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="_images/inheritance-4e8728dd5a8fcfbfb8fa17e167979cf199e0213f.png" alt="Inheritance diagram of sensirion_shdlc_driver.errors" usemap="#inheritance42b56db99d" class="inheritance graphviz" /></div>
 <map id="inheritance42b56db99d" name="inheritance42b56db99d">
-<area shape="rect" id="node1" href="#sensirion_shdlc_driver.errors.ShdlcAccessRightError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcAccessRightError" alt="" coords="505,4,745,21"/>
-<area shape="rect" id="node2" href="#sensirion_shdlc_driver.errors.ShdlcDeviceError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcDeviceError" alt="" coords="230,89,447,106"/>
-<area shape="rect" id="node3" href="#sensirion_shdlc_driver.errors.ShdlcChecksumError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcChecksumError" alt="" coords="509,37,742,55"/>
-<area shape="rect" id="node4" href="#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError" alt="" coords="489,71,762,89"/>
-<area shape="rect" id="node5" href="#sensirion_shdlc_driver.errors.ShdlcCommandParameterError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcCommandParameterError" alt="" coords="486,105,764,122"/>
-<area shape="rect" id="node7" href="#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError" alt="" coords="496,139,754,156"/>
-<area shape="rect" id="node10" href="#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcUnknownCommandError" alt="" coords="489,173,762,190"/>
-<area shape="rect" id="node6" href="#sensirion_shdlc_driver.errors.ShdlcError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcError" alt="" coords="4,122,191,140"/>
-<area shape="rect" id="node8" href="#sensirion_shdlc_driver.errors.ShdlcResponseError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcResponseError" alt="" coords="224,122,453,140"/>
-<area shape="rect" id="node9" href="#sensirion_shdlc_driver.errors.ShdlcTimeoutError" target="_top" title="sensirion_shdlc_driver.errors.ShdlcTimeoutError" alt="" coords="227,156,450,174"/>
+<area shape="rect" id="node1" href="#sensirion_shdlc_driver.errors.ShdlcAccessRightError" target="_top" title="SHDLC device error for wrong access right." alt="" coords="505,4,745,21"/>
+<area shape="rect" id="node2" href="#sensirion_shdlc_driver.errors.ShdlcDeviceError" target="_top" title="SHDLC device error (communication was successful, but slave failed to" alt="" coords="230,89,447,106"/>
+<area shape="rect" id="node3" href="#sensirion_shdlc_driver.errors.ShdlcChecksumError" target="_top" title="SHDLC device error for wrong checksum." alt="" coords="509,37,742,55"/>
+<area shape="rect" id="node4" href="#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError" target="_top" title="SHDLC device error for wrong data size." alt="" coords="489,71,762,89"/>
+<area shape="rect" id="node5" href="#sensirion_shdlc_driver.errors.ShdlcCommandParameterError" target="_top" title="SHDLC device error for illegal command parameter." alt="" coords="486,105,764,122"/>
+<area shape="rect" id="node7" href="#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError" target="_top" title="SHDLC device error for firmware update failure." alt="" coords="496,139,754,156"/>
+<area shape="rect" id="node10" href="#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError" target="_top" title="SHDLC device error for unknown command." alt="" coords="489,173,762,190"/>
+<area shape="rect" id="node6" href="#sensirion_shdlc_driver.errors.ShdlcError" target="_top" title="Base class for all SHDLC related exceptions." alt="" coords="4,122,191,140"/>
+<area shape="rect" id="node8" href="#sensirion_shdlc_driver.errors.ShdlcResponseError" target="_top" title="SHDLC response error (slave response contains invalid data)" alt="" coords="224,122,453,140"/>
+<area shape="rect" id="node9" href="#sensirion_shdlc_driver.errors.ShdlcTimeoutError" target="_top" title="SHDLC timeout exception (device did not respond to command)." alt="" coords="227,156,450,174"/>
 </map><span class="target" id="module-sensirion_shdlc_driver.errors"></span><dl class="exception">
-<dt id="sensirion_shdlc_driver.errors.ShdlcAccessRightError">
-<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcAccessRightError</code><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcAccessRightError" title="Permalink to this definition">¶</a></dt>
-<dd><p>SHDLC device error for wrong access right.</p>
+<dt id="sensirion_shdlc_driver.errors.ShdlcError">
+<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcError</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for all SHDLC related exceptions.</p>
 </dd></dl>
 
 <dl class="exception">
-<dt id="sensirion_shdlc_driver.errors.ShdlcChecksumError">
-<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcChecksumError</code><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcChecksumError" title="Permalink to this definition">¶</a></dt>
-<dd><p>SHDLC device error for wrong checksum.</p>
+<dt id="sensirion_shdlc_driver.errors.ShdlcTimeoutError">
+<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcTimeoutError</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcTimeoutError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcTimeoutError" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC timeout exception (device did not respond to command).</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.errors.ShdlcTimeoutError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcTimeoutError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcTimeoutError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="exception">
-<dt id="sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError">
-<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcCommandDataSizeError</code><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError" title="Permalink to this definition">¶</a></dt>
-<dd><p>SHDLC device error for wrong data size.</p>
+<dt id="sensirion_shdlc_driver.errors.ShdlcResponseError">
+<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcResponseError</code><span class="sig-paren">(</span><em>message</em>, <em>received_data=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcResponseError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcResponseError" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC response error (slave response contains invalid data)</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.errors.ShdlcResponseError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>message</em>, <em>received_data=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcResponseError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcResponseError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>message</strong> (<em>string</em>) – Error message.</li>
+<li><strong>received_data</strong> – The received (invalid) raw data.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="exception">
-<dt id="sensirion_shdlc_driver.errors.ShdlcCommandParameterError">
-<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcCommandParameterError</code><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcCommandParameterError" title="Permalink to this definition">¶</a></dt>
-<dd><p>SHDLC device error for illegal command parameter.</p>
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.errors.ShdlcResponseError.received_data">
+<code class="descname">received_data</code><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcResponseError.received_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the (invalid) raw data which was received from the device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The raw data received from the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bytes</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="exception">
 <dt id="sensirion_shdlc_driver.errors.ShdlcDeviceError">
-<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcDeviceError</code><span class="sig-paren">(</span><em>code</em>, <em>message=u'Unknown error.'</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcDeviceError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcDeviceError</code><span class="sig-paren">(</span><em>code</em>, <em>message='Unknown error.'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcDeviceError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcDeviceError" title="Permalink to this definition">¶</a></dt>
 <dd><p>SHDLC device error (communication was successful, but slave failed to
 execute a command). For each error code a subclass exists to provide the
 corresponding error messages.</p>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.errors.ShdlcDeviceError.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>code</em>, <em>message=u'Unknown error.'</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcDeviceError.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>code</em>, <em>message='Unknown error.'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcDeviceError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcDeviceError.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1097,32 +1610,20 @@ corresponding error messages.</p>
 </dd></dl>
 
 <dl class="exception">
-<dt id="sensirion_shdlc_driver.errors.ShdlcError">
-<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcError</code><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Base class for all SHDLC related exceptions.</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError">
-<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcFirmwareUpdateError</code><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError" title="Permalink to this definition">¶</a></dt>
-<dd><p>SHDLC device error for firmware update failure.</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="sensirion_shdlc_driver.errors.ShdlcResponseError">
-<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcResponseError</code><span class="sig-paren">(</span><em>message</em>, <em>received_data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcResponseError" title="Permalink to this definition">¶</a></dt>
-<dd><p>SHDLC response error (slave response contains invalid data)</p>
+<dt id="sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError">
+<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcCommandDataSizeError</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcCommandDataSizeError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC device error for wrong data size.</p>
 <dl class="method">
-<dt id="sensirion_shdlc_driver.errors.ShdlcResponseError.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>message</em>, <em>received_data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcResponseError.__init__" title="Permalink to this definition">¶</a></dt>
+<dt id="sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcCommandDataSizeError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>message</strong> (<em>string</em>) – Error message.</li>
-<li><strong>received_data</strong> – The received (invalid) raw data.</li>
+<li><strong>code</strong> (<em>byte</em>) – The error code received from the device.</li>
+<li><strong>message</strong> (<em>string</em>) – The error description for the given error code.</li>
 </ul>
 </td>
 </tr>
@@ -1130,17 +1631,25 @@ corresponding error messages.</p>
 </table>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="sensirion_shdlc_driver.errors.ShdlcResponseError.received_data">
-<code class="descname">received_data</code><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcResponseError.received_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the (invalid) raw data which was received from the device.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="sensirion_shdlc_driver.errors.ShdlcUnknownCommandError">
+<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcUnknownCommandError</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcUnknownCommandError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC device error for unknown command.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.errors.ShdlcUnknownCommandError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcUnknownCommandError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The raw data received from the device.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bytes</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>code</strong> (<em>byte</em>) – The error code received from the device.</li>
+<li><strong>message</strong> (<em>string</em>) – The error description for the given error code.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1149,21 +1658,99 @@ corresponding error messages.</p>
 </dd></dl>
 
 <dl class="exception">
-<dt id="sensirion_shdlc_driver.errors.ShdlcTimeoutError">
-<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcTimeoutError</code><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcTimeoutError" title="Permalink to this definition">¶</a></dt>
-<dd><p>SHDLC timeout exception (device did not respond to command).</p>
+<dt id="sensirion_shdlc_driver.errors.ShdlcAccessRightError">
+<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcAccessRightError</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcAccessRightError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcAccessRightError" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC device error for wrong access right.</p>
 <dl class="method">
-<dt id="sensirion_shdlc_driver.errors.ShdlcTimeoutError.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcTimeoutError.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__init__(…) initializes x; see help(type(x)) for signature</p>
+<dt id="sensirion_shdlc_driver.errors.ShdlcAccessRightError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcAccessRightError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcAccessRightError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>code</strong> (<em>byte</em>) – The error code received from the device.</li>
+<li><strong>message</strong> (<em>string</em>) – The error description for the given error code.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="exception">
-<dt id="sensirion_shdlc_driver.errors.ShdlcUnknownCommandError">
-<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcUnknownCommandError</code><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError" title="Permalink to this definition">¶</a></dt>
-<dd><p>SHDLC device error for unknown command.</p>
+<dt id="sensirion_shdlc_driver.errors.ShdlcCommandParameterError">
+<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcCommandParameterError</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcCommandParameterError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcCommandParameterError" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC device error for illegal command parameter.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.errors.ShdlcCommandParameterError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcCommandParameterError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcCommandParameterError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>code</strong> (<em>byte</em>) – The error code received from the device.</li>
+<li><strong>message</strong> (<em>string</em>) – The error description for the given error code.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="sensirion_shdlc_driver.errors.ShdlcChecksumError">
+<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcChecksumError</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcChecksumError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcChecksumError" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC device error for wrong checksum.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.errors.ShdlcChecksumError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcChecksumError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcChecksumError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>code</strong> (<em>byte</em>) – The error code received from the device.</li>
+<li><strong>message</strong> (<em>string</em>) – The error description for the given error code.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError">
+<em class="property">exception </em><code class="descclassname">sensirion_shdlc_driver.errors.</code><code class="descname">ShdlcFirmwareUpdateError</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcFirmwareUpdateError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC device error for firmware update failure.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/errors.html#ShdlcFirmwareUpdateError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>code</strong> (<em>byte</em>) – The error code received from the device.</li>
+<li><strong>message</strong> (<em>string</em>) – The error description for the given error code.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -1205,13 +1792,14 @@ corresponding error messages.</p>
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: add-documentation-ghpages
+        v: develop
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Branches</dt>
-            <dd><a href="add-documentation-ghpages/api.html">add-documentation-ghpages</a></dd>
+            <dd><a href="add-documentation/api.html">add-documentation</a></dd>
+            <dd><a href="develop/api.html">develop</a></dd>
         </dl>
     </div>
 </div>
