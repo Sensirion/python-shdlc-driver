@@ -22,7 +22,7 @@ build_package:linux_py2:
   artifacts:
     expire_in: 1 week
     paths: [dist]
-      
+
 build_package:linux_py3:
   stage: build
   tags: [linux, docker]
@@ -48,6 +48,21 @@ build_package:windows:
     expire_in: 1 week
     paths: [dist]
 
+build_docs:
+  stage: build
+  tags: [linux, docker]
+  image: sensirion/python3
+  variables:
+    # To fix encoding issues
+    LC_ALL: C.UTF-8
+    LANG: C.UTF-8
+  script:
+    - apt-get update && apt-get install -y graphviz
+    - python setup.py install
+    - pip install -r docs/requirements.txt
+    - ./ci/set_git_config.sh
+    - sphinx-versioning build -r "$CI_COMMIT_REF_NAME" docs docs/_build/html
+
 deploy_staging:
     stage: deploy
     tags: [linux, docker]
@@ -66,3 +81,22 @@ deploy_staging:
       - devpi use https://pypi.sensirion.lokal/$DEVPI_GROUP/staging
       - devpi login $DEVPI_GROUP --password=$DEVPI_PW
       - devpi upload --from-dir dist
+
+deploy_docs:
+    stage: deploy
+    tags: [linux, docker]
+    image: sensirion/python3
+    dependencies: []
+    only:
+      - master
+      - tags
+    variables:
+      # To fix encoding issues
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+    script:
+      - apt-get update && apt-get install -y graphviz
+      - python setup.py install
+      - pip install -r docs/requirements.txt
+      - ./ci/set_git_config.sh
+      - sphinx-versioning push docs gh-pages .
