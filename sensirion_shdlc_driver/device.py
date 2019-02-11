@@ -11,6 +11,7 @@ from .commands.error_state import ShdlcCmdGetErrorState
 from .commands.device_reset import ShdlcCmdDeviceReset
 from .commands.slave_address import ShdlcCmdGetSlaveAddress, \
     ShdlcCmdSetSlaveAddress
+from .commands.baudrate import ShdlcCmdGetBaudrate, ShdlcCmdSetBaudrate
 
 import logging
 log = logging.getLogger(__name__)
@@ -235,6 +236,51 @@ class ShdlcDevice(object):
         self.execute(ShdlcCmdSetSlaveAddress(slave_address))
         if update_driver:
             self._slave_address = slave_address
+
+    def get_baudrate(self):
+        """
+        Get the SHDLC baudrate of the device.
+
+        .. note:: This method really sends a command to the device, even though
+                  the baudrate is already known by the used
+                  :class:`~sensirion_shdlc_driver.port.ShdlcPort` object.
+
+        :return: The baudrate of the device [bit/s].
+        :rtype: int
+        """
+        return self.execute(ShdlcCmdGetBaudrate())
+
+    def set_baudrate(self, baudrate, update_driver=True):
+        """
+        Set the SHDLC baudrate of the device.
+
+        .. note:: The baudrate is stored in non-volatile memory of the
+                  device and thus persists after a device reset. So the next
+                  time connecting to the device, you have to use the new
+                  baudrate.
+
+        .. warning:: If you pass `True` to the argument `update_driver`, the
+                     baudrate of the underlaying
+                     :class:`~sensirion_shdlc_driver.port.ShdlcPort` object
+                     is changed. As the baudrate applies to the whole bus (with
+                     all its slaves), you might no longer be able to
+                     communicate with other slaves. Generally you should change
+                     the baudrate of all slaves consecutively, and only set
+                     `update_driver` to `True` the last time.
+
+        :param int baudrate: The new baudrate. See device documentation for a
+                             list of supported baudrates. Many devices support
+                             the baudrates 9600, 19200 and 115200.
+        :param bool update_driver: If true, the baudrate of the
+                                   :class:`~sensirion_shdlc_driver.port.ShdlcPort`
+                                   object is also updated with the baudrate.
+                                   This is needed to allow further
+                                   communication with the device, as its
+                                   baudrate has changed.
+        """
+        self.execute(ShdlcCmdSetBaudrate(baudrate))
+        if update_driver:
+            self._connection.port.bitrate = baudrate
 
     def device_reset(self):
         """
