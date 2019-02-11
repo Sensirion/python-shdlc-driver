@@ -12,6 +12,7 @@ from .commands.device_reset import ShdlcCmdDeviceReset
 from .commands.slave_address import ShdlcCmdGetSlaveAddress, \
     ShdlcCmdSetSlaveAddress
 from .commands.baudrate import ShdlcCmdGetBaudrate, ShdlcCmdSetBaudrate
+from .commands.reply_delay import ShdlcCmdGetReplyDelay, ShdlcCmdSetReplyDelay
 
 import logging
 log = logging.getLogger(__name__)
@@ -281,6 +282,33 @@ class ShdlcDevice(object):
         self.execute(ShdlcCmdSetBaudrate(baudrate))
         if update_driver:
             self._connection.port.bitrate = baudrate
+
+    def get_reply_delay(self):
+        """
+        Get the SHDLC reply delay of the device.
+
+        See :func:`set_reply_delay()` for details.
+
+        :return: The reply delay of the device [μs].
+        :rtype: byte
+        """
+        return self.execute(ShdlcCmdGetReplyDelay())
+
+    def set_reply_delay(self, reply_delay):
+        """
+        Set the SHDLC reply delay of the device.
+
+        The reply delay allows to increase the minimum response time of the
+        slave to a given value in Microseconds. This is needed for RS485
+        masters which require some time to switch from sending to receiving.
+        If the slave starts sending the response while the master is still
+        driving the bus lines, a conflict on the bus occurs and communication
+        fails. If you use such a slow RS485 master, you can increase the reply
+        delay of all slaves to avoid this issue.
+
+        :param byte reply_delay: The new reply delay [μs].
+        """
+        self.execute(ShdlcCmdSetReplyDelay(reply_delay))
 
     def device_reset(self):
         """
