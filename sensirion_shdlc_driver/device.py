@@ -13,6 +13,7 @@ from .commands.slave_address import ShdlcCmdGetSlaveAddress, \
     ShdlcCmdSetSlaveAddress
 from .commands.baudrate import ShdlcCmdGetBaudrate, ShdlcCmdSetBaudrate
 from .commands.reply_delay import ShdlcCmdGetReplyDelay, ShdlcCmdSetReplyDelay
+from .commands.system_up_time import ShdlcCmdGetSystemUpTime
 
 import logging
 log = logging.getLogger(__name__)
@@ -309,6 +310,15 @@ class ShdlcDevice(object):
         :param byte reply_delay: The new reply delay [μs].
         """
         self.execute(ShdlcCmdSetReplyDelay(reply_delay))
+
+    def get_system_up_time(self):
+        """
+        Get the system up time of the device.
+
+        :return: The time since the last power-on or device reset [s].
+        :rtype: int
+        """
+        return self.execute(ShdlcCmdGetSystemUpTime())
 
     def device_reset(self):
         """
