@@ -9,6 +9,8 @@ from .commands.device_info import ShdlcCmdGetProductType, \
 from .commands.device_version import ShdlcCmdGetVersion
 from .commands.error_state import ShdlcCmdGetErrorState
 from .commands.device_reset import ShdlcCmdDeviceReset
+from .commands.slave_address import ShdlcCmdGetSlaveAddress, \
+    ShdlcCmdSetSlaveAddress
 
 import logging
 log = logging.getLogger(__name__)
@@ -193,6 +195,46 @@ class ShdlcDevice(object):
         if as_exception:
             error = self._get_device_error(error)
         return state, error
+
+    def get_slave_address(self):
+        """
+        Get the SHDLC slave address of the device.
+
+        .. note:: See also the property :attr:`slave_address` which returns
+                  the device's slave address without sending a command. This
+                  method really sends a command to the device, even though the
+                  slave address is actually already known by this object.
+
+        :return: The slave address of the device.
+        :rtype: byte
+        """
+        return self.execute(ShdlcCmdGetSlaveAddress())
+
+    def set_slave_address(self, slave_address, update_driver=True):
+        """
+        Set the SHDLC slave address of the device.
+
+        .. note:: The slave address is stored in non-volatile memory of the
+                  device and thus persists after a device reset. So the next
+                  time connecting to the device, you have to use the new
+                  address.
+
+        .. warning:: When changing the address of a slave, make sure there
+                     isn't already a slave with that address on the same bus!
+                     In that case you would get communication issues which can
+                     only be fixed by disconnecting one of the slaves.
+
+        :param byte slave_address: The new slave address [0..254]. The address
+                                   255 is reserved for broadcasts.
+        :param bool update_driver: If true, the property
+                                   :attr:`slave_address` of this object is
+                                   also updated with the new address. This is
+                                   needed to allow further communication with
+                                   the device, as its address has changed.
+        """
+        self.execute(ShdlcCmdSetSlaveAddress(slave_address))
+        if update_driver:
+            self._slave_address = slave_address
 
     def device_reset(self):
         """
