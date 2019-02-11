@@ -14,6 +14,7 @@ from .commands.slave_address import ShdlcCmdGetSlaveAddress, \
 from .commands.baudrate import ShdlcCmdGetBaudrate, ShdlcCmdSetBaudrate
 from .commands.reply_delay import ShdlcCmdGetReplyDelay, ShdlcCmdSetReplyDelay
 from .commands.system_up_time import ShdlcCmdGetSystemUpTime
+from .commands.factory_reset import ShdlcCmdFactoryReset
 
 import logging
 log = logging.getLogger(__name__)
@@ -325,6 +326,20 @@ class ShdlcDevice(object):
         Execute a device reset (reboot firmware, similar to power cycle).
         """
         self.execute(ShdlcCmdDeviceReset())
+        self._last_error_flag = False  # Reset "cache"
+
+    def factory_reset(self):
+        """
+        Perform a factory reset (restore the off-the-shelf factory
+        configuration).
+
+        .. warning:: This resets any configuration done after leaving the
+                     factory! Keep in mind that this command might also change
+                     communication parameters (i.e. baudrate and slave address)
+                     and thus you might have to adjust the driver's parameters
+                     to allow further communication with the device.
+        """
+        self.execute(ShdlcCmdFactoryReset())
         self._last_error_flag = False  # Reset "cache"
 
     def _register_device_errors(self, errors):
