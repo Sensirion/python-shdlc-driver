@@ -50,16 +50,16 @@ class ShdlcPort(object):
         """
         raise NotImplementedError()
 
-    def transceive(self, slave_address, command, data, response_timeout):
+    def transceive(self, slave_address, command_id, data, response_timeout):
         """
         Send SHDLC frame to port and return received response frame.
 
         :param byte slave_address: Slave address.
-        :param byte command: SHDLC command ID.
+        :param byte command_id: SHDLC command ID.
         :param bytes-like data: Payload.
         :param float response_timeout: Response timeout in seconds (maximum
                                        time until the first byte is received).
-        :return: Received address, command, state, and payload.
+        :return: Received address, command_id, state, and payload.
         :rtype: byte, byte, byte, bytes
         :raise ShdlcTimeoutError: If no response received within timeout.
         :raise ShdlcResponseError: If the received response is invalid.
@@ -133,16 +133,16 @@ class ShdlcSerialPort(ShdlcPort):
         with self._lock:
             self._serial.baudrate = bitrate
 
-    def transceive(self, slave_address, command, data, response_timeout):
+    def transceive(self, slave_address, command_id, data, response_timeout):
         """
         Send SHDLC frame to port and return received response frame.
 
         :param byte slave_address: Slave address.
-        :param byte command: SHDLC command ID.
+        :param byte command_id: SHDLC command ID.
         :param bytes-like data: Payload.
         :param float response_timeout: Response timeout in seconds (maximum
                                        time until the first byte is received).
-        :return: Received address, command, state, and payload.
+        :return: Received address, command_id, state, and payload.
         :rtype: byte, byte, byte, bytes
         :raise ShdlcTimeoutError: If no response received within timeout.
         :raise ShdlcResponseError: If the received response is invalid.
@@ -150,7 +150,7 @@ class ShdlcSerialPort(ShdlcPort):
         with self._lock:
             self._serial.flushInput()
             self._set_timeout(response_timeout)
-            self._send_frame(slave_address, command, data)
+            self._send_frame(slave_address, command_id, data)
             self._serial.flush()
             return self._receive_frame()
 
@@ -171,15 +171,15 @@ class ShdlcSerialPort(ShdlcPort):
         if self._serial.timeout != timeout:
             self._serial.timeout = timeout
 
-    def _send_frame(self, slave_address, command, data):
+    def _send_frame(self, slave_address, command_id, data):
         """
         Send a frame to the serial port.
 
         :param byte slave_address: Slave address.
-        :param byte command: SHDLC command ID.
+        :param byte command_id: SHDLC command ID.
         :param bytes-like data: Payload.
         """
-        builder = ShdlcSerialMosiFrameBuilder(slave_address, command, data)
+        builder = ShdlcSerialMosiFrameBuilder(slave_address, command_id, data)
         tx_data = builder.to_bytes()
         log.debug("ShdlcSerialPort send raw: [{}]"
                   .format(", ".join(["0x%.2X" % i for i in bytearray(tx_data)])))
@@ -189,7 +189,7 @@ class ShdlcSerialPort(ShdlcPort):
         """
         Wait for the response frame and return it.
 
-        :return: Received address, command, state, and payload.
+        :return: Received address, command_id, state, and payload.
         :rtype: byte, byte, byte, bytes
         """
         builder = ShdlcSerialMisoFrameBuilder()
