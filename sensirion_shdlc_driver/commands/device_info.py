@@ -61,7 +61,7 @@ class ShdlcCmdGetProductSubType(ShdlcCmdDeviceInfoBase):
     def __init__(self):
         super(ShdlcCmdGetProductSubType, self).__init__(
             data=[0x04], max_response_time=0.5,
-            min_response_length=4, max_response_length=4
+            min_response_length=1, max_response_length=1
         )
 
     def interpret_response(self, data):

@@ -39,10 +39,12 @@ class ShdlcResponseError(ShdlcError):
         super(ShdlcResponseError, self).__init__(
             "Invalid data received from the SHDLC device: " + message
         )
-        if received_data:
-            self._received_data = bytes(bytearray(received_data))
+        self._received_data = received_data
+        if self._received_data is not None:
+            received_data_bytearray = bytearray(self._received_data)
+            self._received_data = bytes(received_data_bytearray)
             log.debug("Invalid SHDLC response raw data: [{}]".format(
-                ", ".join(["0x%.2X" % i for i in self._received_data])))
+                ", ".join(["0x%.2X" % i for i in received_data_bytearray])))
 
     @property
     def received_data(self):
@@ -72,7 +74,7 @@ class ShdlcDeviceError(ShdlcError):
             "SHDLC device returned error code {}: {}".format(code, message)
         )
         self._error_code = code
-        self._error_message = message
+        self._error_message = str(message)
 
     @property
     def error_code(self):
