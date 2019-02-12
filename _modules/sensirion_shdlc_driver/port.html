@@ -156,7 +156,9 @@
 <span class="c1"># (c) Copyright 2019 Sensirion AG, Switzerland</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
-<span class="kn">from</span> <span class="nn">.errors</span> <span class="k">import</span> <span class="n">ShdlcTimeoutError</span><span class="p">,</span> <span class="n">ShdlcResponseError</span>
+<span class="kn">from</span> <span class="nn">.errors</span> <span class="k">import</span> <span class="n">ShdlcTimeoutError</span>
+<span class="kn">from</span> <span class="nn">.serial_frame_builder</span> <span class="k">import</span> <span class="n">ShdlcSerialMosiFrameBuilder</span><span class="p">,</span> \
+    <span class="n">ShdlcSerialMisoFrameBuilder</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Lock</span>
 <span class="kn">import</span> <span class="nn">serial</span>
 
@@ -229,12 +231,6 @@
 <span class="sd">              recommended to do so as it automatically closes the port after</span>
 <span class="sd">              using it.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">_START_STOP_BYTE</span> <span class="o">=</span> <span class="mh">0x7E</span>
-    <span class="n">_ESCAPE_BYTE</span> <span class="o">=</span> <span class="mh">0x7D</span>
-    <span class="n">_ESCAPE_XOR</span> <span class="o">=</span> <span class="mh">0x20</span>
-    <span class="n">_CHARS_TO_ESCAPE</span> <span class="o">=</span> <span class="p">[</span><span class="n">_START_STOP_BYTE</span><span class="p">,</span> <span class="n">_ESCAPE_BYTE</span><span class="p">,</span> <span class="mh">0x11</span><span class="p">,</span> <span class="mh">0x13</span><span class="p">]</span>
-    <span class="n">_MAX_RAW_FRAME_LENGTH</span> <span class="o">=</span> <span class="mi">516</span>  <span class="c1"># All bytes stuffed</span>
 
 <div class="viewcode-block" id="ShdlcSerialPort.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">baudrate</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -337,15 +333,10 @@
 <span class="sd">        :param byte command: SHDLC command ID.</span>
 <span class="sd">        :param bytes-like data: Payload.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">raw_tx_frame</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">([</span><span class="n">slave_address</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)])</span>
-        <span class="n">raw_tx_frame</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-        <span class="n">tx_data</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">()</span>
-        <span class="n">tx_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_START_STOP_BYTE</span><span class="p">)</span>
-        <span class="n">tx_data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_stuff_data_bytes</span><span class="p">(</span><span class="n">raw_tx_frame</span><span class="p">))</span>
-        <span class="n">tx_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_calculate_checksum</span><span class="p">(</span><span class="n">raw_tx_frame</span><span class="p">))</span>
-        <span class="n">tx_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_START_STOP_BYTE</span><span class="p">)</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">ShdlcSerialMosiFrameBuilder</span><span class="p">(</span><span class="n">slave_address</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">tx_data</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">()</span>
         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;ShdlcSerialPort send raw: [</span><span class="si">{}</span><span class="s2">]&quot;</span>
-                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;0x</span><span class="si">%.2X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tx_data</span><span class="p">])))</span>
+                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;0x</span><span class="si">%.2X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">tx_data</span><span class="p">)])))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tx_data</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_receive_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -355,96 +346,17 @@
 <span class="sd">        :return: Received address, command, state, and payload.</span>
 <span class="sd">        :rtype: byte, byte, byte, bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">()</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">ShdlcSerialMisoFrameBuilder</span><span class="p">()</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="c1"># Fetch all received bytes at once (to get maximum performance) or</span>
             <span class="c1"># wait for at least one byte (with timeout) if the buffer is empty.</span>
             <span class="n">new_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">inWaiting</span><span class="p">(),</span> <span class="mi">1</span><span class="p">))</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">ShdlcTimeoutError</span><span class="p">()</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_START_STOP_BYTE</span><span class="p">]))</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">builder</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">new_data</span><span class="p">):</span>
                 <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;ShdlcSerialPort received raw: [</span><span class="si">{}</span><span class="s2">]&quot;</span>
-                          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;0x</span><span class="si">%.2X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])))</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_rx_frame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_MAX_RAW_FRAME_LENGTH</span><span class="p">:</span>
-                <span class="c1"># Abort condition in case we are receiving endless rubbish.</span>
-                <span class="k">raise</span> <span class="n">ShdlcResponseError</span><span class="p">(</span><span class="s2">&quot;Response is too long.&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_build_rx_frame</span><span class="p">(</span><span class="n">raw_rx_data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Interpret and validate received raw data and return it.</span>
-
-<span class="sd">        :param bytearray raw_rx_data: The received (stuffed) raw data.</span>
-<span class="sd">        :return: Received address, command, state, and payload.</span>
-<span class="sd">        :rtype: byte, byte, byte, bytes</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">separator</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">([</span><span class="n">ShdlcSerialPort</span><span class="o">.</span><span class="n">_START_STOP_BYTE</span><span class="p">])</span>
-        <span class="n">stuffed</span> <span class="o">=</span> <span class="n">raw_rx_data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">separator</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">unstuffed</span> <span class="o">=</span> <span class="n">ShdlcSerialPort</span><span class="o">.</span><span class="n">_unstuff_data_bytes</span><span class="p">(</span><span class="n">stuffed</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unstuffed</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ShdlcResponseError</span><span class="p">(</span><span class="s2">&quot;Response is too short.&quot;</span><span class="p">,</span> <span class="n">raw_rx_data</span><span class="p">)</span>
-        <span class="n">frame</span> <span class="o">=</span> <span class="n">unstuffed</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">address</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">command</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
-        <span class="n">checksum</span> <span class="o">=</span> <span class="n">unstuffed</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">checksum</span> <span class="o">!=</span> <span class="n">ShdlcSerialPort</span><span class="o">.</span><span class="n">_calculate_checksum</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">ShdlcResponseError</span><span class="p">(</span><span class="s2">&quot;Wrong checksum.&quot;</span><span class="p">,</span> <span class="n">raw_rx_data</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">length</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">ShdlcResponseError</span><span class="p">(</span><span class="s2">&quot;Wrong length.&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">address</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">command</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">state</span><span class="p">),</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_stuff_data_bytes</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Perform byte-stuffing (escape reserved bytes).</span>
-
-<span class="sd">        :param bytearray data: The data without stuffed bytes.</span>
-<span class="sd">        :return: The data with stuffed bytes.</span>
-<span class="sd">        :rtype: bytearray</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">ShdlcSerialPort</span><span class="o">.</span><span class="n">_CHARS_TO_ESCAPE</span><span class="p">:</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ShdlcSerialPort</span><span class="o">.</span><span class="n">_ESCAPE_BYTE</span><span class="p">)</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span> <span class="o">^</span> <span class="n">ShdlcSerialPort</span><span class="o">.</span><span class="n">_ESCAPE_XOR</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_unstuff_data_bytes</span><span class="p">(</span><span class="n">stuffed_data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Undo byte-stuffing (replacing stuffed bytes by their original value).</span>
-
-<span class="sd">        :param bytearray stuffed_data: The data with stuffed bytes.</span>
-<span class="sd">        :return: The data without stuffed bytes.</span>
-<span class="sd">        :rtype: bytearray</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">()</span>
-        <span class="n">xor</span> <span class="o">=</span> <span class="mh">0x00</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">stuffed_data</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">stuffed_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">ShdlcSerialPort</span><span class="o">.</span><span class="n">_ESCAPE_BYTE</span><span class="p">:</span>
-                <span class="n">xor</span> <span class="o">=</span> <span class="n">ShdlcSerialPort</span><span class="o">.</span><span class="n">_ESCAPE_XOR</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stuffed_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="n">xor</span><span class="p">)</span>
-                <span class="n">xor</span> <span class="o">=</span> <span class="mh">0x00</span>
-        <span class="k">return</span> <span class="n">data</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_calculate_checksum</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculate the checksum for a frame.</span>
-
-<span class="sd">        :param bytearray frame: Input frame.</span>
-<span class="sd">        :return: Calculated checksum.</span>
-<span class="sd">        :rtype: byte</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="o">~</span><span class="nb">sum</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span></div>
+                          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;0x</span><span class="si">%.2X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">builder</span><span class="o">.</span><span class="n">data</span><span class="p">])))</span>
+                <span class="k">return</span> <span class="n">builder</span><span class="o">.</span><span class="n">interpret_data</span><span class="p">()</span></div>
 </pre></div>
 
            </div>
@@ -481,6 +393,7 @@
     <div class="rst-other-versions">
         <dl>
             <dt>Branches</dt>
+            <dd><a href="../../add-more-commands/index.html">add-more-commands</a></dd>
             <dd><a href="../../master/_modules/sensirion_shdlc_driver/port.html">master</a></dd>
         </dl>
     </div>

@@ -215,7 +215,7 @@
 <div class="viewcode-block" id="ShdlcCmdGetProductSubType.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdGetProductSubType</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="mh">0x04</span><span class="p">],</span> <span class="n">max_response_time</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-            <span class="n">min_response_length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_response_length</span><span class="o">=</span><span class="mi">4</span>
+            <span class="n">min_response_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_response_length</span><span class="o">=</span><span class="mi">1</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="ShdlcCmdGetProductSubType.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
@@ -257,6 +257,7 @@
     <div class="rst-other-versions">
         <dl>
             <dt>Branches</dt>
+            <dd><a href="../../../../add-more-commands/index.html">add-more-commands</a></dd>
             <dd><a href="device_info.html">master</a></dd>
         </dl>
     </div>
