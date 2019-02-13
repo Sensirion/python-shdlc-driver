@@ -82,6 +82,26 @@ deploy_staging:
       - devpi login $DEVPI_GROUP --password=$DEVPI_PW
       - devpi upload --from-dir dist
 
+deploy_stable:
+    stage: deploy
+    tags: [linux, docker]
+    image: sensirion/python
+    dependencies:
+      - build_package:linux_py2
+      - build_package:linux_py3
+      - build_package:windows
+    environment:
+      name: pypi.org
+      url: https://pypi.org/project/sensirion-shdlc-driver/
+    only:
+      - tags
+    script:
+      - PKG_VERSION=$(grep '^version\s*=\s*['"'"'"]\([0-9\.]*\)["'"'"'].*$' ${PACKAGE_NAME//-/_}/version.py | sed 's/^version\s*=\s*['"'"'"]\([0-9\.]*\)["'"'"'].*$/\1/')
+      - TAG_VERSION=$(git describe --tags)
+      - if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then echo "Tag Version ($TAG_VERSION) != Package Version ($PKG_VERSION)" && exit 1; fi
+      - pip install twine~=1.12.1
+      - twine upload dist/*
+
 deploy_docs:
     stage: deploy
     tags: [linux, docker]
