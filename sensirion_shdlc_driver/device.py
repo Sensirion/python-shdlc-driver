@@ -9,6 +9,12 @@ from .commands.device_info import ShdlcCmdGetProductType, \
 from .commands.device_version import ShdlcCmdGetVersion
 from .commands.error_state import ShdlcCmdGetErrorState
 from .commands.device_reset import ShdlcCmdDeviceReset
+from .commands.slave_address import ShdlcCmdGetSlaveAddress, \
+    ShdlcCmdSetSlaveAddress
+from .commands.baudrate import ShdlcCmdGetBaudrate, ShdlcCmdSetBaudrate
+from .commands.reply_delay import ShdlcCmdGetReplyDelay, ShdlcCmdSetReplyDelay
+from .commands.system_up_time import ShdlcCmdGetSystemUpTime
+from .commands.factory_reset import ShdlcCmdFactoryReset
 
 import logging
 log = logging.getLogger(__name__)
@@ -194,11 +200,146 @@ class ShdlcDevice(object):
             error = self._get_device_error(error)
         return state, error
 
+    def get_slave_address(self):
+        """
+        Get the SHDLC slave address of the device.
+
+        .. note:: See also the property :attr:`slave_address` which returns
+                  the device's slave address without sending a command. This
+                  method really sends a command to the device, even though the
+                  slave address is actually already known by this object.
+
+        :return: The slave address of the device.
+        :rtype: byte
+        """
+        return self.execute(ShdlcCmdGetSlaveAddress())
+
+    def set_slave_address(self, slave_address, update_driver=True):
+        """
+        Set the SHDLC slave address of the device.
+
+        .. note:: The slave address is stored in non-volatile memory of the
+                  device and thus persists after a device reset. So the next
+                  time connecting to the device, you have to use the new
+                  address.
+
+        .. warning:: When changing the address of a slave, make sure there
+                     isn't already a slave with that address on the same bus!
+                     In that case you would get communication issues which can
+                     only be fixed by disconnecting one of the slaves.
+
+        :param byte slave_address: The new slave address [0..254]. The address
+                                   255 is reserved for broadcasts.
+        :param bool update_driver: If true, the property
+                                   :attr:`slave_address` of this object is
+                                   also updated with the new address. This is
+                                   needed to allow further communication with
+                                   the device, as its address has changed.
+        """
+        self.execute(ShdlcCmdSetSlaveAddress(slave_address))
+        if update_driver:
+            self._slave_address = slave_address
+
+    def get_baudrate(self):
+        """
+        Get the SHDLC baudrate of the device.
+
+        .. note:: This method really sends a command to the device, even though
+                  the baudrate is already known by the used
+                  :class:`~sensirion_shdlc_driver.port.ShdlcPort` object.
+
+        :return: The baudrate of the device [bit/s].
+        :rtype: int
+        """
+        return self.execute(ShdlcCmdGetBaudrate())
+
+    def set_baudrate(self, baudrate, update_driver=True):
+        """
+        Set the SHDLC baudrate of the device.
+
+        .. note:: The baudrate is stored in non-volatile memory of the
+                  device and thus persists after a device reset. So the next
+                  time connecting to the device, you have to use the new
+                  baudrate.
+
+        .. warning:: If you pass `True` to the argument `update_driver`, the
+                     baudrate of the underlaying
+                     :class:`~sensirion_shdlc_driver.port.ShdlcPort` object
+                     is changed. As the baudrate applies to the whole bus (with
+                     all its slaves), you might no longer be able to
+                     communicate with other slaves. Generally you should change
+                     the baudrate of all slaves consecutively, and only set
+                     `update_driver` to `True` the last time.
+
+        :param int baudrate: The new baudrate. See device documentation for a
+                             list of supported baudrates. Many devices support
+                             the baudrates 9600, 19200 and 115200.
+        :param bool update_driver: If true, the baudrate of the
+                                   :class:`~sensirion_shdlc_driver.port.ShdlcPort`
+                                   object is also updated with the baudrate.
+                                   This is needed to allow further
+                                   communication with the device, as its
+                                   baudrate has changed.
+        """
+        self.execute(ShdlcCmdSetBaudrate(baudrate))
+        if update_driver:
+            self._connection.port.bitrate = baudrate
+
+    def get_reply_delay(self):
+        """
+        Get the SHDLC reply delay of the device.
+
+        See :func:`set_reply_delay()` for details.
+
+        :return: The reply delay of the device [μs].
+        :rtype: byte
+        """
+        return self.execute(ShdlcCmdGetReplyDelay())
+
+    def set_reply_delay(self, reply_delay):
+        """
+        Set the SHDLC reply delay of the device.
+
+        The reply delay allows to increase the minimum response time of the
+        slave to a given value in Microseconds. This is needed for RS485
+        masters which require some time to switch from sending to receiving.
+        If the slave starts sending the response while the master is still
+        driving the bus lines, a conflict on the bus occurs and communication
+        fails. If you use such a slow RS485 master, you can increase the reply
+        delay of all slaves to avoid this issue.
+
+        :param byte reply_delay: The new reply delay [μs].
+        """
+        self.execute(ShdlcCmdSetReplyDelay(reply_delay))
+
+    def get_system_up_time(self):
+        """
+        Get the system up time of the device.
+
+        :return: The time since the last power-on or device reset [s].
+        :rtype: int
+        """
+        return self.execute(ShdlcCmdGetSystemUpTime())
+
     def device_reset(self):
         """
         Execute a device reset (reboot firmware, similar to power cycle).
         """
         self.execute(ShdlcCmdDeviceReset())
+        self._last_error_flag = False  # Reset "cache"
+
+    def factory_reset(self):
+        """
+        Perform a factory reset (restore the off-the-shelf factory
+        configuration).
+
+        .. warning:: This resets any configuration done after leaving the
+                     factory! Keep in mind that this command might also change
+                     communication parameters (i.e. baudrate and slave address)
+                     and thus you might have to adjust the driver's parameters
+                     to allow further communication with the device.
+        """
+        self.execute(ShdlcCmdFactoryReset())
         self._last_error_flag = False  # Reset "cache"
 
     def _register_device_errors(self, errors):
