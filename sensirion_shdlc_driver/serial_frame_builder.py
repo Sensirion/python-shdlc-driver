@@ -148,7 +148,7 @@ class ShdlcSerialMisoFrameBuilder(ShdlcSerialFrameBuilder):
         """
         Interpret and validate received raw data and return it.
 
-        :return: Received address, command, state, and payload.
+        :return: Received address, command_id, state, and payload.
         :rtype: byte, byte, byte, bytes
         """
         separator = bytearray([self._START_STOP_BYTE])
@@ -158,7 +158,7 @@ class ShdlcSerialMisoFrameBuilder(ShdlcSerialFrameBuilder):
             raise ShdlcResponseError("Response is too short.", self._data)
         frame = unstuffed[:-1]
         address = int(frame[0])
-        command = int(frame[1])
+        command_id = int(frame[1])
         state = int(frame[2])
         length = int(frame[3])
         data = bytes(frame[4:])
@@ -167,7 +167,7 @@ class ShdlcSerialMisoFrameBuilder(ShdlcSerialFrameBuilder):
             raise ShdlcResponseError("Wrong length.", self._data)
         if checksum != self._calculate_checksum(frame):
             raise ShdlcResponseError("Wrong checksum.", self._data)
-        return address, command, state, data
+        return address, command_id, state, data
 
     @staticmethod
     def _unstuff_data_bytes(stuffed_data):

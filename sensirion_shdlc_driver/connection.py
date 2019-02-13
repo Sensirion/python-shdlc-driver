@@ -71,12 +71,12 @@ class ShdlcConnection(object):
         command.check_response_length(data)  # Raises if length was wrong
         return command.interpret_response(data), error
 
-    def transceive(self, slave_address, command, data, response_timeout):
+    def transceive(self, slave_address, command_id, data, response_timeout):
         """
         Send a raw SHDLC command and return the received raw response.
 
         :param byte slave_address: Slave address.
-        :param byte command: SHDLC command ID.
+        :param byte command_id: SHDLC command ID.
         :param bytes-like data: Payload (may be empty).
         :param float response_timeout: Response timeout in seconds (maximum
                                        time until the first byte is received).
@@ -84,13 +84,13 @@ class ShdlcConnection(object):
         :rtype: bytes, bool
         """
         rx_addr, rx_cmd, rx_state, rx_data = self._port.transceive(
-            slave_address, command, data, response_timeout)
+            slave_address, command_id, data, response_timeout)
         if rx_addr != slave_address:
             raise ShdlcResponseError("Received slave address {} instead of {}."
                                      .format(rx_addr, slave_address))
-        if rx_cmd != command:
+        if rx_cmd != command_id:
             raise ShdlcResponseError("Received command ID 0x{:02X} instead of "
-                                     "0x{:02X}.".format(rx_cmd, command))
+                                     "0x{:02X}.".format(rx_cmd, command_id))
         error_state = True if rx_state & 0x80 else False
         if error_state:
             log.warning("SHDLC device with address {} is in error state."
