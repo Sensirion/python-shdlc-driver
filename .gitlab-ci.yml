@@ -15,7 +15,7 @@ build_package:linux_py2:
   image: sensirion/python
   script:
     - pip install -e .[test]
-    - flake8 sensirion_shdlc_driver
+    - flake8
     - pytest
     - python setup.py sdist
     - python setup.py bdist_wheel
@@ -29,7 +29,7 @@ build_package:linux_py3:
   image: sensirion/python3
   script:
     - pip install -e .[test]
-    - flake8 sensirion_shdlc_driver
+    - flake8
     - pytest
     - python3 setup.py bdist_wheel
   artifacts:
@@ -41,7 +41,7 @@ build_package:windows:
   tags: [windows, x86_64, python27]
   script:
     - pip install -e .[test]
-    - flake8 sensirion_shdlc_driver
+    - flake8
     - pytest
     - python setup.py bdist_wheel -q
   artifacts:
