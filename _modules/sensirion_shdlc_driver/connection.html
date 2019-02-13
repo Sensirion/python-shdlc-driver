@@ -227,12 +227,12 @@
         <span class="n">command</span><span class="o">.</span><span class="n">check_response_length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># Raises if length was wrong</span>
         <span class="k">return</span> <span class="n">command</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">error</span></div>
 
-<div class="viewcode-block" id="ShdlcConnection.transceive"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.connection.ShdlcConnection.transceive">[docs]</a>    <span class="k">def</span> <span class="nf">transceive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">response_timeout</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcConnection.transceive"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.connection.ShdlcConnection.transceive">[docs]</a>    <span class="k">def</span> <span class="nf">transceive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">,</span> <span class="n">command_id</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">response_timeout</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Send a raw SHDLC command and return the received raw response.</span>
 
 <span class="sd">        :param byte slave_address: Slave address.</span>
-<span class="sd">        :param byte command: SHDLC command ID.</span>
+<span class="sd">        :param byte command_id: SHDLC command ID.</span>
 <span class="sd">        :param bytes-like data: Payload (may be empty).</span>
 <span class="sd">        :param float response_timeout: Response timeout in seconds (maximum</span>
 <span class="sd">                                       time until the first byte is received).</span>
@@ -240,13 +240,13 @@
 <span class="sd">        :rtype: bytes, bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rx_addr</span><span class="p">,</span> <span class="n">rx_cmd</span><span class="p">,</span> <span class="n">rx_state</span><span class="p">,</span> <span class="n">rx_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_port</span><span class="o">.</span><span class="n">transceive</span><span class="p">(</span>
-            <span class="n">slave_address</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">response_timeout</span><span class="p">)</span>
+            <span class="n">slave_address</span><span class="p">,</span> <span class="n">command_id</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">response_timeout</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">rx_addr</span> <span class="o">!=</span> <span class="n">slave_address</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ShdlcResponseError</span><span class="p">(</span><span class="s2">&quot;Received slave address </span><span class="si">{}</span><span class="s2"> instead of </span><span class="si">{}</span><span class="s2">.&quot;</span>
                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rx_addr</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">rx_cmd</span> <span class="o">!=</span> <span class="n">command</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rx_cmd</span> <span class="o">!=</span> <span class="n">command_id</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ShdlcResponseError</span><span class="p">(</span><span class="s2">&quot;Received command ID 0x</span><span class="si">{:02X}</span><span class="s2"> instead of &quot;</span>
-                                     <span class="s2">&quot;0x</span><span class="si">{:02X}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rx_cmd</span><span class="p">,</span> <span class="n">command</span><span class="p">))</span>
+                                     <span class="s2">&quot;0x</span><span class="si">{:02X}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rx_cmd</span><span class="p">,</span> <span class="n">command_id</span><span class="p">))</span>
         <span class="n">error_state</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">rx_state</span> <span class="o">&amp;</span> <span class="mh">0x80</span> <span class="k">else</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="n">error_state</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;SHDLC device with address </span><span class="si">{}</span><span class="s2"> is in error state.&quot;</span>

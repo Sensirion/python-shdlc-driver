@@ -209,7 +209,7 @@ i.e. allowing them to be called from multiple threads at the same time.</p>
 
 <dl class="method">
 <dt id="sensirion_shdlc_driver.port.ShdlcPort.transceive">
-<code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcPort.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort.transceive" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command_id</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcPort.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort.transceive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send SHDLC frame to port and return received response frame.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -217,14 +217,14 @@ i.e. allowing them to be called from multiple threads at the same time.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>slave_address</strong> (<em>byte</em>) – Slave address.</li>
-<li><strong>command</strong> (<em>byte</em>) – SHDLC command ID.</li>
+<li><strong>command_id</strong> (<em>byte</em>) – SHDLC command ID.</li>
 <li><strong>data</strong> (<em>bytes-like</em>) – Payload.</li>
 <li><strong>response_timeout</strong> (<em>float</em>) – Response timeout in seconds (maximum
 time until the first byte is received).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Received address, command, state, and payload.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Received address, command_id, state, and payload.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">byte, byte, byte, bytes</p>
@@ -305,7 +305,7 @@ using it.</p>
 
 <dl class="method">
 <dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.transceive">
-<code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.transceive" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command_id</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.transceive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send SHDLC frame to port and return received response frame.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -313,14 +313,14 @@ using it.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>slave_address</strong> (<em>byte</em>) – Slave address.</li>
-<li><strong>command</strong> (<em>byte</em>) – SHDLC command ID.</li>
+<li><strong>command_id</strong> (<em>byte</em>) – SHDLC command ID.</li>
 <li><strong>data</strong> (<em>bytes-like</em>) – Payload.</li>
 <li><strong>response_timeout</strong> (<em>float</em>) – Response timeout in seconds (maximum
 time until the first byte is received).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Received address, command, state, and payload.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Received address, command_id, state, and payload.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">byte, byte, byte, bytes</p>
@@ -428,7 +428,7 @@ until post processing is done.</li>
 
 <dl class="method">
 <dt id="sensirion_shdlc_driver.connection.ShdlcConnection.transceive">
-<code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/connection.html#ShdlcConnection.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.connection.ShdlcConnection.transceive" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command_id</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/connection.html#ShdlcConnection.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.connection.ShdlcConnection.transceive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send a raw SHDLC command and return the received raw response.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -436,7 +436,7 @@ until post processing is done.</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>slave_address</strong> (<em>byte</em>) – Slave address.</li>
-<li><strong>command</strong> (<em>byte</em>) – SHDLC command ID.</li>
+<li><strong>command_id</strong> (<em>byte</em>) – SHDLC command ID.</li>
 <li><strong>data</strong> (<em>bytes-like</em>) – Payload (may be empty).</li>
 <li><strong>response_timeout</strong> (<em>float</em>) – Response timeout in seconds (maximum
 time until the first byte is received).</li>
