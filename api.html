@@ -19,13 +19,20 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
@@ -33,21 +40,16 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Quick Start" href="quickstart.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -708,9 +710,203 @@ object or None, otherwise as a byte.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_slave_address">
+<code class="descname">get_slave_address</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.get_slave_address"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_slave_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the SHDLC slave address of the device.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">See also the property <a class="reference internal" href="#sensirion_shdlc_driver.device.ShdlcDevice.slave_address" title="sensirion_shdlc_driver.device.ShdlcDevice.slave_address"><code class="xref py py-attr docutils literal notranslate"><span class="pre">slave_address</span></code></a> which returns
+the device’s slave address without sending a command. This
+method really sends a command to the device, even though the
+slave address is actually already known by this object.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The slave address of the device.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">byte</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.set_slave_address">
+<code class="descname">set_slave_address</code><span class="sig-paren">(</span><em>slave_address</em>, <em>update_driver=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.set_slave_address"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.set_slave_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the SHDLC slave address of the device.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The slave address is stored in non-volatile memory of the
+device and thus persists after a device reset. So the next
+time connecting to the device, you have to use the new
+address.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">When changing the address of a slave, make sure there
+isn’t already a slave with that address on the same bus!
+In that case you would get communication issues which can
+only be fixed by disconnecting one of the slaves.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>slave_address</strong> (<em>byte</em>) – The new slave address [0..254]. The address
+255 is reserved for broadcasts.</li>
+<li><strong>update_driver</strong> (<em>bool</em>) – If true, the property
+<a class="reference internal" href="#sensirion_shdlc_driver.device.ShdlcDevice.slave_address" title="sensirion_shdlc_driver.device.ShdlcDevice.slave_address"><code class="xref py py-attr docutils literal notranslate"><span class="pre">slave_address</span></code></a> of this object is
+also updated with the new address. This is
+needed to allow further communication with
+the device, as its address has changed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_baudrate">
+<code class="descname">get_baudrate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.get_baudrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_baudrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the SHDLC baudrate of the device.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method really sends a command to the device, even though
+the baudrate is already known by the used
+<a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcPort" title="sensirion_shdlc_driver.port.ShdlcPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShdlcPort</span></code></a> object.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The baudrate of the device [bit/s].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.set_baudrate">
+<code class="descname">set_baudrate</code><span class="sig-paren">(</span><em>baudrate</em>, <em>update_driver=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.set_baudrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.set_baudrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the SHDLC baudrate of the device.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The baudrate is stored in non-volatile memory of the
+device and thus persists after a device reset. So the next
+time connecting to the device, you have to use the new
+baudrate.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you pass <cite>True</cite> to the argument <cite>update_driver</cite>, the
+baudrate of the underlaying
+<a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcPort" title="sensirion_shdlc_driver.port.ShdlcPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShdlcPort</span></code></a> object
+is changed. As the baudrate applies to the whole bus (with
+all its slaves), you might no longer be able to
+communicate with other slaves. Generally you should change
+the baudrate of all slaves consecutively, and only set
+<cite>update_driver</cite> to <cite>True</cite> the last time.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>baudrate</strong> (<em>int</em>) – The new baudrate. See device documentation for a
+list of supported baudrates. Many devices support
+the baudrates 9600, 19200 and 115200.</li>
+<li><strong>update_driver</strong> (<em>bool</em>) – If true, the baudrate of the
+<a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcPort" title="sensirion_shdlc_driver.port.ShdlcPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShdlcPort</span></code></a>
+object is also updated with the baudrate.
+This is needed to allow further
+communication with the device, as its
+baudrate has changed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_reply_delay">
+<code class="descname">get_reply_delay</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.get_reply_delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_reply_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the SHDLC reply delay of the device.</p>
+<p>See <a class="reference internal" href="#sensirion_shdlc_driver.device.ShdlcDevice.set_reply_delay" title="sensirion_shdlc_driver.device.ShdlcDevice.set_reply_delay"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_reply_delay()</span></code></a> for details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The reply delay of the device [μs].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">byte</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.set_reply_delay">
+<code class="descname">set_reply_delay</code><span class="sig-paren">(</span><em>reply_delay</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.set_reply_delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.set_reply_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the SHDLC reply delay of the device.</p>
+<p>The reply delay allows to increase the minimum response time of the
+slave to a given value in Microseconds. This is needed for RS485
+masters which require some time to switch from sending to receiving.
+If the slave starts sending the response while the master is still
+driving the bus lines, a conflict on the bus occurs and communication
+fails. If you use such a slow RS485 master, you can increase the reply
+delay of all slaves to avoid this issue.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>reply_delay</strong> (<em>byte</em>) – The new reply delay [μs].</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.get_system_up_time">
+<code class="descname">get_system_up_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.get_system_up_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_system_up_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the system up time of the device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The time since the last power-on or device reset [s].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="sensirion_shdlc_driver.device.ShdlcDevice.device_reset">
 <code class="descname">device_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.device_reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.device_reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute a device reset (reboot firmware, similar to power cycle).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.device.ShdlcDevice.factory_reset">
+<code class="descname">factory_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.factory_reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.factory_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a factory reset (restore the off-the-shelf factory
+configuration).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This resets any configuration done after leaving the
+factory! Keep in mind that this command might also change
+communication parameters (i.e. baudrate and slave address)
+and thus you might have to adjust the driver’s parameters
+to allow further communication with the device.</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -1765,7 +1961,7 @@ corresponding error messages.</p>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="quickstart.html" class="btn btn-neutral" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -1798,33 +1994,22 @@ corresponding error messages.</p>
     <div class="rst-other-versions">
         <dl>
             <dt>Branches</dt>
-            <dd><a href="add-more-commands/api.html">add-more-commands</a></dd>
             <dd><a href="master/api.html">master</a></dd>
         </dl>
     </div>
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
