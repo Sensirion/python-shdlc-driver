@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sensirion_shdlc_driver.commands.device_reset &mdash; Sensirion SHDLC Python Driver 0.1.0 documentation</title>
+  <title>sensirion_shdlc_driver.commands.system_up_time &mdash; Sensirion SHDLC Python Driver 0.1.0 documentation</title>
   
 
   
@@ -138,7 +138,7 @@
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
-      <li>sensirion_shdlc_driver.commands.device_reset</li>
+      <li>sensirion_shdlc_driver.commands.system_up_time</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -153,32 +153,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for sensirion_shdlc_driver.commands.device_reset</h1><div class="highlight"><pre>
+  <h1>Source code for sensirion_shdlc_driver.commands.system_up_time</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># (c) Copyright 2019 Sensirion AG, Switzerland</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">..command</span> <span class="k">import</span> <span class="n">ShdlcCommand</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="k">import</span> <span class="n">unpack</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="ShdlcCmdDeviceResetBase"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase">[docs]</a><span class="k">class</span> <span class="nc">ShdlcCmdDeviceResetBase</span><span class="p">(</span><span class="n">ShdlcCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcCmdSystemUpTimeBase"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase">[docs]</a><span class="k">class</span> <span class="nc">ShdlcCmdSystemUpTimeBase</span><span class="p">(</span><span class="n">ShdlcCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    SHDLC command 0xD3: &quot;Device Reset&quot;.</span>
+<span class="sd">    SHDLC command 0x93: &quot;System Up Time&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="ShdlcCmdDeviceResetBase.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdDeviceResetBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mh">0xD3</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+<div class="viewcode-block" id="ShdlcCmdSystemUpTimeBase.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdSystemUpTimeBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mh">0x93</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="ShdlcCmdDeviceReset"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset">[docs]</a><span class="k">class</span> <span class="nc">ShdlcCmdDeviceReset</span><span class="p">(</span><span class="n">ShdlcCmdDeviceResetBase</span><span class="p">):</span>
-<div class="viewcode-block" id="ShdlcCmdDeviceReset.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdDeviceReset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-            <span class="n">data</span><span class="o">=</span><span class="p">[],</span> <span class="n">max_response_time</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_response_length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">2.0</span>
-        <span class="p">)</span></div></div>
+<div class="viewcode-block" id="ShdlcCmdGetSystemUpTime"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime">[docs]</a><span class="k">class</span> <span class="nc">ShdlcCmdGetSystemUpTime</span><span class="p">(</span><span class="n">ShdlcCmdSystemUpTimeBase</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcCmdGetSystemUpTime.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdGetSystemUpTime</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="p">[],</span> <span class="n">max_response_time</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+            <span class="n">min_response_length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_response_length</span><span class="o">=</span><span class="mi">4</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ShdlcCmdGetSystemUpTime.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return int: System up time [s].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;I&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div></div>
 </pre></div>
 
            </div>
@@ -209,14 +216,14 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: master
+        v: prepare-release
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Branches</dt>
-            <dd><a href="device_reset.html">master</a></dd>
-            <dd><a href="../../../../prepare-release/index.html">prepare-release</a></dd>
+            <dd><a href="../../../../master/index.html">master</a></dd>
+            <dd><a href="system_up_time.html">prepare-release</a></dd>
         </dl>
     </div>
 </div>

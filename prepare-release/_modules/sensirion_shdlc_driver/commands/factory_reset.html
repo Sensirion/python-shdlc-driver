@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sensirion_shdlc_driver.commands.device_reset &mdash; Sensirion SHDLC Python Driver 0.1.0 documentation</title>
+  <title>sensirion_shdlc_driver.commands.factory_reset &mdash; Sensirion SHDLC Python Driver 0.1.0 documentation</title>
   
 
   
@@ -138,7 +138,7 @@
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
-      <li>sensirion_shdlc_driver.commands.device_reset</li>
+      <li>sensirion_shdlc_driver.commands.factory_reset</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -153,7 +153,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for sensirion_shdlc_driver.commands.device_reset</h1><div class="highlight"><pre>
+  <h1>Source code for sensirion_shdlc_driver.commands.factory_reset</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># (c) Copyright 2019 Sensirion AG, Switzerland</span>
 
@@ -164,19 +164,19 @@
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="ShdlcCmdDeviceResetBase"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase">[docs]</a><span class="k">class</span> <span class="nc">ShdlcCmdDeviceResetBase</span><span class="p">(</span><span class="n">ShdlcCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcCmdFactoryResetBase"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase">[docs]</a><span class="k">class</span> <span class="nc">ShdlcCmdFactoryResetBase</span><span class="p">(</span><span class="n">ShdlcCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    SHDLC command 0xD3: &quot;Device Reset&quot;.</span>
+<span class="sd">    SHDLC command 0x92: &quot;Factory Reset&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="ShdlcCmdDeviceResetBase.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdDeviceResetBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mh">0xD3</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+<div class="viewcode-block" id="ShdlcCmdFactoryResetBase.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdFactoryResetBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mh">0x92</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="ShdlcCmdDeviceReset"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset">[docs]</a><span class="k">class</span> <span class="nc">ShdlcCmdDeviceReset</span><span class="p">(</span><span class="n">ShdlcCmdDeviceResetBase</span><span class="p">):</span>
-<div class="viewcode-block" id="ShdlcCmdDeviceReset.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdDeviceReset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-            <span class="n">data</span><span class="o">=</span><span class="p">[],</span> <span class="n">max_response_time</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_response_length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<div class="viewcode-block" id="ShdlcCmdFactoryReset"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset">[docs]</a><span class="k">class</span> <span class="nc">ShdlcCmdFactoryReset</span><span class="p">(</span><span class="n">ShdlcCmdFactoryResetBase</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcCmdFactoryReset.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdFactoryReset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="p">[],</span> <span class="n">max_response_time</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">max_response_length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
             <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">2.0</span>
         <span class="p">)</span></div></div>
 </pre></div>
@@ -209,14 +209,14 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: master
+        v: prepare-release
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Branches</dt>
-            <dd><a href="device_reset.html">master</a></dd>
-            <dd><a href="../../../../prepare-release/index.html">prepare-release</a></dd>
+            <dd><a href="../../../../master/index.html">master</a></dd>
+            <dd><a href="factory_reset.html">prepare-release</a></dd>
         </dl>
     </div>
 </div>

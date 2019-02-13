@@ -182,7 +182,7 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="ShdlcCmdGetVersion.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="n">data_bytes</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># To make the [] operator returning a byte</span>
+        <span class="n">data_bytes</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># Make the [] operator returning a byte</span>
         <span class="k">return</span> <span class="n">Version</span><span class="p">(</span>
             <span class="n">firmware</span><span class="o">=</span><span class="n">FirmwareVersion</span><span class="p">(</span>
                 <span class="n">major</span><span class="o">=</span><span class="n">data_bytes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -234,7 +234,6 @@
     <div class="rst-other-versions">
         <dl>
             <dt>Branches</dt>
-            <dd><a href="../../../../increase-flake8-coverage/index.html">increase-flake8-coverage</a></dd>
             <dd><a href="../../../../master/index.html">master</a></dd>
             <dd><a href="device_version.html">prepare-release</a></dd>
         </dl>

@@ -337,8 +337,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">builder</span> <span class="o">=</span> <span class="n">ShdlcSerialMosiFrameBuilder</span><span class="p">(</span><span class="n">slave_address</span><span class="p">,</span> <span class="n">command_id</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         <span class="n">tx_data</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">()</span>
-        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;ShdlcSerialPort send raw: [</span><span class="si">{}</span><span class="s2">]&quot;</span>
-                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;0x</span><span class="si">%.2X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">tx_data</span><span class="p">)])))</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;ShdlcSerialPort send raw: [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                  <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;0x</span><span class="si">%.2X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">tx_data</span><span class="p">)])))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tx_data</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_receive_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -356,8 +356,8 @@
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">ShdlcTimeoutError</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">builder</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">new_data</span><span class="p">):</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;ShdlcSerialPort received raw: [</span><span class="si">{}</span><span class="s2">]&quot;</span>
-                          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;0x</span><span class="si">%.2X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">builder</span><span class="o">.</span><span class="n">data</span><span class="p">])))</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;ShdlcSerialPort received raw: [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                          <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;0x</span><span class="si">%.2X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">builder</span><span class="o">.</span><span class="n">data</span><span class="p">])))</span>
                 <span class="k">return</span> <span class="n">builder</span><span class="o">.</span><span class="n">interpret_data</span><span class="p">()</span></div>
 </pre></div>
 
@@ -395,7 +395,6 @@
     <div class="rst-other-versions">
         <dl>
             <dt>Branches</dt>
-            <dd><a href="../../../increase-flake8-coverage/index.html">increase-flake8-coverage</a></dd>
             <dd><a href="../../../master/index.html">master</a></dd>
             <dd><a href="port.html">prepare-release</a></dd>
         </dl>

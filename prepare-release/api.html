@@ -92,6 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-sensirion_shdlc_driver.serial_frame_builder">ShdlcSerialFrameBuilder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shdlcport">ShdlcPort</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shdlcconnection">ShdlcConnection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shdlcdevice">ShdlcDevice</a></li>
@@ -166,6 +167,129 @@
             
   <div class="section" id="api-reference">
 <h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-sensirion_shdlc_driver.serial_frame_builder">
+<span id="shdlcserialframebuilder"></span><h2>ShdlcSerialFrameBuilder<a class="headerlink" href="#module-sensirion_shdlc_driver.serial_frame_builder" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialFrameBuilder">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.serial_frame_builder.</code><code class="descname">ShdlcSerialFrameBuilder</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/serial_frame_builder.html#ShdlcSerialFrameBuilder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialFrameBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for ShdlcSerialMosiFrameBuilder and ShdlcSerialMisoFrameBuilder.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialFrameBuilder.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/serial_frame_builder.html#ShdlcSerialFrameBuilder.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialFrameBuilder.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMosiFrameBuilder">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.serial_frame_builder.</code><code class="descname">ShdlcSerialMosiFrameBuilder</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command_id</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/serial_frame_builder.html#ShdlcSerialMosiFrameBuilder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMosiFrameBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serial MOSI (master out, slave in) frame builder.</p>
+<p>This class allows to convert structured data (slave address, command ID
+etc.) into the raw bytes which are then sent to the serial port.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMosiFrameBuilder.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command_id</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/serial_frame_builder.html#ShdlcSerialMosiFrameBuilder.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMosiFrameBuilder.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>slave_address</strong> (<em>byte</em>) – Slave address.</li>
+<li><strong>command_id</strong> (<em>byte</em>) – Command ID.</li>
+<li><strong>data</strong> (<em>bytes-like</em>) – Payload (can be empty).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMosiFrameBuilder.to_bytes">
+<code class="descname">to_bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/serial_frame_builder.html#ShdlcSerialMosiFrameBuilder.to_bytes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMosiFrameBuilder.to_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the structured data from the constructor to raw bytes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The raw data which can be sent to the serial port.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bytes</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.serial_frame_builder.</code><code class="descname">ShdlcSerialMisoFrameBuilder</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/serial_frame_builder.html#ShdlcSerialMisoFrameBuilder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serial MISO (master in, slave sout) frame builder.</p>
+<p>This class allows to convert raw bytes received from the serial port into
+structured data (slave address, command ID etc.).</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/serial_frame_builder.html#ShdlcSerialMisoFrameBuilder.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.data">
+<code class="descname">data</code><a class="headerlink" href="#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the received data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The received data.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bytearray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.add_data">
+<code class="descname">add_data</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/serial_frame_builder.html#ShdlcSerialMisoFrameBuilder.add_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.add_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add more data (received from the serial port) and check if a complete
+frame is received.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes-like</em>) – The bytes received from the serial port.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Whether the received data contains a complete frame or not.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.interpret_data">
+<code class="descname">interpret_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/serial_frame_builder.html#ShdlcSerialMisoFrameBuilder.interpret_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.interpret_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpret and validate received raw data and return it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Received address, command_id, state, and payload.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">byte, byte, byte, bytes</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="shdlcport">
 <h2>ShdlcPort<a class="headerlink" href="#shdlcport" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -1049,6 +1173,110 @@ actual command implementation for details.</td>
 
 </dd></dl>
 
+<span class="target" id="module-sensirion_shdlc_driver.commands.baudrate"></span><dl class="class">
+<dt id="sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.baudrate.</code><code class="descname">ShdlcCmdBaudrateBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/baudrate.html#ShdlcCmdBaudrateBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC command 0x91: “Get/Set Baudrate”.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/baudrate.html#ShdlcCmdBaudrateBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.baudrate.</code><code class="descname">ShdlcCmdSetBaudrate</code><span class="sig-paren">(</span><em>baudrate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/baudrate.html#ShdlcCmdSetBaudrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>baudrate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/baudrate.html#ShdlcCmdSetBaudrate.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.baudrate.</code><code class="descname">ShdlcCmdGetBaudrate</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/baudrate.html#ShdlcCmdGetBaudrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/baudrate.html#ShdlcCmdGetBaudrate.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/baudrate.html#ShdlcCmdGetBaudrate.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return int:</th><td class="field-body">Baudrate [bit/s].</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 <span class="target" id="module-sensirion_shdlc_driver.commands.device_info"></span><dl class="class">
 <dt id="sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase">
 <em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.device_info.</code><code class="descname">ShdlcCmdDeviceInfoBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/device_info.html#ShdlcCmdDeviceInfoBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase" title="Permalink to this definition">¶</a></dt>
@@ -1548,6 +1776,349 @@ error (byte) which occurred on the device.</td>
 
 </dd></dl>
 
+<span class="target" id="module-sensirion_shdlc_driver.commands.factory_reset"></span><dl class="class">
+<dt id="sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.factory_reset.</code><code class="descname">ShdlcCmdFactoryResetBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/factory_reset.html#ShdlcCmdFactoryResetBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC command 0x92: “Factory Reset”.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/factory_reset.html#ShdlcCmdFactoryResetBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.factory_reset.</code><code class="descname">ShdlcCmdFactoryReset</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/factory_reset.html#ShdlcCmdFactoryReset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/factory_reset.html#ShdlcCmdFactoryReset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-sensirion_shdlc_driver.commands.reply_delay"></span><dl class="class">
+<dt id="sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.reply_delay.</code><code class="descname">ShdlcCmdReplyDelayBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/reply_delay.html#ShdlcCmdReplyDelayBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC command 0x95: “Get/Set Reply Delay”.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/reply_delay.html#ShdlcCmdReplyDelayBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.reply_delay.</code><code class="descname">ShdlcCmdSetReplyDelay</code><span class="sig-paren">(</span><em>reply_delay</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/reply_delay.html#ShdlcCmdSetReplyDelay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>reply_delay</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/reply_delay.html#ShdlcCmdSetReplyDelay.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.reply_delay.</code><code class="descname">ShdlcCmdGetReplyDelay</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/reply_delay.html#ShdlcCmdGetReplyDelay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/reply_delay.html#ShdlcCmdGetReplyDelay.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/reply_delay.html#ShdlcCmdGetReplyDelay.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return byte:</th><td class="field-body">Reply delay [μs].</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-sensirion_shdlc_driver.commands.slave_address"></span><dl class="class">
+<dt id="sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.slave_address.</code><code class="descname">ShdlcCmdSlaveAddressBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/slave_address.html#ShdlcCmdSlaveAddressBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC command 0x90: “Get/Set Slave Address”.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/slave_address.html#ShdlcCmdSlaveAddressBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.slave_address.</code><code class="descname">ShdlcCmdSetSlaveAddress</code><span class="sig-paren">(</span><em>slave_address</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/slave_address.html#ShdlcCmdSetSlaveAddress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>slave_address</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/slave_address.html#ShdlcCmdSetSlaveAddress.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.slave_address.</code><code class="descname">ShdlcCmdGetSlaveAddress</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/slave_address.html#ShdlcCmdGetSlaveAddress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/slave_address.html#ShdlcCmdGetSlaveAddress.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/slave_address.html#ShdlcCmdGetSlaveAddress.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return byte:</th><td class="field-body">Slave address.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-sensirion_shdlc_driver.commands.system_up_time"></span><dl class="class">
+<dt id="sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.system_up_time.</code><code class="descname">ShdlcCmdSystemUpTimeBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/system_up_time.html#ShdlcCmdSystemUpTimeBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC command 0x93: “System Up Time”.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/system_up_time.html#ShdlcCmdSystemUpTimeBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.system_up_time.</code><code class="descname">ShdlcCmdGetSystemUpTime</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/system_up_time.html#ShdlcCmdGetSystemUpTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/system_up_time.html#ShdlcCmdGetSystemUpTime.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/system_up_time.html#ShdlcCmdGetSystemUpTime.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return int:</th><td class="field-body">System up time [s].</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="types">
 <h2>Types<a class="headerlink" href="#types" title="Permalink to this headline">¶</a></h2>
@@ -1994,7 +2565,6 @@ corresponding error messages.</p>
     <div class="rst-other-versions">
         <dl>
             <dt>Branches</dt>
-            <dd><a href="../increase-flake8-coverage/api.html">increase-flake8-coverage</a></dd>
             <dd><a href="../master/api.html">master</a></dd>
             <dd><a href="api.html">prepare-release</a></dd>
         </dl>
