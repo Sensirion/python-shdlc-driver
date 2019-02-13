@@ -96,7 +96,7 @@ deploy_stable:
     only:
       - tags
     script:
-      - PKG_VERSION=$(grep '^version\s*=\s*['"'"'"]\([0-9\.]*\)["'"'"'].*$' ${PACKAGE_NAME//-/_}/version.py | sed 's/^version\s*=\s*['"'"'"]\([0-9\.]*\)["'"'"'].*$/\1/')
+      - PKG_VERSION=$(grep '^version\s*=\s*['"'"'"]\([0-9\.]*\)["'"'"'].*$' sensirion_shdlc_driver/version.py | sed 's/^version\s*=\s*['"'"'"]\([0-9\.]*\)["'"'"'].*$/\1/')
       - TAG_VERSION=$(git describe --tags)
       - if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then echo "Tag Version ($TAG_VERSION) != Package Version ($PKG_VERSION)" && exit 1; fi
       - pip install twine~=1.12.1
