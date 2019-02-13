@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sensirion_shdlc_driver.commands.error_state &mdash; Sensirion SHDLC Python Driver 0.1.0 documentation</title>
+  <title>sensirion_shdlc_driver.commands.system_up_time &mdash; Sensirion SHDLC Python Driver 0.1.0 documentation</title>
   
 
   
@@ -138,7 +138,7 @@
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
-      <li>sensirion_shdlc_driver.commands.error_state</li>
+      <li>sensirion_shdlc_driver.commands.system_up_time</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -153,7 +153,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for sensirion_shdlc_driver.commands.error_state</h1><div class="highlight"><pre>
+  <h1>Source code for sensirion_shdlc_driver.commands.system_up_time</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># (c) Copyright 2019 Sensirion AG, Switzerland</span>
 
@@ -165,29 +165,27 @@
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="ShdlcCmdErrorStateBase"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase">[docs]</a><span class="k">class</span> <span class="nc">ShdlcCmdErrorStateBase</span><span class="p">(</span><span class="n">ShdlcCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcCmdSystemUpTimeBase"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase">[docs]</a><span class="k">class</span> <span class="nc">ShdlcCmdSystemUpTimeBase</span><span class="p">(</span><span class="n">ShdlcCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    SHDLC command 0xD2: &quot;Device Error State&quot;.</span>
+<span class="sd">    SHDLC command 0x93: &quot;System Up Time&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="ShdlcCmdErrorStateBase.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdErrorStateBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mh">0xD2</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+<div class="viewcode-block" id="ShdlcCmdSystemUpTimeBase.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdSystemUpTimeBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mh">0x93</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="ShdlcCmdGetErrorState"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState">[docs]</a><span class="k">class</span> <span class="nc">ShdlcCmdGetErrorState</span><span class="p">(</span><span class="n">ShdlcCmdErrorStateBase</span><span class="p">):</span>
-<div class="viewcode-block" id="ShdlcCmdGetErrorState.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clear</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdGetErrorState</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-            <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="mh">0x01</span> <span class="k">if</span> <span class="n">clear</span> <span class="k">else</span> <span class="mh">0x00</span><span class="p">],</span> <span class="n">max_response_time</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-            <span class="n">min_response_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_response_length</span><span class="o">=</span><span class="mi">5</span>
+<div class="viewcode-block" id="ShdlcCmdGetSystemUpTime"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime">[docs]</a><span class="k">class</span> <span class="nc">ShdlcCmdGetSystemUpTime</span><span class="p">(</span><span class="n">ShdlcCmdSystemUpTimeBase</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcCmdGetSystemUpTime.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCmdGetSystemUpTime</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="p">[],</span> <span class="n">max_response_time</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+            <span class="n">min_response_length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_response_length</span><span class="o">=</span><span class="mi">4</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ShdlcCmdGetErrorState.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcCmdGetSystemUpTime.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :return int, byte: Device state (32 flags as integer) and the last</span>
-<span class="sd">                           error (byte) which occurred on the device.</span>
+<span class="sd">        :return int: System up time [s].</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">device_state</span><span class="p">,</span> <span class="n">last_error</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;IB&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">device_state</span><span class="p">,</span> <span class="n">last_error</span></div></div>
+        <span class="k">return</span> <span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;I&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div></div>
 </pre></div>
 
            </div>
@@ -224,7 +222,7 @@
     <div class="rst-other-versions">
         <dl>
             <dt>Branches</dt>
-            <dd><a href="error_state.html">master</a></dd>
+            <dd><a href="system_up_time.html">master</a></dd>
         </dl>
     </div>
 </div>
