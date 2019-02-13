@@ -181,8 +181,8 @@ class ShdlcSerialPort(ShdlcPort):
         """
         builder = ShdlcSerialMosiFrameBuilder(slave_address, command_id, data)
         tx_data = builder.to_bytes()
-        log.debug("ShdlcSerialPort send raw: [{}]"
-                  .format(", ".join(["0x%.2X" % i for i in bytearray(tx_data)])))
+        log.debug("ShdlcSerialPort send raw: [{}]".format(
+                  ", ".join(["0x%.2X" % i for i in bytearray(tx_data)])))
         self._serial.write(tx_data)
 
     def _receive_frame(self):
@@ -200,6 +200,6 @@ class ShdlcSerialPort(ShdlcPort):
             if len(new_data) == 0:
                 raise ShdlcTimeoutError()
             if builder.add_data(new_data):
-                log.debug("ShdlcSerialPort received raw: [{}]"
-                          .format(", ".join(["0x%.2X" % i for i in builder.data])))
+                log.debug("ShdlcSerialPort received raw: [{}]".format(
+                          ", ".join(["0x%.2X" % i for i in builder.data])))
                 return builder.interpret_data()

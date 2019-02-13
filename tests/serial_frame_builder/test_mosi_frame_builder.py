@@ -2,7 +2,8 @@
 # (c) Copyright 2019 Sensirion AG, Switzerland
 
 from __future__ import absolute_import, division, print_function
-from sensirion_shdlc_driver.serial_frame_builder import ShdlcSerialMosiFrameBuilder
+from sensirion_shdlc_driver.serial_frame_builder import \
+    ShdlcSerialMosiFrameBuilder
 import pytest
 
 

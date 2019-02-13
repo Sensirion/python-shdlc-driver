@@ -2,7 +2,8 @@
 # (c) Copyright 2019 Sensirion AG, Switzerland
 
 from __future__ import absolute_import, division, print_function
-from sensirion_shdlc_driver.commands.system_up_time import ShdlcCmdGetSystemUpTime
+from sensirion_shdlc_driver.commands.system_up_time import \
+    ShdlcCmdGetSystemUpTime
 from sensirion_shdlc_driver.errors import ShdlcResponseError
 import pytest
 

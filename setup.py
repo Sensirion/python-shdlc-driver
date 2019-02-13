@@ -17,8 +17,9 @@ else:
 
 
 # Use README.rst and CHANGELOG.rst as package description
-readme = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
-changelog = open(os.path.join(os.path.dirname(__file__), 'CHANGELOG.rst')).read()
+root_path = os.path.dirname(__file__)
+readme = open(os.path.join(root_path, 'README.rst')).read()
+changelog = open(os.path.join(root_path, 'CHANGELOG.rst')).read()
 long_description = readme.strip() + "\n\n" + changelog.strip() + "\n"
 
 

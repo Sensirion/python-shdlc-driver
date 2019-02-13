@@ -136,8 +136,13 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'PythonDriverforSensirionSHDLCDevices.tex', u'Python Driver for Sensirion SHDLC Devices Documentation',
-     u'Sensirion AG', 'manual'),
+    (
+        master_doc,
+        'PythonDriverforSensirionSHDLCDevices.tex',
+        u'Python Driver for Sensirion SHDLC Devices Documentation',
+        u'Sensirion AG',
+        'manual'
+    ),
 ]
 
 
@@ -146,8 +151,13 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'pythondriverforsensirionshdlcdevices', u'Python Driver for Sensirion SHDLC Devices Documentation',
-     [author], 1)
+    (
+        master_doc,
+        'pythondriverforsensirionshdlcdevices',
+        u'Python Driver for Sensirion SHDLC Devices Documentation',
+        [author],
+        1
+    )
 ]
 
 
@@ -157,9 +167,15 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'PythonDriverforSensirionSHDLCDevices', u'Python Driver for Sensirion SHDLC Devices Documentation',
-     author, 'PythonDriverforSensirionSHDLCDevices', 'One line description of project.',
-     'Miscellaneous'),
+    (
+        master_doc,
+        'PythonDriverforSensirionSHDLCDevices',
+        u'Python Driver for Sensirion SHDLC Devices Documentation',
+        author,
+        'PythonDriverforSensirionSHDLCDevices',
+        'One line description of project.',
+        'Miscellaneous'
+    ),
 ]
 
 
@@ -172,13 +188,16 @@ autodoc_default_flags = [
     'special-members',
 ]
 
+
 def autodoc_skip_member(app, what, name, obj, skip, options):
     exclusions = ('__weakref__', '__doc__', '__module__', '__dict__')
     exclude = name in exclusions
     return skip or exclude
 
+
 def setup(app):
     app.connect('autodoc-skip-member', autodoc_skip_member)
+
 
 scv_whitelist_branches = ('master')
 
