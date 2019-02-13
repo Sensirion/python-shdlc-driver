@@ -36,5 +36,5 @@ class ShdlcCmdGetSlaveAddress(ShdlcCmdSlaveAddressBase):
         """
         :return byte: Slave address.
         """
-        data_bytes = bytearray(data)  # To make the [] operator returning a byte
+        data_bytes = bytearray(data)  # Make the [] operator returning a byte
         return int(data_bytes[0])

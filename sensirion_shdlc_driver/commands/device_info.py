@@ -65,5 +65,5 @@ class ShdlcCmdGetProductSubType(ShdlcCmdDeviceInfoBase):
         )
 
     def interpret_response(self, data):
-        data_bytes = bytearray(data)  # To make the [] operator returning a byte
+        data_bytes = bytearray(data)  # Make the [] operator returning a byte
         return data_bytes[0]
