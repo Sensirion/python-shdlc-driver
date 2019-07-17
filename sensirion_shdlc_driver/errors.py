@@ -14,6 +14,21 @@ class ShdlcError(Exception):
     pass
 
 
+class ShdlcFirmwareImageSignatureError(ShdlcError):
+    """
+    SHDLC firmware image signature error.
+    """
+    def __init__(self, signature):
+        """
+        Constructor.
+
+        :param int signature: Firmware image signature.
+        """
+        super(ShdlcFirmwareImageSignatureError, self).__init__(
+            "Invalid signature in firmware image: 0x{:08X}".format(signature)
+        )
+
+
 class ShdlcTimeoutError(ShdlcError):
     """
     SHDLC timeout exception (device did not respond to command).
