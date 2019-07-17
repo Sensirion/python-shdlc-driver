@@ -29,6 +29,23 @@ class ShdlcFirmwareImageSignatureError(ShdlcError):
         )
 
 
+class ShdlcFirmwareImageIncompatibilityError(ShdlcError):
+    """
+    SHDLC firmware image incompatibility error.
+    """
+    def __init__(self, image_type, device_type):
+        """
+        Constructor.
+
+        :param int image_type:  Device type of the firmware image.
+        :param int device_type: Device type of the connected device.
+        """
+        super(ShdlcFirmwareImageIncompatibilityError, self).__init__(
+            "Firmware image for device 0x{:08X} not compatible with connected "
+            "device 0x{:08X}.".format(image_type, device_type)
+        )
+
+
 class ShdlcTimeoutError(ShdlcError):
     """
     SHDLC timeout exception (device did not respond to command).
