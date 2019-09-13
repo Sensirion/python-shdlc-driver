@@ -31,6 +31,7 @@ ShdlcCommand
 
 .. autoclass:: sensirion_shdlc_driver.command.ShdlcCommand
 .. automodule:: sensirion_shdlc_driver.commands.baudrate
+.. automodule:: sensirion_shdlc_driver.commands.bootloader
 .. automodule:: sensirion_shdlc_driver.commands.device_info
 .. automodule:: sensirion_shdlc_driver.commands.device_reset
 .. automodule:: sensirion_shdlc_driver.commands.device_version
