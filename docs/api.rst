@@ -32,6 +32,12 @@ ShdlcFirmwareImage
 .. automodule:: sensirion_shdlc_driver.firmware_image
 
 
+ShdlcFirmwareUpdate
+-------------------
+
+.. automodule:: sensirion_shdlc_driver.firmware_update
+
+
 ShdlcCommand
 ------------
 
