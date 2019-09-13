@@ -5,14 +5,14 @@ stages:
 check_rst_syntax:
   stage: build
   tags: [linux, docker]
-  image: sensirion/python
+  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:3.6-18.04-1.1.0
   script:
     - rst-lint *.rst
 
 build_package:linux_py2:
   stage: build
   tags: [linux, docker]
-  image: sensirion/python
+  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:2.7-18.04-1.1.0
   script:
     - pip install -e .[test]
     - flake8
@@ -26,19 +26,20 @@ build_package:linux_py2:
 build_package:linux_py3:
   stage: build
   tags: [linux, docker]
-  image: sensirion/python3
+  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:3.6-18.04-1.1.0
   script:
     - pip install -e .[test]
     - flake8
     - pytest
-    - python3 setup.py bdist_wheel
+    - python setup.py bdist_wheel
   artifacts:
     expire_in: 1 week
     paths: [dist]
 
 build_package:windows:
   stage: build
-  tags: [windows, x86_64, python27]
+  tags: [windows, docker]
+  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:2.7.12-32bit-windowsservercore-ltsc2019-1.1.0
   script:
     - pip install -e .[test]
     - flake8
@@ -51,11 +52,7 @@ build_package:windows:
 build_docs:
   stage: build
   tags: [linux, docker]
-  image: sensirion/python3
-  variables:
-    # To fix encoding issues
-    LC_ALL: C.UTF-8
-    LANG: C.UTF-8
+  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:3.6-18.04-1.1.0
   script:
     - apt-get update && apt-get install -y graphviz
     - python setup.py install
@@ -66,7 +63,7 @@ build_docs:
 deploy_staging:
     stage: deploy
     tags: [linux, docker]
-    image: sensirion/python
+    image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:2.7-18.04-1.1.0
     dependencies:
       - build_package:linux_py2
       - build_package:linux_py3
@@ -85,7 +82,7 @@ deploy_staging:
 deploy_stable:
     stage: deploy
     tags: [linux, docker]
-    image: sensirion/python
+    image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:2.7-18.04-1.1.0
     dependencies:
       - build_package:linux_py2
       - build_package:linux_py3
@@ -105,15 +102,11 @@ deploy_stable:
 deploy_docs:
     stage: deploy
     tags: [linux, docker]
-    image: sensirion/python3
+    image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:3.6-18.04-1.1.0
     dependencies: []
     only:
       - master
       - tags
-    variables:
-      # To fix encoding issues
-      LC_ALL: C.UTF-8
-      LANG: C.UTF-8
     script:
       - apt-get update && apt-get install -y graphviz
       - python setup.py install
