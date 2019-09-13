@@ -36,10 +36,23 @@ build_package:linux_py3:
     expire_in: 1 week
     paths: [dist]
 
-build_package:windows:
+build_package:windows_py2:
   stage: build
   tags: [windows, docker]
   image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:2.7.12-32bit-windowsservercore-ltsc2019-1.1.0
+  script:
+    - pip install -e .[test]
+    - flake8
+    - pytest
+    - python setup.py bdist_wheel -q
+  artifacts:
+    expire_in: 1 week
+    paths: [dist]
+
+build_package:windows_py3:
+  stage: build
+  tags: [windows, docker]
+  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:3.5.4-64bit-windowsservercore-ltsc2019-1.1.0
   script:
     - pip install -e .[test]
     - flake8
@@ -67,7 +80,8 @@ deploy_staging:
     dependencies:
       - build_package:linux_py2
       - build_package:linux_py3
-      - build_package:windows
+      - build_package:windows_py2
+      - build_package:windows_py3
     environment:
       name: $DEVPI_GROUP/staging
       url: https://pypi.sensirion.lokal/$DEVPI_GROUP/staging/sensirion-shdlc-driver
@@ -86,7 +100,8 @@ deploy_stable:
     dependencies:
       - build_package:linux_py2
       - build_package:linux_py3
-      - build_package:windows
+      - build_package:windows_py2
+      - build_package:windows_py3
     environment:
       name: pypi.org
       url: https://pypi.org/project/sensirion-shdlc-driver/
