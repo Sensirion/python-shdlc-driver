@@ -5,7 +5,7 @@ from __future__ import absolute_import, division, print_function
 from .errors import ShdlcTimeoutError
 from .serial_frame_builder import ShdlcSerialMosiFrameBuilder, \
     ShdlcSerialMisoFrameBuilder
-from threading import Lock
+from threading import RLock
 import serial
 
 import logging
@@ -50,6 +50,17 @@ class ShdlcPort(object):
         """
         raise NotImplementedError()
 
+    @property
+    def lock(self):
+        """
+        Get the lock object of the port to allow locking it, i.e. to get
+        exclusive access across multiple method calls.
+
+        :return: The lock object.
+        :rtype: threading.RLock
+        """
+        raise NotImplementedError()
+
     def transceive(self, slave_address, command_id, data, response_timeout):
         """
         Send SHDLC frame to port and return received response frame.
@@ -88,7 +99,7 @@ class ShdlcSerialPort(ShdlcPort):
         super(ShdlcSerialPort, self).__init__()
         log.debug("Open ShdlcSerialPort on '{}' with {} bit/s."
                   .format(port, baudrate))
-        self._lock = Lock()
+        self._lock = RLock()
         self._serial = serial.Serial(port=port, baudrate=baudrate,
                                      bytesize=serial.EIGHTBITS,
                                      parity=serial.PARITY_NONE,
@@ -132,6 +143,17 @@ class ShdlcSerialPort(ShdlcPort):
         """
         with self._lock:
             self._serial.baudrate = bitrate
+
+    @property
+    def lock(self):
+        """
+        Get the lock object of the port to allow locking it, i.e. to get
+        exclusive access across multiple method calls.
+
+        :return: The lock object.
+        :rtype: threading.RLock
+        """
+        return self._lock
 
     def transceive(self, slave_address, command_id, data, response_timeout):
         """
