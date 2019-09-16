@@ -42,8 +42,15 @@ setup(
         'pyserial~=3.0',
     ],
     extras_require={
+        # Dependencies for the firmware update (optional since not all devices
+        # support firmware updates)
+        'fwupdate': [
+            'intelhex~=2.0',
+        ],
+        # Dependencies for tests
         'test': [
             'flake8~=3.6.0',
+            'intelhex~=2.0',  # from the "fwupdate" extra
             'pytest~=3.10.0',
             'pytest-cov~=2.6.0',
         ]
