@@ -51,6 +51,7 @@ setup(
         'test': [
             'flake8~=3.6.0',
             'intelhex~=2.0',  # from the "fwupdate" extra
+            'mock~=3.0.0',
             'pytest~=3.10.0',
             'pytest-cov~=2.6.0',
         ]
