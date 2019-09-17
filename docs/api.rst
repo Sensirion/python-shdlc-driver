@@ -26,6 +26,12 @@ ShdlcDevice
 .. autoclass:: sensirion_shdlc_driver.device.ShdlcDevice
 
 
+ShdlcFirmwareImage
+------------------
+
+.. automodule:: sensirion_shdlc_driver.firmware_image
+
+
 ShdlcCommand
 ------------
 
