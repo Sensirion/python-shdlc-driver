@@ -170,6 +170,38 @@
     <span class="k">pass</span></div>
 
 
+<div class="viewcode-block" id="ShdlcFirmwareImageSignatureError"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareImageSignatureError">[docs]</a><span class="k">class</span> <span class="nc">ShdlcFirmwareImageSignatureError</span><span class="p">(</span><span class="n">ShdlcError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SHDLC firmware image signature error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ShdlcFirmwareImageSignatureError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareImageSignatureError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signature</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param int signature: Firmware image signature.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcFirmwareImageSignatureError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="s2">&quot;Invalid signature in firmware image: 0x</span><span class="si">{:08X}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ShdlcFirmwareImageIncompatibilityError"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareImageIncompatibilityError">[docs]</a><span class="k">class</span> <span class="nc">ShdlcFirmwareImageIncompatibilityError</span><span class="p">(</span><span class="n">ShdlcError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SHDLC firmware image incompatibility error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ShdlcFirmwareImageIncompatibilityError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareImageIncompatibilityError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_type</span><span class="p">,</span> <span class="n">device_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param int image_type:  Device type of the firmware image.</span>
+<span class="sd">        :param int device_type: Device type of the connected device.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcFirmwareImageIncompatibilityError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="s2">&quot;Firmware image for device 0x</span><span class="si">{:08X}</span><span class="s2"> not compatible with connected &quot;</span>
+            <span class="s2">&quot;device 0x</span><span class="si">{:08X}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">image_type</span><span class="p">,</span> <span class="n">device_type</span><span class="p">)</span>
+        <span class="p">)</span></div></div>
+
+
 <div class="viewcode-block" id="ShdlcTimeoutError"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcTimeoutError">[docs]</a><span class="k">class</span> <span class="nc">ShdlcTimeoutError</span><span class="p">(</span><span class="n">ShdlcError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SHDLC timeout exception (device did not respond to command).</span>
@@ -371,7 +403,6 @@
         <dl>
             <dt>Branches</dt>
             <dd><a href="../../add-shdlc-tcp-port/index.html">add-shdlc-tcp-port</a></dd>
-            <dd><a href="../../firmware-update/index.html">firmware-update</a></dd>
             <dd><a href="../../master/_modules/sensirion_shdlc_driver/errors.html">master</a></dd>
         </dl>
     </div>

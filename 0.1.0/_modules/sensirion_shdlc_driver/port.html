@@ -161,7 +161,7 @@
 <span class="kn">from</span> <span class="nn">.errors</span> <span class="k">import</span> <span class="n">ShdlcTimeoutError</span>
 <span class="kn">from</span> <span class="nn">.serial_frame_builder</span> <span class="k">import</span> <span class="n">ShdlcSerialMosiFrameBuilder</span><span class="p">,</span> \
     <span class="n">ShdlcSerialMisoFrameBuilder</span>
-<span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Lock</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">RLock</span>
 <span class="kn">import</span> <span class="nn">serial</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
@@ -206,6 +206,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lock</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the lock object of the port to allow locking it, i.e. to get</span>
+<span class="sd">        exclusive access across multiple method calls.</span>
+
+<span class="sd">        :return: The lock object.</span>
+<span class="sd">        :rtype: threading.RLock</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
 <div class="viewcode-block" id="ShdlcPort.transceive"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcPort.transceive">[docs]</a>    <span class="k">def</span> <span class="nf">transceive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">,</span> <span class="n">command_id</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">response_timeout</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Send SHDLC frame to port and return received response frame.</span>
@@ -244,7 +255,7 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcSerialPort</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Open ShdlcSerialPort on &#39;</span><span class="si">{}</span><span class="s2">&#39; with </span><span class="si">{}</span><span class="s2"> bit/s.&quot;</span>
                   <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">baudrate</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span> <span class="o">=</span> <span class="n">RLock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="n">baudrate</span><span class="p">,</span>
                                      <span class="n">bytesize</span><span class="o">=</span><span class="n">serial</span><span class="o">.</span><span class="n">EIGHTBITS</span><span class="p">,</span>
                                      <span class="n">parity</span><span class="o">=</span><span class="n">serial</span><span class="o">.</span><span class="n">PARITY_NONE</span><span class="p">,</span>
@@ -288,6 +299,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">baudrate</span> <span class="o">=</span> <span class="n">bitrate</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lock</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the lock object of the port to allow locking it, i.e. to get</span>
+<span class="sd">        exclusive access across multiple method calls.</span>
+
+<span class="sd">        :return: The lock object.</span>
+<span class="sd">        :rtype: threading.RLock</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span>
 
 <div class="viewcode-block" id="ShdlcSerialPort.transceive"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.transceive">[docs]</a>    <span class="k">def</span> <span class="nf">transceive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">,</span> <span class="n">command_id</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">response_timeout</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -400,7 +422,6 @@
         <dl>
             <dt>Branches</dt>
             <dd><a href="../../../add-shdlc-tcp-port/index.html">add-shdlc-tcp-port</a></dd>
-            <dd><a href="../../../firmware-update/index.html">firmware-update</a></dd>
             <dd><a href="../../../master/index.html">master</a></dd>
         </dl>
     </div>
