@@ -1,0 +1,386 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sensirion_shdlc_driver.firmware_update &mdash; Sensirion SHDLC Python Driver 0.1.1 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Sensirion SHDLC Python Driver
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../shdlc.html">SHDLC Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Sensirion SHDLC Python Driver</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>sensirion_shdlc_driver.firmware_update</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for sensirion_shdlc_driver.firmware_update</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># (c) Copyright 2019 Sensirion AG, Switzerland</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">.commands.bootloader</span> <span class="k">import</span> <span class="n">ShdlcCmdEnterBootloader</span><span class="p">,</span> \
+    <span class="n">ShdlcCmdFirmwareUpdateStart</span><span class="p">,</span> <span class="n">ShdlcCmdFirmwareUpdateData</span><span class="p">,</span> \
+    <span class="n">ShdlcCmdFirmwareUpdateStop</span>
+<span class="kn">from</span> <span class="nn">.errors</span> <span class="k">import</span> <span class="n">ShdlcFirmwareImageIncompatibilityError</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ShdlcFirmwareUpdate"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate">[docs]</a><span class="k">class</span> <span class="nc">ShdlcFirmwareUpdate</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper class to perform firmware updates over SHDLC.</span>
+
+<span class="sd">    .. note:: Device-specific drivers should provide a simple wrapper method</span>
+<span class="sd">              to easily perform firmware updates. So usually you don&#39;t have to</span>
+<span class="sd">              use this class directly.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># The SHDLC bootloader has a fixed bitrate and slave address, independent</span>
+    <span class="c1"># of the actual device settings or rotary switches.</span>
+    <span class="n">BOOTLOADER_BITRATE</span> <span class="o">=</span> <span class="mi">115200</span>
+    <span class="n">BOOTLOADER_SLAVE_ADDRESS</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="ShdlcFirmwareUpdate.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">status_callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">progress_callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param ~sensirion_shdlc_driver.device.ShdlcDevice device:</span>
+<span class="sd">            The device to update.</span>
+<span class="sd">        :param ~sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage image:</span>
+<span class="sd">            The image to flash.</span>
+<span class="sd">        :param callable status_callback: Optional callback for status report,</span>
+<span class="sd">                                         taking a string as parameter.</span>
+<span class="sd">        :param callable progress_callback: Optional callback for progress</span>
+<span class="sd">                                           report, taking a float (progress in</span>
+<span class="sd">                                           percent) as parameter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_device</span> <span class="o">=</span> <span class="n">device</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_image</span> <span class="o">=</span> <span class="n">image</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status_callback</span> <span class="o">=</span> <span class="n">status_callback</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_progress_callback</span> <span class="o">=</span> <span class="n">progress_callback</span></div>
+
+<div class="viewcode-block" id="ShdlcFirmwareUpdate.execute"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">emergency</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform the firmware update.</span>
+
+<span class="sd">        .. note:: This can take several minutes, don&#39;t abort it! If aborted,</span>
+<span class="sd">                  the device stays in the bootloader and you need to restart</span>
+<span class="sd">                  the update with ``emergency=True`` to recover.</span>
+
+<span class="sd">        :param bool emergency: Must be set to ``True`` if the device is already</span>
+<span class="sd">                               in bootloader mode, ``False`` otherwise.</span>
+<span class="sd">        :raises ~sensirion_shdlc_driver.errors.ShdlcFirmwareImageIncompatibilityError:</span>
+<span class="sd">            If the image is not compatible with the connected device.</span>
+<span class="sd">        :raises Exception: On other errors.</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa: E501</span>
+        <span class="c1"># Lock the port during the whole firmware update procedure.</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">emergency</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_check_product_type</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="mf">4.0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_enter_bootloader</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="mf">7.0</span><span class="p">)</span>
+            <span class="c1"># Switch to the bootloader bitrate for the actual update commands.</span>
+            <span class="n">old_bitrate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">bitrate</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">bitrate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">BOOTLOADER_BITRATE</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_send_start</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_send_data</span><span class="p">(</span><span class="n">progress_start</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">progress_end</span><span class="o">=</span><span class="mf">90.0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_send_stop</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">bitrate</span> <span class="o">=</span> <span class="n">old_bitrate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">(</span><span class="s2">&quot;Finished!&quot;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_check_product_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">progress</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check the product type.</span>
+
+<span class="sd">        Checks if the product type of the loaded firmware image corresponds to</span>
+<span class="sd">        the product type of the connected device. Raises an exception if it</span>
+<span class="sd">        doesn&#39;t match.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">(</span><span class="s2">&quot;Check compatibility...&quot;</span><span class="p">)</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">get_product_type</span><span class="p">(</span><span class="n">as_int</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_image</span><span class="o">.</span><span class="n">product_type</span>
+        <span class="k">if</span> <span class="n">actual</span> <span class="o">!=</span> <span class="n">expected</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ShdlcFirmwareImageIncompatibilityError</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_progress</span><span class="p">(</span><span class="n">progress</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_enter_bootloader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">progress</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enter the bootloaded on the device.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">(</span><span class="s2">&quot;Enter bootloader...&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">slave_address</span><span class="p">,</span> <span class="n">ShdlcCmdEnterBootloader</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_progress</span><span class="p">(</span><span class="n">progress</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_send_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">progress</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send the update start command to the bootloader.</span>
+
+<span class="sd">        :param float progress: The progress after executing this command.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">(</span><span class="s2">&quot;Clear flash...&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">BOOTLOADER_SLAVE_ADDRESS</span><span class="p">,</span>
+                      <span class="n">ShdlcCmdFirmwareUpdateStart</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_progress</span><span class="p">(</span><span class="n">progress</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_send_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">progress_start</span><span class="p">,</span> <span class="n">progress_end</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send the new firmware to the bootloader.</span>
+
+<span class="sd">        :param float progress_start: The progress before sending the data.</span>
+<span class="sd">        :param float progress_end: The progress after sending the data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">(</span><span class="s2">&quot;Write new firmware...&quot;</span><span class="p">)</span>
+        <span class="n">progress_diff</span> <span class="o">=</span> <span class="n">progress_end</span> <span class="o">-</span> <span class="n">progress_start</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_image</span><span class="o">.</span><span class="n">available_bytes</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cmd</span> <span class="o">=</span> <span class="n">ShdlcCmdFirmwareUpdateData</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_image</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">254</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">BOOTLOADER_SLAVE_ADDRESS</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_image</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_image</span><span class="o">.</span><span class="n">available_bytes</span>
+            <span class="n">ratio</span> <span class="o">=</span> <span class="n">count</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_image</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+            <span class="n">percent</span> <span class="o">=</span> <span class="n">progress_start</span> <span class="o">+</span> <span class="p">(</span><span class="n">ratio</span> <span class="o">*</span> <span class="n">progress_diff</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">(</span><span class="s2">&quot;Write new firmware: </span><span class="si">{:.2f}</span><span class="s2"> kB of </span><span class="si">{:.2f}</span><span class="s2"> kB&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">count</span> <span class="o">/</span> <span class="mf">1024.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_image</span><span class="o">.</span><span class="n">size</span> <span class="o">/</span> <span class="mf">1024.0</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_progress</span><span class="p">(</span><span class="n">percent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_send_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">progress</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send the update stop command to the bootloader.</span>
+
+<span class="sd">        :param float progress: The progress after executing this command.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">(</span><span class="s2">&quot;Verify checksum...&quot;</span><span class="p">)</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="n">ShdlcCmdFirmwareUpdateStop</span><span class="p">(</span><span class="n">checksum</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_image</span><span class="o">.</span><span class="n">checksum</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">BOOTLOADER_SLAVE_ADDRESS</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_progress</span><span class="p">(</span><span class="n">progress</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute an SHDLC command.</span>
+
+<span class="sd">        :param int slave_address: The slave address where to send the command.</span>
+<span class="sd">        :param ~sensirion_shdlc_driver.command.ShdlcCommand command:</span>
+<span class="sd">            The command to execute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">slave_address</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the status message.</span>
+
+<span class="sd">        :param string status: The new status message.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;SHDLC firmware update: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">status</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status_callback</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status_callback</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_progress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">percent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the progress position.</span>
+
+<span class="sd">        :param float percent: The new progress in percent.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_progress_callback</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_progress_callback</span><span class="p">(</span><span class="n">percent</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 Sensirion AG, Switzerland
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.1.1
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../0.1.0/index.html">0.1.0</a></dd>
+            <dd><a href="firmware_update.html">0.1.1</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../add-shdlc-tcp-port/index.html">add-shdlc-tcp-port</a></dd>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
