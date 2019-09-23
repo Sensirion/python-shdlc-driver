@@ -6,5 +6,7 @@ from .version import version as __version__  # noqa: F401
 from .port import ShdlcSerialPort  # noqa: F401
 from .connection import ShdlcConnection  # noqa: F401
 from .device import ShdlcDevice  # noqa: F401
+from .firmware_image import ShdlcFirmwareImage  # noqa: F401
+from .firmware_update import ShdlcFirmwareUpdate  # noqa: F401
 
 __copyright__ = '(c) Copyright 2019 Sensirion AG, Switzerland'
