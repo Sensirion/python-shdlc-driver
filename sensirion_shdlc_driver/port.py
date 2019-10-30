@@ -7,6 +7,7 @@ from .serial_frame_builder import ShdlcSerialMosiFrameBuilder, \
     ShdlcSerialMisoFrameBuilder
 from threading import RLock
 import serial
+import time
 
 import logging
 log = logging.getLogger(__name__)
@@ -65,6 +66,14 @@ class ShdlcPort(object):
         """
         Send SHDLC frame to port and return received response frame.
 
+        .. note:: The specified response timeout defines the maximum time the
+                  device needs until it starts to send the response after
+                  receiving the last byte from the master request. The time
+                  needed for the transmission itself and other possible
+                  overhead or delays depends on hardware, drivers, bitrate etc.
+                  and must be taken into account in the implementation of this
+                  method.
+
         :param byte slave_address: Slave address.
         :param byte command_id: SHDLC command ID.
         :param bytes-like data: Payload.
@@ -89,22 +98,28 @@ class ShdlcSerialPort(ShdlcPort):
               using it.
     """
 
-    def __init__(self, port, baudrate):
+    def __init__(self, port, baudrate, additional_response_time=0.1):
         """
         Open the serial port. Throws an exception if the port cannot be opened.
 
         :param string port: The serial port (e.g. "COM2" or "/dev/ttyUSB0")
         :param int baudrate: The baudrate in bit/s.
+        :param float additional_response_time: Additional response time (in
+            Seconds) used when receiving frames. See property
+            :py:attr:`~sensirion_shdlc_driver.port.ShdlcSerialPort.additional_response_time`
+            for details. Defaults to 0.1 (i.e. 100ms) which should be enough
+            in most cases.
         """
         super(ShdlcSerialPort, self).__init__()
         log.debug("Open ShdlcSerialPort on '{}' with {} bit/s."
                   .format(port, baudrate))
+        self._additional_response_time = float(additional_response_time)
         self._lock = RLock()
         self._serial = serial.Serial(port=port, baudrate=baudrate,
                                      bytesize=serial.EIGHTBITS,
                                      parity=serial.PARITY_NONE,
                                      stopbits=serial.STOPBITS_ONE,
-                                     timeout=1.0, xonxoff=False)
+                                     timeout=0.01, xonxoff=False)
 
     def __enter__(self):
         return self
@@ -145,6 +160,30 @@ class ShdlcSerialPort(ShdlcPort):
             self._serial.baudrate = bitrate
 
     @property
+    def additional_response_time(self):
+        """
+        The additional response time (in Seconds) used when receiving frames.
+
+        Since the timeout measurement of serial communication is typically
+        very inaccurate (e.g. USB-UART converter drivers often buffer I/O
+        data for 16ms), this class adds some extra time to the specified
+        response timeout to avoid timeout errors even if the device responded
+        within the given timeout. If needed, this extra time can be changed
+        either with this property, or with the parameter
+        ``additional_response_time`` of
+        :py:meth:`~sensirion_shdlc_driver.port.ShdlcSerialPort.__init__`.
+
+        :type: float
+        """
+        with self._lock:
+            return self._additional_response_time
+
+    @additional_response_time.setter
+    def additional_response_time(self, additional_response_time):
+        with self._lock:
+            self._additional_response_time = float(additional_response_time)
+
+    @property
     def lock(self):
         """
         Get the lock object of the port to allow locking it, i.e. to get
@@ -171,27 +210,15 @@ class ShdlcSerialPort(ShdlcPort):
         """
         with self._lock:
             self._serial.flushInput()
-            self._set_timeout(response_timeout)
             self._send_frame(slave_address, command_id, data)
             self._serial.flush()
-            return self._receive_frame()
+            return self._receive_frame(response_timeout)
 
     def close(self):
         """
         Close (release) the serial port.
         """
         self._serial.close()
-
-    def _set_timeout(self, timeout):
-        """
-        Set the timeout of the serial port.
-
-        :param float timeout: The new timeout in seconds.
-        """
-        # Only change timeout if needed because at least under Windows
-        # it leads to strange errors when writing it too often.
-        if self._serial.timeout != timeout:
-            self._serial.timeout = timeout
 
     def _send_frame(self, slave_address, command_id, data):
         """
@@ -207,21 +234,54 @@ class ShdlcSerialPort(ShdlcPort):
                   ", ".join(["0x%.2X" % i for i in bytearray(tx_data)])))
         self._serial.write(tx_data)
 
-    def _receive_frame(self):
+    def _receive_frame(self, response_timeout):
         """
         Wait for the response frame and return it.
 
+        :param float response_timeout: Response timeout in seconds (maximum
+                                       time until the first byte is received).
         :return: Received address, command_id, state, and payload.
         :rtype: byte, byte, byte, bytes
         """
+        start_time = time.time()
+        response_timeout += self._additional_response_time  # add extra time
+        total_timeout = response_timeout + self._calculate_maximum_frame_time()
         builder = ShdlcSerialMisoFrameBuilder()
         while True:
             # Fetch all received bytes at once (to get maximum performance) or
             # wait for at least one byte (with timeout) if the buffer is empty.
             new_data = self._serial.read(max(self._serial.inWaiting(), 1))
-            if len(new_data) == 0:
-                raise ShdlcTimeoutError()
+
+            # Process received data and return if the frame is complete.
             if builder.add_data(new_data):
                 log.debug("ShdlcSerialPort received raw: [{}]".format(
                           ", ".join(["0x%.2X" % i for i in builder.data])))
                 return builder.interpret_data()
+
+            # Frame not (completely) received yet, check timeout conditions.
+            elapsed_time = time.time() - start_time
+            timeout = \
+                total_timeout if builder.start_received else response_timeout
+            if elapsed_time > timeout:
+                log.warning("ShdlcSerialPort timed out while waiting for "
+                            "response after {:.0f} ms.".format(
+                                elapsed_time * 1000.0))
+                log.debug("ShdlcSerialPort received raw until timeout: [{}]"
+                          .format(", ".join(["0x%.2X" % i
+                                             for i in builder.data])))
+                raise ShdlcTimeoutError()
+
+    def _calculate_maximum_frame_time(self):
+        """
+        Calculate the time required for receiving the longest possible frame,
+        respecting the used bitrate and with some extra time for inter-byte
+        spaces etc.
+
+        :return: Maximum frame time in Seconds
+        :rtype: float
+        """
+        # Calculate theoretical transmission time of longest possible frame:
+        #   600 bytes * (start bit + 8 data bits + stop bit) / bitrate
+        max_frame_time = (600.0 * 10.0) / self.bitrate
+        # Add 200ms extra, e.g. for inter-byte spaces.
+        return max_frame_time + 0.2
