@@ -17,6 +17,16 @@ def test_initial_data_empty():
     assert len(builder.data) == 0
 
 
+def test_initial_start_received_false():
+    """
+    Test if the initial value and type of the "start_received" property is
+    correct.
+    """
+    builder = ShdlcSerialMisoFrameBuilder()
+    assert type(builder.start_received) is bool
+    assert builder.start_received is False
+
+
 def test_add_data_appends():
     """
     Test if the "add_data()" method appends the passed data to the object.
@@ -52,6 +62,22 @@ def test_add_data():
     assert builder.add_data(b"\x7e\x00\x00") is False  # frame START
     assert builder.add_data(b"\x00\x00\x7e") is True  # frame STOP
     assert builder.add_data(b"\x00\x01\x02") is True  # some rubbish
+
+
+def test_initial_start_received():
+    """
+    Test if the return value of the "start_received" property is correct after
+    adding data with "add_data()".
+    """
+    builder = ShdlcSerialMisoFrameBuilder()
+    builder.add_data(b"\x00\x01\x02")  # some rubbish
+    assert builder.start_received is False
+    builder.add_data(b"\x7e\x00\x00")  # frame START
+    assert builder.start_received is True
+    builder.add_data(b"\x00\x00\x7e")  # frame STOP
+    assert builder.start_received is True
+    builder.add_data(b"\x00\x01\x02")  # some rubbish
+    assert builder.start_received is True
 
 
 @pytest.mark.parametrize("raw,exp_addr,exp_cmd,exp_state,exp_data", [
