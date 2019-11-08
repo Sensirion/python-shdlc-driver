@@ -279,6 +279,16 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">start_received</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if the start byte was already received.</span>
+
+<span class="sd">        :return: Whether the start byte was already received or not.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_START_STOP_BYTE</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+
 <div class="viewcode-block" id="ShdlcSerialMisoFrameBuilder.add_data"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.add_data">[docs]</a>    <span class="k">def</span> <span class="nf">add_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add more data (received from the serial port) and check if a complete</span>

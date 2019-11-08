@@ -90,7 +90,10 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="shdlc.html">SHDLC Protocol</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#firmware-updater-dependencies">Firmware Updater Dependencies</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 </ul>
@@ -164,6 +167,18 @@
 </pre></div>
 </div>
 <p>Recommended usage is within a virtualenv.</p>
+<div class="section" id="firmware-updater-dependencies">
+<span id="id1"></span><h2>Firmware Updater Dependencies<a class="headerlink" href="#firmware-updater-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>The firmware updater has additional dependencies which are not installed by
+default because not all devices support firmware updates. They can be
+installed explicitly with the <code class="docutils literal notranslate"><span class="pre">fwupdate</span></code> extra:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install sensirion-shdlc-driver<span class="o">[</span>fwupdate<span class="o">]</span>
+</pre></div>
+</div>
+<p>However, device-specific drivers which support firmware updates will add the
+<code class="docutils literal notranslate"><span class="pre">fwupdate</span></code> extra to their dependencies anyway, so usually you don’t have to
+care about this.</p>
+</div>
 </div>
 
 

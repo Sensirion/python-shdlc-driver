@@ -96,6 +96,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#shdlcport">ShdlcPort</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shdlcconnection">ShdlcConnection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shdlcdevice">ShdlcDevice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sensirion_shdlc_driver.firmware_image">ShdlcFirmwareImage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sensirion_shdlc_driver.firmware_update">ShdlcFirmwareUpdate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shdlccommand">ShdlcCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#types">Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#exceptions">Exceptions</a></li>
@@ -252,6 +254,22 @@ structured data (slave address, command ID etc.).</p>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.start_received">
+<code class="descname">start_received</code><a class="headerlink" href="#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.start_received" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the start byte was already received.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Whether the start byte was already received or not.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.add_data">
 <code class="descname">add_data</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/serial_frame_builder.html#ShdlcSerialMisoFrameBuilder.add_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.add_data" title="Permalink to this definition">¶</a></dt>
@@ -352,6 +370,16 @@ exclusive access across multiple method calls.</p>
 <dt id="sensirion_shdlc_driver.port.ShdlcPort.transceive">
 <code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command_id</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcPort.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort.transceive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send SHDLC frame to port and return received response frame.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The specified response timeout defines the maximum time the
+device needs until it starts to send the response after
+receiving the last byte from the master request. The time
+needed for the transmission itself and other possible
+overhead or delays depends on hardware, drivers, bitrate etc.
+and must be taken into account in the implementation of this
+method.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -385,7 +413,7 @@ time until the first byte is received).</li>
 
 <dl class="class">
 <dt id="sensirion_shdlc_driver.port.ShdlcSerialPort">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.port.</code><code class="descname">ShdlcSerialPort</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.port.</code><code class="descname">ShdlcSerialPort</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em>, <em>additional_response_time=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort" title="Permalink to this definition">¶</a></dt>
 <dd><p>SHDLC transceiver for the serial port (e.g. UART/RS232/RS485).</p>
 <p>This class implements the ShdlcPort interface for the serial port.</p>
 <div class="admonition note">
@@ -396,7 +424,7 @@ using it.</p>
 </div>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em>, <em>additional_response_time=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open the serial port. Throws an exception if the port cannot be opened.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -405,6 +433,11 @@ using it.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>port</strong> (<em>string</em>) – The serial port (e.g. “COM2” or “/dev/ttyUSB0”)</li>
 <li><strong>baudrate</strong> (<em>int</em>) – The baudrate in bit/s.</li>
+<li><strong>additional_response_time</strong> (<em>float</em>) – Additional response time (in
+Seconds) used when receiving frames. See property
+<a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.additional_response_time" title="sensirion_shdlc_driver.port.ShdlcSerialPort.additional_response_time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">additional_response_time</span></code></a>
+for details. Defaults to 0.1 (i.e. 100ms) which should be enough
+in most cases.</li>
 </ul>
 </td>
 </tr>
@@ -439,6 +472,28 @@ using it.</p>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Bitrate in bit/s.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.additional_response_time">
+<code class="descname">additional_response_time</code><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.additional_response_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>The additional response time (in Seconds) used when receiving frames.</p>
+<p>Since the timeout measurement of serial communication is typically
+very inaccurate (e.g. USB-UART converter drivers often buffer I/O
+data for 16ms), this class adds some extra time to the specified
+response timeout to avoid timeout errors even if the device responded
+within the given timeout. If needed, this extra time can be changed
+either with this property, or with the parameter
+<code class="docutils literal notranslate"><span class="pre">additional_response_time</span></code> of
+<a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__" title="sensirion_shdlc_driver.port.ShdlcSerialPort.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
@@ -1070,6 +1125,243 @@ to allow further communication with the device.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-sensirion_shdlc_driver.firmware_image">
+<span id="shdlcfirmwareimage"></span><h2>ShdlcFirmwareImage<a class="headerlink" href="#module-sensirion_shdlc_driver.firmware_image" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.firmware_image.</code><code class="descname">ShdlcFirmwareImage</code><span class="sig-paren">(</span><em>hexfile</em>, <em>bl_start_addr</em>, <em>app_start_addr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/firmware_image.html#ShdlcFirmwareImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents a firmware image for an SHDLC device. It is used to
+load and verify Intel-Hex files for performing firmware updates over SHDLC.</p>
+<p>Since the different SHDLC devices use different memory layouts, this class
+needs to know the bootloader base address and application base address (see
+constructor parameters). Drivers for specific SHDLC devices should create a
+subclass to provide a new type which already contains the correct
+addresses, so users don’t have to care about these details.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This class is intended only for devices which contain the SHDLC
+bootloader. Devices which support firmware updates with another
+system aren’t supported by this class.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The package <code class="docutils literal notranslate"><span class="pre">intelhex</span></code> must be installed to use this class. See
+<a class="reference internal" href="installation.html#firmware-updater-dependencies"><span class="std std-ref">Firmware Updater Dependencies</span></a> for details.</p>
+</div>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>hexfile</em>, <em>bl_start_addr</em>, <em>app_start_addr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/firmware_image.html#ShdlcFirmwareImage.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor which loads and parses the firmware from a hex file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hexfile</strong> (<em>str/file</em>) – The filename or file-like object containing
+the firmware in Intel-Hex format (*.hex).</li>
+<li><strong>bl_start_addr</strong> (<em>int</em>) – The base address of the bootloader inside
+the firmware image.</li>
+<li><strong>app_start_addr</strong> (<em>int</em>) – The base address of the application
+inside the firmware image.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#sensirion_shdlc_driver.errors.ShdlcFirmwareImageSignatureError" title="sensirion_shdlc_driver.errors.ShdlcFirmwareImageSignatureError"><strong>ShdlcFirmwareImageSignatureError</strong></a> – If the signature of the image is invalid.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.product_type">
+<code class="descname">product_type</code><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.product_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the product type for which the loaded firmware is made.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Product type as an integer.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.bootloader_version">
+<code class="descname">bootloader_version</code><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.bootloader_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the bootloader version which is contained in the loaded image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Bootloader version (note: debug flag is not supported, it’s
+always False).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#sensirion_shdlc_driver.types.FirmwareVersion" title="sensirion_shdlc_driver.types.FirmwareVersion">FirmwareVersion</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.application_version">
+<code class="descname">application_version</code><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.application_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the application firmware version which is contained in the loaded
+image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Application firmware version (note: debug flag is not
+supported, it’s always False).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#sensirion_shdlc_driver.types.FirmwareVersion" title="sensirion_shdlc_driver.types.FirmwareVersion">FirmwareVersion</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.checksum">
+<code class="descname">checksum</code><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.checksum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the checksum over the application firmware part of the loaded
+image. This is the checksum which needs to be sent to the product
+bootloader.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Checksum as a byte.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">byte</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.size">
+<code class="descname">size</code><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the size of the application firmware.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Size in bytes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.available_bytes">
+<code class="descname">available_bytes</code><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.available_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the count of available bytes left.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Count of available bytes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>size=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/firmware_image.html#ShdlcFirmwareImage.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the next bytes of the application firmware.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>size</strong> (<em>int</em>) – Maximum count of bytes to read (-1 reads all
+available)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Firmware data block.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bytes</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-sensirion_shdlc_driver.firmware_update">
+<span id="shdlcfirmwareupdate"></span><h2>ShdlcFirmwareUpdate<a class="headerlink" href="#module-sensirion_shdlc_driver.firmware_update" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.firmware_update.</code><code class="descname">ShdlcFirmwareUpdate</code><span class="sig-paren">(</span><em>device</em>, <em>image</em>, <em>status_callback=None</em>, <em>progress_callback=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/firmware_update.html#ShdlcFirmwareUpdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper class to perform firmware updates over SHDLC.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Device-specific drivers should provide a simple wrapper method
+to easily perform firmware updates. So usually you don’t have to
+use this class directly.</p>
+</div>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>device</em>, <em>image</em>, <em>status_callback=None</em>, <em>progress_callback=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/firmware_update.html#ShdlcFirmwareUpdate.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>device</strong> (<a class="reference internal" href="#sensirion_shdlc_driver.device.ShdlcDevice" title="sensirion_shdlc_driver.device.ShdlcDevice"><em>ShdlcDevice</em></a>) – The device to update.</li>
+<li><strong>image</strong> (<a class="reference internal" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage" title="sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage"><em>ShdlcFirmwareImage</em></a>) – The image to flash.</li>
+<li><strong>status_callback</strong> (<em>callable</em>) – Optional callback for status report,
+taking a string as parameter.</li>
+<li><strong>progress_callback</strong> (<em>callable</em>) – Optional callback for progress
+report, taking a float (progress in
+percent) as parameter.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>emergency=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/firmware_update.html#ShdlcFirmwareUpdate.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the firmware update.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This can take several minutes, don’t abort it! If aborted,
+the device stays in the bootloader and you need to restart
+the update with <code class="docutils literal notranslate"><span class="pre">emergency=True</span></code> to recover.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>emergency</strong> (<em>bool</em>) – Must be set to <code class="docutils literal notranslate"><span class="pre">True</span></code> if the device is already
+in bootloader mode, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="#sensirion_shdlc_driver.errors.ShdlcFirmwareImageIncompatibilityError" title="sensirion_shdlc_driver.errors.ShdlcFirmwareImageIncompatibilityError"><strong>ShdlcFirmwareImageIncompatibilityError</strong></a> – If the image is not compatible with the connected device.</li>
+<li><strong>Exception</strong> – On other errors.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="shdlccommand">
 <h2>ShdlcCommand<a class="headerlink" href="#shdlccommand" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -1304,6 +1596,157 @@ needs for post processing
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Return int:</th><td class="field-body">Baudrate [bit/s].</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-sensirion_shdlc_driver.commands.bootloader"></span><dl class="class">
+<dt id="sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.bootloader.</code><code class="descname">ShdlcCmdBootloaderBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/bootloader.html#ShdlcCmdBootloaderBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHDLC command 0xF3: “Bootloader”.</p>
+<dl class="method">
+<dt id="sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/bootloader.html#ShdlcCmdBootloaderBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.bootloader.</code><code class="descname">ShdlcCmdEnterBootloader</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/bootloader.html#ShdlcCmdEnterBootloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/bootloader.html#ShdlcCmdEnterBootloader.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.bootloader.</code><code class="descname">ShdlcCmdFirmwareUpdateStart</code><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/bootloader.html#ShdlcCmdFirmwareUpdateStart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/bootloader.html#ShdlcCmdFirmwareUpdateStart.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.bootloader.</code><code class="descname">ShdlcCmdFirmwareUpdateData</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/bootloader.html#ShdlcCmdFirmwareUpdateData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/bootloader.html#ShdlcCmdFirmwareUpdateData.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop">
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.commands.bootloader.</code><code class="descname">ShdlcCmdFirmwareUpdateStop</code><span class="sig-paren">(</span><em>checksum</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/bootloader.html#ShdlcCmdFirmwareUpdateStop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>checksum</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/commands/bootloader.html#ShdlcCmdFirmwareUpdateStop.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>byte</em>) – Command ID (0..255).</li>
+<li><strong>data</strong> (<em>bytes-like/list</em>) – MOSI data (0..255 bytes).</li>
+<li><strong>max_response_time</strong> (<em>float</em>) – Maximum time the device needs to
+response (used as timeout).</li>
+<li><strong>min_response_length</strong> (<em>byte</em>) – Minimum expected response length.</li>
+<li><strong>max_response_length</strong> (<em>byte</em>) – Maximum expected response length.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device
+needs for post processing
+(typically 0.0s).</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
