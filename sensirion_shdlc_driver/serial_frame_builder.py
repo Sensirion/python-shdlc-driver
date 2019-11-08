@@ -123,6 +123,16 @@ class ShdlcSerialMisoFrameBuilder(ShdlcSerialFrameBuilder):
         """
         return self._data
 
+    @property
+    def start_received(self):
+        """
+        Check if the start byte was already received.
+
+        :return: Whether the start byte was already received or not.
+        :rtype: bool
+        """
+        return self._START_STOP_BYTE in self._data
+
     def add_data(self, data):
         """
         Add more data (received from the serial port) and check if a complete
