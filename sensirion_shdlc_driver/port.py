@@ -7,6 +7,7 @@ from .serial_frame_builder import ShdlcSerialMosiFrameBuilder, \
     ShdlcSerialMisoFrameBuilder
 from threading import RLock
 import serial
+import socket
 import time
 
 import logging
@@ -285,3 +286,152 @@ class ShdlcSerialPort(ShdlcPort):
         max_frame_time = (600.0 * 10.0) / self.bitrate
         # Add 200ms extra, e.g. for inter-byte spaces.
         return max_frame_time + 0.2
+
+
+class ShdlcTcpPort(ShdlcPort):
+    """
+    SHDLC transceiver for a TCP/IP port in client connection mode.
+
+    This class implements the ShdlcPort interface for a client connection on a
+    TCP/IP port.
+
+    .. note:: This class can be used in a "with"-statement, and it's
+              recommended to do so as it automatically closes the port after
+              using it.
+    """
+
+    def __init__(self, ip, port, socket_timeout=5.0):
+        """
+        Open the TCP socket. Throws an exception if the socket cannot be
+        opened.
+
+        :param string ip: The IP address (e.g. "192.168.100.200").
+        :param int port: The TCP port.
+        :param float socket_timeout: General TCP socket base timeout. Upon data
+            transmission, the socket timeout is adjusted for each command, i.e.
+            the timeout is increased with the parameter ``response_timeout`` of
+            :py:meth:`~sensirion_shdlc_driver.port.ShdlcTcpPort.transceive`.
+        """
+        super(ShdlcTcpPort, self).__init__()
+        log.debug("Open ShdlcTcpPort as TCP client to '{}' on port {}."
+                  .format(ip, port))
+        self._socket_timeout = float(socket_timeout)
+        self._lock = RLock()
+        self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self._socket.settimeout(self._socket_timeout)
+        self._socket.connect((ip, port))
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self._socket.close()
+
+    @property
+    def description(self):
+        """
+        Get the description of the TCP socket (address and port).
+
+        :return: Description string.
+        :rtype: string
+        """
+        with self._lock:
+            ip, port = self._socket.getpeername()
+            return '{}:{}'.format(ip, port)
+
+    @property
+    def socket_timeout(self):
+        """
+        The base timeout of the TCP socket (in seconds) during transmission.
+
+        The actual socket timeout is adjusted for each command. There are
+        commands (e.g. flash erase) which require several seconds to be
+        successfully executed. Therefore, the actual socket timeout value
+        is calculated by the sum of the base timeout, plus the parameter
+        ``response_timeout`` of
+        :py:meth:`~sensirion_shdlc_driver.port.ShdlcTcpPort.transceive`.
+
+        :type: float
+        """
+        with self._lock:
+            return self._socket_timeout
+
+    @socket_timeout.setter
+    def socket_timeout(self, socket_timeout):
+        with self._lock:
+            self._socket_timeout = float(socket_timeout)
+
+    @property
+    def lock(self):
+        """
+        Get the lock object of the port to allow locking it, i.e. to get
+        exclusive access across multiple method calls.
+
+        :return: The lock object.
+        :rtype: threading.RLock
+        """
+        return self._lock
+
+    def transceive(self, slave_address, command_id, data, response_timeout):
+        """
+        Send SHDLC frame to the TCP socket and return received response frame.
+
+        :param byte slave_address: Slave address.
+        :param byte command_id: SHDLC command ID.
+        :param bytes-like data: Payload.
+        :param float response_timeout: Response timeout in seconds. The actual
+            command response timeout is defined by the sum of this parameter
+            and the socket base timeout.
+        :return: Received address, command_id, state, and payload.
+        :rtype: byte, byte, byte, bytes
+        :raise ShdlcTimeoutError: If no response received within timeout.
+        :raise ShdlcResponseError: If the received response is invalid.
+        """
+        with self._lock:
+            self._socket.settimeout(self._socket_timeout + response_timeout)
+            self._send_frame(slave_address, command_id, data)
+            return self._receive_frame()
+
+    def close(self):
+        """
+        Close the TCP socket.
+        """
+        self._socket.close()
+
+    def _send_frame(self, slave_address, command_id, data):
+        """
+        Send a frame to the TCP socket.
+
+        :param byte slave_address: Slave address.
+        :param byte command_id: SHDLC command ID.
+        :param bytes-like data: Payload.
+        """
+        builder = ShdlcSerialMosiFrameBuilder(slave_address, command_id, data)
+        tx_data = builder.to_bytes()
+        log.debug("ShdlcTcpPort send raw: [{}]".format(
+                  ", ".join(["0x%.2X" % i for i in bytearray(tx_data)])))
+        self._socket.send(tx_data)
+
+    def _receive_frame(self):
+        """
+        Wait for the response frame and return it.
+
+        :return: Received address, command_id, state, and payload.
+        :rtype: byte, byte, byte, bytes
+        """
+        builder = ShdlcSerialMisoFrameBuilder()
+
+        try:
+            # Receive data from socket
+            # Note: recv buffer size should be a relatively small power of 2.
+            # See: https://docs.python.org/3/library/socket.html
+            new_data = self._socket.recv(1024)
+            if len(new_data) == 0:
+                raise ShdlcTimeoutError()
+            # Process received data and return if the frame is complete
+            if builder.add_data(new_data):
+                log.debug("ShdlcTcpPort received raw: [{}]".format(
+                            ", ".join(["0x%.2X" % i for i in builder.data])))
+                return builder.interpret_data()
+        except socket.timeout:
+            raise ShdlcTimeoutError()
