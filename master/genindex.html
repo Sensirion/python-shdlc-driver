@@ -275,6 +275,8 @@
 </li>
         <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__">(sensirion_shdlc_driver.port.ShdlcSerialPort method)</a>
 </li>
+        <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.__init__">(sensirion_shdlc_driver.port.ShdlcTcpPort method)</a>
+</li>
         <li><a href="api.html#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialFrameBuilder.__init__">(sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialFrameBuilder method)</a>
 </li>
         <li><a href="api.html#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.__init__">(sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder method)</a>
@@ -347,7 +349,11 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.close">close() (sensirion_shdlc_driver.port.ShdlcSerialPort method)</a>
+
+      <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.close">(sensirion_shdlc_driver.port.ShdlcTcpPort method)</a>
 </li>
+      </ul></li>
       <li><a href="api.html#sensirion_shdlc_driver.device.ShdlcDevice.connection">connection (sensirion_shdlc_driver.device.ShdlcDevice attribute)</a>
 </li>
   </ul></td>
@@ -362,14 +368,16 @@
         <li><a href="api.html#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.data">(sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcPort.description">description (sensirion_shdlc_driver.port.ShdlcPort attribute)</a>
 
       <ul>
         <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.description">(sensirion_shdlc_driver.port.ShdlcSerialPort attribute)</a>
 </li>
+        <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.description">(sensirion_shdlc_driver.port.ShdlcTcpPort attribute)</a>
+</li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.device.ShdlcDevice.device_reset">device_reset() (sensirion_shdlc_driver.device.ShdlcDevice method)</a>
 </li>
   </ul></td>
@@ -486,12 +494,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.device.ShdlcDevice.last_error_flag">last_error_flag (sensirion_shdlc_driver.device.ShdlcDevice attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcPort.lock">lock (sensirion_shdlc_driver.port.ShdlcPort attribute)</a>
 
       <ul>
         <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.lock">(sensirion_shdlc_driver.port.ShdlcSerialPort attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.lock">(sensirion_shdlc_driver.port.ShdlcTcpPort attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -608,10 +616,10 @@
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName">ShdlcCmdGetProductName (class in sensirion_shdlc_driver.commands.device_info)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType">ShdlcCmdGetProductSubType (class in sensirion_shdlc_driver.commands.device_info)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType">ShdlcCmdGetProductType (class in sensirion_shdlc_driver.commands.device_info)</a>
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay">ShdlcCmdGetReplyDelay (class in sensirion_shdlc_driver.commands.reply_delay)</a>
@@ -672,6 +680,8 @@
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcSerialPort">ShdlcSerialPort (class in sensirion_shdlc_driver.port)</a>
 </li>
+      <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcTcpPort">ShdlcTcpPort (class in sensirion_shdlc_driver.port)</a>
+</li>
       <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcTimeoutError">ShdlcTimeoutError</a>
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError">ShdlcUnknownCommandError</a>
@@ -679,6 +689,8 @@
       <li><a href="api.html#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.size">size (sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage attribute)</a>
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.device.ShdlcDevice.slave_address">slave_address (sensirion_shdlc_driver.device.ShdlcDevice attribute)</a>
+</li>
+      <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.socket_timeout">socket_timeout (sensirion_shdlc_driver.port.ShdlcTcpPort attribute)</a>
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.start_received">start_received (sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder attribute)</a>
 </li>
@@ -696,6 +708,8 @@
         <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcPort.transceive">(sensirion_shdlc_driver.port.ShdlcPort method)</a>
 </li>
         <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.transceive">(sensirion_shdlc_driver.port.ShdlcSerialPort method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.transceive">(sensirion_shdlc_driver.port.ShdlcTcpPort method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -750,7 +764,6 @@
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="../add-shdlc-tcp-port/index.html">add-shdlc-tcp-port</a></dd>
             <dd><a href="genindex.html">master</a></dd>
         </dl>
     </div>

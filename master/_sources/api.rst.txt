@@ -12,6 +12,7 @@ ShdlcPort
 
 .. autoclass:: sensirion_shdlc_driver.port.ShdlcPort
 .. autoclass:: sensirion_shdlc_driver.port.ShdlcSerialPort
+.. autoclass:: sensirion_shdlc_driver.port.ShdlcTcpPort
 
 
 ShdlcConnection
