@@ -63,6 +63,20 @@ class ShdlcPort(object):
         """
         raise NotImplementedError()
 
+    def open(self):
+        """
+        Open the port. Only needs to be called if the port is not already
+        opened. Does nothing if the port is already opened.
+        """
+        raise NotImplementedError()
+
+    def close(self):
+        """
+        Close the port to release the underlying resources. Does nothing if
+        the port is already closed.
+        """
+        raise NotImplementedError()
+
     def transceive(self, slave_address, command_id, data, response_timeout):
         """
         Send SHDLC frame to port and return received response frame.
