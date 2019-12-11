@@ -16,7 +16,7 @@ build_package:linux_py2:
   script:
     - pip install -e .[test]
     - flake8
-    - pytest
+    - pytest -m "not needs_serialport"
     - python setup.py sdist
     - python setup.py bdist_wheel
   artifacts:
@@ -30,7 +30,7 @@ build_package:linux_py3:
   script:
     - pip install -e .[test]
     - flake8
-    - pytest
+    - pytest -m "not needs_serialport"
     - python setup.py bdist_wheel
   artifacts:
     expire_in: 1 week
@@ -43,7 +43,7 @@ build_package:windows_py2:
   script:
     - pip install -e .[test]
     - flake8
-    - pytest
+    - pytest -m "not needs_serialport"
     - python setup.py bdist_wheel -q
   artifacts:
     expire_in: 1 week
@@ -56,7 +56,7 @@ build_package:windows_py3:
   script:
     - pip install -e .[test]
     - flake8
-    - pytest
+    - pytest -m "not needs_serialport"
     - python setup.py bdist_wheel -q
   artifacts:
     expire_in: 1 week

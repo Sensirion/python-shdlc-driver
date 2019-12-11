@@ -113,9 +113,11 @@ class ShdlcSerialPort(ShdlcPort):
               using it.
     """
 
-    def __init__(self, port, baudrate, additional_response_time=0.1):
+    def __init__(self, port, baudrate, additional_response_time=0.1,
+                 do_open=True):
         """
-        Open the serial port. Throws an exception if the port cannot be opened.
+        Create and optionally open a serial port. Throws an exception if the
+        port cannot be opened.
 
         :param string port: The serial port (e.g. "COM2" or "/dev/ttyUSB0")
         :param int baudrate: The baudrate in bit/s.
@@ -124,23 +126,31 @@ class ShdlcSerialPort(ShdlcPort):
             :py:attr:`~sensirion_shdlc_driver.port.ShdlcSerialPort.additional_response_time`
             for details. Defaults to 0.1 (i.e. 100ms) which should be enough
             in most cases.
+        :param bool do_open:
+            Whether the serial port should be opened immediately or not.
+            If ``False``, you will have to call
+            :py:meth:`~sensirion_shdlc_driver.port.ShdlcSerialPort.open`
+            manually before using this object. Defaults to ``True``.
         """
         super(ShdlcSerialPort, self).__init__()
         log.debug("Open ShdlcSerialPort on '{}' with {} bit/s."
                   .format(port, baudrate))
         self._additional_response_time = float(additional_response_time)
         self._lock = RLock()
-        self._serial = serial.Serial(port=port, baudrate=baudrate,
+        self._serial = serial.Serial(port=None, baudrate=baudrate,
                                      bytesize=serial.EIGHTBITS,
                                      parity=serial.PARITY_NONE,
                                      stopbits=serial.STOPBITS_ONE,
                                      timeout=0.01, xonxoff=False)
+        self._serial.port = port
+        if do_open:
+            self.open()
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self._serial.close()
+        self.close()
 
     @property
     def description(self):
@@ -209,6 +219,23 @@ class ShdlcSerialPort(ShdlcPort):
         """
         return self._lock
 
+    def open(self):
+        """
+        Open the serial port (only needs to be called if ``do_open`` in
+        :py:meth:`~sensirion_shdlc_driver.port.ShdlcSerialPort.__init__`
+        was set to ``False``). Does nothing if the port is already opened.
+        """
+        if self._serial.is_open is False:
+            self._serial.open()
+
+    def close(self):
+        """
+        Close (release) the serial port. Does nothing if the port is already
+        closed.
+        """
+        if self._serial.is_open is True:
+            self._serial.close()
+
     def transceive(self, slave_address, command_id, data, response_timeout):
         """
         Send SHDLC frame to port and return received response frame.
@@ -228,12 +255,6 @@ class ShdlcSerialPort(ShdlcPort):
             self._send_frame(slave_address, command_id, data)
             self._serial.flush()
             return self._receive_frame(response_timeout)
-
-    def close(self):
-        """
-        Close (release) the serial port.
-        """
-        self._serial.close()
 
     def _send_frame(self, slave_address, command_id, data):
         """

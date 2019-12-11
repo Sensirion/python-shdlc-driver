@@ -31,9 +31,20 @@ flake8                  # Run style check
 Unit tests can be run with [`pytest`](https://pytest.org/):
 
 ```bash
-pip install -e .[test]  # Install requirements
-pytest                  # Run tests
+pip install -e .[test]              # Install requirements
+pytest -m "not needs_serialport"    # Run tests without hardware
+pytest                              # Run all tests
 ```
+
+To run the tests which access connected hardware, you need to pass following
+arguments to `pytest`:
+
+- `--serial-port`: The serial port where a device is connected (e.g. `COM7`)
+- `--serial-bitrate`: The bitrate of the device connected to the serial port
+  (e.g. `460800`)
+- `--serial-address`: The slave address of the device connected to the serial
+  port (e.g. `0`)
+
 
 ### Build documentation
 
