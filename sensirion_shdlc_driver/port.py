@@ -63,6 +63,20 @@ class ShdlcPort(object):
         """
         raise NotImplementedError()
 
+    def open(self):
+        """
+        Open the port. Only needs to be called if the port is not already
+        opened. Does nothing if the port is already opened.
+        """
+        raise NotImplementedError()
+
+    def close(self):
+        """
+        Close the port to release the underlying resources. Does nothing if
+        the port is already closed.
+        """
+        raise NotImplementedError()
+
     def transceive(self, slave_address, command_id, data, response_timeout):
         """
         Send SHDLC frame to port and return received response frame.
@@ -99,9 +113,11 @@ class ShdlcSerialPort(ShdlcPort):
               using it.
     """
 
-    def __init__(self, port, baudrate, additional_response_time=0.1):
+    def __init__(self, port, baudrate, additional_response_time=0.1,
+                 do_open=True):
         """
-        Open the serial port. Throws an exception if the port cannot be opened.
+        Create and optionally open a serial port. Throws an exception if the
+        port cannot be opened.
 
         :param string port: The serial port (e.g. "COM2" or "/dev/ttyUSB0")
         :param int baudrate: The baudrate in bit/s.
@@ -110,23 +126,31 @@ class ShdlcSerialPort(ShdlcPort):
             :py:attr:`~sensirion_shdlc_driver.port.ShdlcSerialPort.additional_response_time`
             for details. Defaults to 0.1 (i.e. 100ms) which should be enough
             in most cases.
+        :param bool do_open:
+            Whether the serial port should be opened immediately or not.
+            If ``False``, you will have to call
+            :py:meth:`~sensirion_shdlc_driver.port.ShdlcSerialPort.open`
+            manually before using this object. Defaults to ``True``.
         """
         super(ShdlcSerialPort, self).__init__()
         log.debug("Open ShdlcSerialPort on '{}' with {} bit/s."
                   .format(port, baudrate))
         self._additional_response_time = float(additional_response_time)
         self._lock = RLock()
-        self._serial = serial.Serial(port=port, baudrate=baudrate,
+        self._serial = serial.Serial(port=None, baudrate=baudrate,
                                      bytesize=serial.EIGHTBITS,
                                      parity=serial.PARITY_NONE,
                                      stopbits=serial.STOPBITS_ONE,
                                      timeout=0.01, xonxoff=False)
+        self._serial.port = port
+        if do_open:
+            self.open()
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self._serial.close()
+        self.close()
 
     @property
     def description(self):
@@ -195,6 +219,23 @@ class ShdlcSerialPort(ShdlcPort):
         """
         return self._lock
 
+    def open(self):
+        """
+        Open the serial port (only needs to be called if ``do_open`` in
+        :py:meth:`~sensirion_shdlc_driver.port.ShdlcSerialPort.__init__`
+        was set to ``False``). Does nothing if the port is already opened.
+        """
+        if self._serial.is_open is False:
+            self._serial.open()
+
+    def close(self):
+        """
+        Close (release) the serial port. Does nothing if the port is already
+        closed.
+        """
+        if self._serial.is_open is True:
+            self._serial.close()
+
     def transceive(self, slave_address, command_id, data, response_timeout):
         """
         Send SHDLC frame to port and return received response frame.
@@ -214,12 +255,6 @@ class ShdlcSerialPort(ShdlcPort):
             self._send_frame(slave_address, command_id, data)
             self._serial.flush()
             return self._receive_frame(response_timeout)
-
-    def close(self):
-        """
-        Close (release) the serial port.
-        """
-        self._serial.close()
 
     def _send_frame(self, slave_address, command_id, data):
         """
@@ -300,10 +335,10 @@ class ShdlcTcpPort(ShdlcPort):
               using it.
     """
 
-    def __init__(self, ip, port, socket_timeout=5.0):
+    def __init__(self, ip, port, socket_timeout=5.0, do_open=True):
         """
-        Open the TCP socket. Throws an exception if the socket cannot be
-        opened.
+        Create and optionally open a TCP socket. Throws an exception if the
+        socket cannot be opened.
 
         :param string ip: The IP address (e.g. "192.168.100.200").
         :param int port: The TCP port.
@@ -311,21 +346,30 @@ class ShdlcTcpPort(ShdlcPort):
             transmission, the socket timeout is adjusted for each command, i.e.
             the timeout is increased with the parameter ``response_timeout`` of
             :py:meth:`~sensirion_shdlc_driver.port.ShdlcTcpPort.transceive`.
+        :param bool do_open:
+            Whether the port should be opened immediately or not. If ``False``,
+            you will have to call
+            :py:meth:`~sensirion_shdlc_driver.port.ShdlcTcpPort.open`
+            manually before using this object. Defaults to ``True``.
         """
         super(ShdlcTcpPort, self).__init__()
         log.debug("Open ShdlcTcpPort as TCP client to '{}' on port {}."
                   .format(ip, port))
+        self._ip = str(ip)
+        self._port = int(port)
         self._socket_timeout = float(socket_timeout)
+        self._is_open = False
         self._lock = RLock()
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._socket.settimeout(self._socket_timeout)
-        self._socket.connect((ip, port))
+        if do_open:
+            self.open()
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self._socket.close()
+        self.close()
 
     @property
     def description(self):
@@ -336,8 +380,7 @@ class ShdlcTcpPort(ShdlcPort):
         :rtype: string
         """
         with self._lock:
-            ip, port = self._socket.getpeername()
-            return '{}:{}'.format(ip, port)
+            return '{}:{}'.format(self._ip, self._port)
 
     @property
     def socket_timeout(self):
@@ -372,6 +415,24 @@ class ShdlcTcpPort(ShdlcPort):
         """
         return self._lock
 
+    def open(self):
+        """
+        Open the TCP socket (only needs to be called if ``do_open`` in
+        :py:meth:`~sensirion_shdlc_driver.port.ShdlcSerialPort.__init__`
+        was set to ``False``). Does nothing if the socket is already opened.
+        """
+        if self._is_open is False:
+            self._socket.connect((self._ip, self._port))
+            self._is_open = True
+
+    def close(self):
+        """
+        Close the TCP socket. Does nothing if the socket is already closed.
+        """
+        if self._is_open is True:
+            self._socket.close()
+            self._is_open = False
+
     def transceive(self, slave_address, command_id, data, response_timeout):
         """
         Send SHDLC frame to the TCP socket and return received response frame.
@@ -391,12 +452,6 @@ class ShdlcTcpPort(ShdlcPort):
             self._socket.settimeout(self._socket_timeout + response_timeout)
             self._send_frame(slave_address, command_id, data)
             return self._receive_frame()
-
-    def close(self):
-        """
-        Close the TCP socket.
-        """
-        self._socket.close()
 
     def _send_frame(self, slave_address, command_id, data):
         """
