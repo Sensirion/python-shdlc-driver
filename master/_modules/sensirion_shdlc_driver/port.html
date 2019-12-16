@@ -219,6 +219,20 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
+<div class="viewcode-block" id="ShdlcPort.open"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcPort.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Open the port. Only needs to be called if the port is not already</span>
+<span class="sd">        opened. Does nothing if the port is already opened.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ShdlcPort.close"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcPort.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Close the port to release the underlying resources. Does nothing if</span>
+<span class="sd">        the port is already closed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="ShdlcPort.transceive"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcPort.transceive">[docs]</a>    <span class="k">def</span> <span class="nf">transceive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">,</span> <span class="n">command_id</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">response_timeout</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Send SHDLC frame to port and return received response frame.</span>
@@ -255,9 +269,11 @@
 <span class="sd">              using it.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="ShdlcSerialPort.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">baudrate</span><span class="p">,</span> <span class="n">additional_response_time</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcSerialPort.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">baudrate</span><span class="p">,</span> <span class="n">additional_response_time</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                 <span class="n">do_open</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Open the serial port. Throws an exception if the port cannot be opened.</span>
+<span class="sd">        Create and optionally open a serial port. Throws an exception if the</span>
+<span class="sd">        port cannot be opened.</span>
 
 <span class="sd">        :param string port: The serial port (e.g. &quot;COM2&quot; or &quot;/dev/ttyUSB0&quot;)</span>
 <span class="sd">        :param int baudrate: The baudrate in bit/s.</span>
@@ -266,23 +282,31 @@
 <span class="sd">            :py:attr:`~sensirion_shdlc_driver.port.ShdlcSerialPort.additional_response_time`</span>
 <span class="sd">            for details. Defaults to 0.1 (i.e. 100ms) which should be enough</span>
 <span class="sd">            in most cases.</span>
+<span class="sd">        :param bool do_open:</span>
+<span class="sd">            Whether the serial port should be opened immediately or not.</span>
+<span class="sd">            If ``False``, you will have to call</span>
+<span class="sd">            :py:meth:`~sensirion_shdlc_driver.port.ShdlcSerialPort.open`</span>
+<span class="sd">            manually before using this object. Defaults to ``True``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcSerialPort</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Open ShdlcSerialPort on &#39;</span><span class="si">{}</span><span class="s2">&#39; with </span><span class="si">{}</span><span class="s2"> bit/s.&quot;</span>
                   <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">baudrate</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_additional_response_time</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">additional_response_time</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span> <span class="o">=</span> <span class="n">RLock</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="n">baudrate</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="n">baudrate</span><span class="p">,</span>
                                      <span class="n">bytesize</span><span class="o">=</span><span class="n">serial</span><span class="o">.</span><span class="n">EIGHTBITS</span><span class="p">,</span>
                                      <span class="n">parity</span><span class="o">=</span><span class="n">serial</span><span class="o">.</span><span class="n">PARITY_NONE</span><span class="p">,</span>
                                      <span class="n">stopbits</span><span class="o">=</span><span class="n">serial</span><span class="o">.</span><span class="n">STOPBITS_ONE</span><span class="p">,</span>
-                                     <span class="n">timeout</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">xonxoff</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+                                     <span class="n">timeout</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">xonxoff</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="k">if</span> <span class="n">do_open</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -351,6 +375,23 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span>
 
+<div class="viewcode-block" id="ShdlcSerialPort.open"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Open the serial port (only needs to be called if ``do_open`` in</span>
+<span class="sd">        :py:meth:`~sensirion_shdlc_driver.port.ShdlcSerialPort.__init__`</span>
+<span class="sd">        was set to ``False``). Does nothing if the port is already opened.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">is_open</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">open</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ShdlcSerialPort.close"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Close (release) the serial port. Does nothing if the port is already</span>
+<span class="sd">        closed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">is_open</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="ShdlcSerialPort.transceive"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.transceive">[docs]</a>    <span class="k">def</span> <span class="nf">transceive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">,</span> <span class="n">command_id</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">response_timeout</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Send SHDLC frame to port and return received response frame.</span>
@@ -370,12 +411,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_send_frame</span><span class="p">(</span><span class="n">slave_address</span><span class="p">,</span> <span class="n">command_id</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_receive_frame</span><span class="p">(</span><span class="n">response_timeout</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="ShdlcSerialPort.close"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Close (release) the serial port.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">_send_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">,</span> <span class="n">command_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -456,10 +491,10 @@
 <span class="sd">              using it.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="ShdlcTcpPort.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">socket_timeout</span><span class="o">=</span><span class="mf">5.0</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcTcpPort.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">socket_timeout</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">do_open</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Open the TCP socket. Throws an exception if the socket cannot be</span>
-<span class="sd">        opened.</span>
+<span class="sd">        Create and optionally open a TCP socket. Throws an exception if the</span>
+<span class="sd">        socket cannot be opened.</span>
 
 <span class="sd">        :param string ip: The IP address (e.g. &quot;192.168.100.200&quot;).</span>
 <span class="sd">        :param int port: The TCP port.</span>
@@ -467,21 +502,30 @@
 <span class="sd">            transmission, the socket timeout is adjusted for each command, i.e.</span>
 <span class="sd">            the timeout is increased with the parameter ``response_timeout`` of</span>
 <span class="sd">            :py:meth:`~sensirion_shdlc_driver.port.ShdlcTcpPort.transceive`.</span>
+<span class="sd">        :param bool do_open:</span>
+<span class="sd">            Whether the port should be opened immediately or not. If ``False``,</span>
+<span class="sd">            you will have to call</span>
+<span class="sd">            :py:meth:`~sensirion_shdlc_driver.port.ShdlcTcpPort.open`</span>
+<span class="sd">            manually before using this object. Defaults to ``True``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcTcpPort</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Open ShdlcTcpPort as TCP client to &#39;</span><span class="si">{}</span><span class="s2">&#39; on port </span><span class="si">{}</span><span class="s2">.&quot;</span>
                   <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ip</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_socket_timeout</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">socket_timeout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_open</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span> <span class="o">=</span> <span class="n">RLock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_socket_timeout</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span></div>
+        <span class="k">if</span> <span class="n">do_open</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -492,8 +536,7 @@
 <span class="sd">        :rtype: string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
-            <span class="n">ip</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">getpeername</span><span class="p">()</span>
-            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ip</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_port</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">socket_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -528,6 +571,24 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span>
 
+<div class="viewcode-block" id="ShdlcTcpPort.open"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Open the TCP socket (only needs to be called if ``do_open`` in</span>
+<span class="sd">        :py:meth:`~sensirion_shdlc_driver.port.ShdlcSerialPort.__init__`</span>
+<span class="sd">        was set to ``False``). Does nothing if the socket is already opened.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_open</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_ip</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_port</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_open</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ShdlcTcpPort.close"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Close the TCP socket. Does nothing if the socket is already closed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_open</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_open</span> <span class="o">=</span> <span class="kc">False</span></div>
+
 <div class="viewcode-block" id="ShdlcTcpPort.transceive"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.transceive">[docs]</a>    <span class="k">def</span> <span class="nf">transceive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">,</span> <span class="n">command_id</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">response_timeout</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Send SHDLC frame to the TCP socket and return received response frame.</span>
@@ -547,12 +608,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_socket_timeout</span> <span class="o">+</span> <span class="n">response_timeout</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_send_frame</span><span class="p">(</span><span class="n">slave_address</span><span class="p">,</span> <span class="n">command_id</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_receive_frame</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="ShdlcTcpPort.close"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Close the TCP socket.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">_send_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">,</span> <span class="n">command_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -632,6 +687,7 @@
         </dl>
         <dl>
             <dt>Branches</dt>
+            <dd><a href="../../../fix-multi-segment-tcp-response/index.html">fix-multi-segment-tcp-response</a></dd>
             <dd><a href="port.html">master</a></dd>
         </dl>
     </div>

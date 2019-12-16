@@ -367,6 +367,20 @@ exclusive access across multiple method calls.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="sensirion_shdlc_driver.port.ShdlcPort.open">
+<code class="descname">open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcPort.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open the port. Only needs to be called if the port is not already
+opened. Does nothing if the port is already opened.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.port.ShdlcPort.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcPort.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the port to release the underlying resources. Does nothing if
+the port is already closed.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="sensirion_shdlc_driver.port.ShdlcPort.transceive">
 <code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command_id</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcPort.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcPort.transceive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send SHDLC frame to port and return received response frame.</p>
@@ -413,7 +427,7 @@ time until the first byte is received).</li>
 
 <dl class="class">
 <dt id="sensirion_shdlc_driver.port.ShdlcSerialPort">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.port.</code><code class="descname">ShdlcSerialPort</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em>, <em>additional_response_time=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.port.</code><code class="descname">ShdlcSerialPort</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em>, <em>additional_response_time=0.1</em>, <em>do_open=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort" title="Permalink to this definition">¶</a></dt>
 <dd><p>SHDLC transceiver for the serial port (e.g. UART/RS232/RS485).</p>
 <p>This class implements the ShdlcPort interface for the serial port.</p>
 <div class="admonition note">
@@ -424,8 +438,9 @@ using it.</p>
 </div>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em>, <em>additional_response_time=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Open the serial port. Throws an exception if the port cannot be opened.</p>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em>, <em>additional_response_time=0.1</em>, <em>do_open=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and optionally open a serial port. Throws an exception if the
+port cannot be opened.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -438,6 +453,10 @@ Seconds) used when receiving frames. See property
 <a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.additional_response_time" title="sensirion_shdlc_driver.port.ShdlcSerialPort.additional_response_time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">additional_response_time</span></code></a>
 for details. Defaults to 0.1 (i.e. 100ms) which should be enough
 in most cases.</li>
+<li><strong>do_open</strong> (<em>bool</em>) – Whether the serial port should be opened immediately or not.
+If <code class="docutils literal notranslate"><span class="pre">False</span></code>, you will have to call
+<a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.open" title="sensirion_shdlc_driver.port.ShdlcSerialPort.open"><code class="xref py py-meth docutils literal notranslate"><span class="pre">open()</span></code></a>
+manually before using this object. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</li>
 </ul>
 </td>
 </tr>
@@ -517,6 +536,21 @@ exclusive access across multiple method calls.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.open">
+<code class="descname">open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open the serial port (only needs to be called if <code class="docutils literal notranslate"><span class="pre">do_open</span></code> in
+<a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__" title="sensirion_shdlc_driver.port.ShdlcSerialPort.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>
+was set to <code class="docutils literal notranslate"><span class="pre">False</span></code>). Does nothing if the port is already opened.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close (release) the serial port. Does nothing if the port is already
+closed.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.transceive">
 <code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command_id</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.transceive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send SHDLC frame to port and return received response frame.</p>
@@ -549,17 +583,11 @@ time until the first byte is received).</li>
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="sensirion_shdlc_driver.port.ShdlcSerialPort.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcSerialPort.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Close (release) the serial port.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
 <dt id="sensirion_shdlc_driver.port.ShdlcTcpPort">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.port.</code><code class="descname">ShdlcTcpPort</code><span class="sig-paren">(</span><em>ip</em>, <em>port</em>, <em>socket_timeout=5.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcTcpPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcTcpPort" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.port.</code><code class="descname">ShdlcTcpPort</code><span class="sig-paren">(</span><em>ip</em>, <em>port</em>, <em>socket_timeout=5.0</em>, <em>do_open=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcTcpPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcTcpPort" title="Permalink to this definition">¶</a></dt>
 <dd><p>SHDLC transceiver for a TCP/IP port in client connection mode.</p>
 <p>This class implements the ShdlcPort interface for a client connection on a
 TCP/IP port.</p>
@@ -571,9 +599,9 @@ using it.</p>
 </div>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.port.ShdlcTcpPort.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>ip</em>, <em>port</em>, <em>socket_timeout=5.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcTcpPort.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcTcpPort.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Open the TCP socket. Throws an exception if the socket cannot be
-opened.</p>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>ip</em>, <em>port</em>, <em>socket_timeout=5.0</em>, <em>do_open=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcTcpPort.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcTcpPort.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and optionally open a TCP socket. Throws an exception if the
+socket cannot be opened.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -585,6 +613,10 @@ opened.</p>
 transmission, the socket timeout is adjusted for each command, i.e.
 the timeout is increased with the parameter <code class="docutils literal notranslate"><span class="pre">response_timeout</span></code> of
 <a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcTcpPort.transceive" title="sensirion_shdlc_driver.port.ShdlcTcpPort.transceive"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transceive()</span></code></a>.</li>
+<li><strong>do_open</strong> (<em>bool</em>) – Whether the port should be opened immediately or not. If <code class="docutils literal notranslate"><span class="pre">False</span></code>,
+you will have to call
+<a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcTcpPort.open" title="sensirion_shdlc_driver.port.ShdlcTcpPort.open"><code class="xref py py-meth docutils literal notranslate"><span class="pre">open()</span></code></a>
+manually before using this object. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</li>
 </ul>
 </td>
 </tr>
@@ -646,6 +678,20 @@ exclusive access across multiple method calls.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="sensirion_shdlc_driver.port.ShdlcTcpPort.open">
+<code class="descname">open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcTcpPort.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcTcpPort.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open the TCP socket (only needs to be called if <code class="docutils literal notranslate"><span class="pre">do_open</span></code> in
+<a class="reference internal" href="#sensirion_shdlc_driver.port.ShdlcSerialPort.__init__" title="sensirion_shdlc_driver.port.ShdlcSerialPort.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>
+was set to <code class="docutils literal notranslate"><span class="pre">False</span></code>). Does nothing if the socket is already opened.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_shdlc_driver.port.ShdlcTcpPort.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcTcpPort.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcTcpPort.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the TCP socket. Does nothing if the socket is already closed.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="sensirion_shdlc_driver.port.ShdlcTcpPort.transceive">
 <code class="descname">transceive</code><span class="sig-paren">(</span><em>slave_address</em>, <em>command_id</em>, <em>data</em>, <em>response_timeout</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcTcpPort.transceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcTcpPort.transceive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send SHDLC frame to the TCP socket and return received response frame.</p>
@@ -677,12 +723,6 @@ and the socket base timeout.</li>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sensirion_shdlc_driver.port.ShdlcTcpPort.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/port.html#ShdlcTcpPort.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.port.ShdlcTcpPort.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Close the TCP socket.</p>
 </dd></dl>
 
 </dd></dl>
@@ -3223,6 +3263,7 @@ corresponding error messages.</p>
         </dl>
         <dl>
             <dt>Branches</dt>
+            <dd><a href="../fix-multi-segment-tcp-response/api.html">fix-multi-segment-tcp-response</a></dd>
             <dd><a href="api.html">master</a></dd>
         </dl>
     </div>
