@@ -633,17 +633,18 @@
         <span class="n">builder</span> <span class="o">=</span> <span class="n">ShdlcSerialMisoFrameBuilder</span><span class="p">()</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># Receive data from socket</span>
-            <span class="c1"># Note: recv buffer size should be a relatively small power of 2.</span>
-            <span class="c1"># See: https://docs.python.org/3/library/socket.html</span>
-            <span class="n">new_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">ShdlcTimeoutError</span><span class="p">()</span>
-            <span class="c1"># Process received data and return if the frame is complete</span>
-            <span class="k">if</span> <span class="n">builder</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">new_data</span><span class="p">):</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;ShdlcTcpPort received raw: [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                            <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;0x</span><span class="si">%.2X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">builder</span><span class="o">.</span><span class="n">data</span><span class="p">])))</span>
-                <span class="k">return</span> <span class="n">builder</span><span class="o">.</span><span class="n">interpret_data</span><span class="p">()</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># Receive data from socket</span>
+                <span class="c1"># Note: recv buffer size should be a relatively small power</span>
+                <span class="c1"># of 2. See: https://docs.python.org/3/library/socket.html</span>
+                <span class="n">new_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">ShdlcTimeoutError</span><span class="p">()</span>
+                <span class="c1"># Process received data and return if the frame is complete</span>
+                <span class="k">if</span> <span class="n">builder</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">new_data</span><span class="p">):</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;ShdlcTcpPort received raw: [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                              <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;0x</span><span class="si">%.2X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">builder</span><span class="o">.</span><span class="n">data</span><span class="p">])))</span>
+                    <span class="k">return</span> <span class="n">builder</span><span class="o">.</span><span class="n">interpret_data</span><span class="p">()</span>
         <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">timeout</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ShdlcTimeoutError</span><span class="p">()</span>
 </pre></div>
@@ -687,7 +688,6 @@
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="../../../fix-multi-segment-tcp-response/index.html">fix-multi-segment-tcp-response</a></dd>
             <dd><a href="../../../master/index.html">master</a></dd>
         </dl>
     </div>
