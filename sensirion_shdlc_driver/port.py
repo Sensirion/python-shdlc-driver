@@ -477,16 +477,17 @@ class ShdlcTcpPort(ShdlcPort):
         builder = ShdlcSerialMisoFrameBuilder()
 
         try:
-            # Receive data from socket
-            # Note: recv buffer size should be a relatively small power of 2.
-            # See: https://docs.python.org/3/library/socket.html
-            new_data = self._socket.recv(1024)
-            if len(new_data) == 0:
-                raise ShdlcTimeoutError()
-            # Process received data and return if the frame is complete
-            if builder.add_data(new_data):
-                log.debug("ShdlcTcpPort received raw: [{}]".format(
-                            ", ".join(["0x%.2X" % i for i in builder.data])))
-                return builder.interpret_data()
+            while True:
+                # Receive data from socket
+                # Note: recv buffer size should be a relatively small power
+                # of 2. See: https://docs.python.org/3/library/socket.html
+                new_data = self._socket.recv(1024)
+                if len(new_data) == 0:
+                    raise ShdlcTimeoutError()
+                # Process received data and return if the frame is complete
+                if builder.add_data(new_data):
+                    log.debug("ShdlcTcpPort received raw: [{}]".format(
+                              ", ".join(["0x%.2X" % i for i in builder.data])))
+                    return builder.interpret_data()
         except socket.timeout:
             raise ShdlcTimeoutError()

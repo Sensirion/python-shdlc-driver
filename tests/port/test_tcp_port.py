@@ -3,8 +3,76 @@
 
 from __future__ import absolute_import, division, print_function
 from sensirion_shdlc_driver.port import ShdlcTcpPort
-from sensirion_shdlc_driver.errors import ShdlcTimeoutError
+from sensirion_shdlc_driver.errors import ShdlcResponseError, ShdlcTimeoutError
 import pytest
+import socket
+import threading
+
+
+class ShdlcTcpServer(object):
+    """
+    Helper class to run a virtual SHDLC TCP server on localhost. The
+    constructor starts a TCP server which listens for an incoming connection.
+    The connection parameters can be obtained with the properties `ip` and
+    `port`. Then you can prepare raw responses by assigning the property
+    `response_data`. These responses will be sent every time the server
+    received some data. The received data can be read back with the property
+    `received_data`.
+    """
+
+    def __init__(self):
+        super(ShdlcTcpServer, self).__init__()
+        self._stop = False
+        self._exception = None
+        self.response_data = []
+        self.received_data = []
+
+        # open server socket
+        self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self._socket.bind(('localhost', 0))  # Automatically choose a free port
+        self._socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self._socket_timeout = 1.0
+        self._socket.listen(0)
+        self.ip, self.port = self._socket.getsockname()
+
+        # start thread
+        self._thread = threading.Thread(target=self._run)
+        self._thread.daemon = True  # Avoid blocking tests caused by threads
+        self._thread.start()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self._stop = True
+        self._thread.join(2.0)
+        # Make sure the tests fail if there was an error in the thread!
+        if self._exception is not None:
+            raise self._exception
+
+    def _run(self):
+        try:
+            sock, addr = self._socket.accept()
+            while self._stop is not True:
+                data = sock.recv(1024)
+                if data is not None:
+                    self.received_data.append(data)
+                    for response in self.response_data:
+                        sock.send(response)
+            self._socket.close()
+        except IOError:
+            pass  # Probably client disconnected, which is fine
+        except Exception as e:
+            self._exception = e
+
+
+@pytest.fixture
+def tcp_server():
+    """
+    Virtual SHDLC TCP server which will be running during test execution.
+    """
+    with ShdlcTcpServer() as server:
+        yield server
 
 
 @pytest.mark.needs_tcp
@@ -59,6 +127,41 @@ def test_transceive_timeout(tcp_ip, tcp_port):
             addr, cmd, state, data = port.transceive(
                 slave_address=42, command_id=0xD1, data=b'',
                 response_timeout=0.1)
+
+
+def test_transceive_segmented(tcp_server):
+    """
+    Test if the transceive() method reads the data multiple times from the
+    TCP server until the whole frame is received.
+    """
+    with ShdlcTcpPort(tcp_server.ip, tcp_server.port) as port:
+        tcp_server.response_data = [
+            b"\x7E\x00\xD1",
+            b"\x00",
+            b"\x07\x05\x08\x00\x03\x00\x01\x00",
+            b"\x16\x7E"
+        ]
+        addr, cmd, state, data = port.transceive(
+            slave_address=42, command_id=0xD1, data=b'',
+            response_timeout=10.0)
+        assert tcp_server.received_data == [b"\x7E\x2A\xD1\x00\x04\x7E"]
+        assert addr == 0x00
+        assert cmd == 0xD1
+        assert state == 0x00
+        assert data == b"\x05\x08\x00\x03\x00\x01\x00"
+
+
+def test_transceive_checksum_error(tcp_server):
+    """
+    Test if the transceive() method raises a ShdlcResponseError exception if
+    the response contains a wrong checksum.
+    """
+    with ShdlcTcpPort(tcp_server.ip, tcp_server.port) as port:
+        tcp_server.response_data = [b"\x7E\x00\xD1\x00\x00\x00\x7E"]
+        with pytest.raises(ShdlcResponseError):
+            addr, cmd, state, data = port.transceive(
+                slave_address=42, command_id=0xD1, data=b'',
+                response_timeout=10.0)
 
 
 def test_create_and_open_invalid_port():

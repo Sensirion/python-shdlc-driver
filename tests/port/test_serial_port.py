@@ -3,8 +3,9 @@
 
 from __future__ import absolute_import, division, print_function
 from sensirion_shdlc_driver.port import ShdlcSerialPort
-from sensirion_shdlc_driver.errors import ShdlcTimeoutError
+from sensirion_shdlc_driver.errors import ShdlcResponseError, ShdlcTimeoutError
 from serial import SerialException
+from mock import Mock, PropertyMock
 import pytest
 
 
@@ -72,6 +73,48 @@ def test_transceive_timeout(serial_port, serial_bitrate):
             addr, cmd, state, data = port.transceive(
                 slave_address=42, command_id=0xD1, data=b'',
                 response_timeout=0.1)
+
+
+def test_transceive_segmented():
+    """
+    Test if the transceive() method reads the data multiple times from the
+    underlying Serial object until the whole frame is received.
+    """
+    port = ShdlcSerialPort('/non/existing/port', 115200, do_open=False)
+    port._serial = Mock()
+    type(port._serial).baudrate = PropertyMock(return_value=115200)
+    port._serial.inWaiting.side_effect = [3, 1, 8, 2]
+    port._serial.read.side_effect = [
+        b"\x7E\x00\xD1",
+        b"\x00",
+        b"\x07\x05\x08\x00\x03\x00\x01\x00",
+        b"\x16\x7E"
+    ]
+    addr, cmd, state, data = port.transceive(
+        slave_address=42, command_id=0xD1, data=b'',
+        response_timeout=10.0)
+    arguments = [arg[0][0] for arg in port._serial.write.call_args_list]
+    assert arguments == [b"\x7E\x2A\xD1\x00\x04\x7E"]
+    assert addr == 0x00
+    assert cmd == 0xD1
+    assert state == 0x00
+    assert data == b"\x05\x08\x00\x03\x00\x01\x00"
+
+
+def test_transceive_checksum_error():
+    """
+    Test if the transceive() method raises a ShdlcResponseError exception if
+    the response contains a wrong checksum.
+    """
+    port = ShdlcSerialPort('/non/existing/port', 115200, do_open=False)
+    port._serial = Mock()
+    type(port._serial).baudrate = PropertyMock(return_value=115200)
+    port._serial.inWaiting.return_value = 1
+    port._serial.read.return_value = b"\x7E\x00\xD1\x00\x00\x00\x7E"
+    with pytest.raises(ShdlcResponseError):
+        addr, cmd, state, data = port.transceive(
+            slave_address=42, command_id=0xD1, data=b'',
+            response_timeout=10.0)
 
 
 def test_create_and_open_invalid_port():
