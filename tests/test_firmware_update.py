@@ -12,7 +12,7 @@ from sensirion_shdlc_driver.commands.bootloader import \
     ShdlcCmdFirmwareUpdateData, ShdlcCmdFirmwareUpdateStop
 from sensirion_shdlc_driver.firmware_image import ShdlcFirmwareImage
 from sensirion_shdlc_driver.firmware_update import ShdlcFirmwareUpdate
-from mock import MagicMock
+from mock import MagicMock, PropertyMock
 import os
 import pytest
 
@@ -87,6 +87,24 @@ def test_execute_emergency():
     for i in range(1, len(commands) - 1):
         assert type(commands[i]) is ShdlcCmdFirmwareUpdateData
     assert type(commands[-1]) is ShdlcCmdFirmwareUpdateStop
+
+
+def test_execute_without_bitrate_getter():
+    """
+    Test if execute() fails before sending the "enter bootloader" command (to
+    avoid bricking the device) if the underlying port has not implemented the
+    bitrate getter property.
+    """
+    connection = MagicMock()
+    type(connection.port).bitrate = PropertyMock(
+        side_effect=NotImplementedError)
+    device = ShdlcDevice(connection, 0)
+    image = ShdlcFirmwareImage(EKS2_HEXFILE, EKS2_BL_ADDR, EKS2_APP_ADDR)
+    update = ShdlcFirmwareUpdate(device, image)
+    with pytest.raises(NotImplementedError):
+        update.execute(emergency=False)
+    commands = [c[0][1] for c in device.connection.execute.call_args_list]
+    assert len(commands) == 0  # no commands sent
 
 
 def test_status_callback():

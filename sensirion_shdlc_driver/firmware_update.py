@@ -61,11 +61,29 @@ class ShdlcFirmwareUpdate(object):
         """  # noqa: E501
         # Lock the port during the whole firmware update procedure.
         with self._device.connection.port.lock:
+            # Check if the underlying port supports changing the bitrate. If it
+            # doesn't support changing the bitrate (e.g. like ShdlcTcpPort), we
+            # must raise an exception *before* the "enter bootloader" command
+            # is sent to the device. Otherwise the device enters the bootloader
+            # but the user will not be able to update the firmware, which would
+            # be a bad situation. Thus we just read and set the bitrate to
+            # check if the underlying port has a bitrate getter and setter.
+            try:
+                old_bitrate = self._device.connection.port.bitrate
+                self._device.connection.port.bitrate = old_bitrate
+            except NotImplementedError:
+                raise NotImplementedError(
+                    "The used port '{}' does not support changing the bitrate,"
+                    " therefore it's not possible to update the firmware."
+                    .format(self._device.connection.port.__class__.__name__))
+
+            # Only check product type and enter the bootloader if it's not an
+            # emergency update, i.e. the application firmware is still running.
             if not emergency:
                 self._check_product_type(progress=4.0)
                 self._enter_bootloader(progress=7.0)
-            # Switch to the bootloader bitrate for the actual update commands.
-            old_bitrate = self._device.connection.port.bitrate
+
+            # Switch to the bootloader bitrate and send the update commands.
             self._device.connection.port.bitrate = self.BOOTLOADER_BITRATE
             try:
                 self._send_start(progress=10.0)
