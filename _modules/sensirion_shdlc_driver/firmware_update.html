@@ -217,11 +217,29 @@
 <span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa: E501</span>
         <span class="c1"># Lock the port during the whole firmware update procedure.</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
+            <span class="c1"># Check if the underlying port supports changing the bitrate. If it</span>
+            <span class="c1"># doesn&#39;t support changing the bitrate (e.g. like ShdlcTcpPort), we</span>
+            <span class="c1"># must raise an exception *before* the &quot;enter bootloader&quot; command</span>
+            <span class="c1"># is sent to the device. Otherwise the device enters the bootloader</span>
+            <span class="c1"># but the user will not be able to update the firmware, which would</span>
+            <span class="c1"># be a bad situation. Thus we just read and set the bitrate to</span>
+            <span class="c1"># check if the underlying port has a bitrate getter and setter.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">old_bitrate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">bitrate</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">bitrate</span> <span class="o">=</span> <span class="n">old_bitrate</span>
+            <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                    <span class="s2">&quot;The used port &#39;</span><span class="si">{}</span><span class="s2">&#39; does not support changing the bitrate,&quot;</span>
+                    <span class="s2">&quot; therefore it&#39;s not possible to update the firmware.&quot;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+            <span class="c1"># Only check product type and enter the bootloader if it&#39;s not an</span>
+            <span class="c1"># emergency update, i.e. the application firmware is still running.</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">emergency</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_check_product_type</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="mf">4.0</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_enter_bootloader</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="mf">7.0</span><span class="p">)</span>
-            <span class="c1"># Switch to the bootloader bitrate for the actual update commands.</span>
-            <span class="n">old_bitrate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">bitrate</span>
+
+            <span class="c1"># Switch to the bootloader bitrate and send the update commands.</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">bitrate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">BOOTLOADER_BITRATE</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_send_start</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
