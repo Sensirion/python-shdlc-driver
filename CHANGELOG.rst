@@ -1,6 +1,18 @@
 CHANGELOG
 ---------
 
+0.1.2
+:::::
+- Add ``ShdlcTcpPort`` class to communicate with SHDLC devices through TCP/IP
+- Add property ``start_received`` to ``ShdlcSerialMisoFrameBuilder``
+- Add methods ``open()`` and ``close()`` to the ``ShdlcPort`` interface
+- Add parameter ``do_open`` to constructor of ``ShdlcSerialPort`` to allow
+  creating ``ShdlcSerialPort`` instances without opening the port yet
+- Add property ``additional_response_time`` to ``ShdlcSerialPort``
+- Improve timeout calculation of ``ShdlcSerialPort`` to fix possible response
+  timeout errors
+- Make ``FirmwareUpdate`` failing early if the bitrate cannot be changed
+
 0.1.1
 :::::
 - Add optional dependency ``intelhex`` for performing firmware updates
