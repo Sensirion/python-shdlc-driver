@@ -199,6 +199,6 @@ def setup(app):
     app.connect('autodoc-skip-member', autodoc_skip_member)
 
 
-scv_whitelist_branches = ('master')
+scv_whitelist_branches = ('master',)
 
 scv_grm_exclude = ('.gitignore', '.nojekyll')
