@@ -80,9 +80,12 @@ class Version(object):
         """
         Constructor.
 
-        :param FirmwareVersion firmware: Firmware version.
-        :param HardwareVersion hardware: Hardware version.
-        :param ProtocolVersion protocol: SHDLC protocol version.
+        :param ~sensirion_shdlc_driver.types.FirmwareVersion firmware:
+            Firmware version.
+        :param ~sensirion_shdlc_driver.types.HardwareVersion hardware:
+            Hardware version.
+        :param ~sensirion_shdlc_driver.types.ProtocolVersion protocol:
+            SHDLC protocol version.
         """
         super(Version, self).__init__()
         self.firmware = firmware

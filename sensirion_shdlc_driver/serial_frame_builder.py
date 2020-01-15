@@ -10,7 +10,10 @@ log = logging.getLogger(__name__)
 
 class ShdlcSerialFrameBuilder(object):
     """
-    Base class for ShdlcSerialMosiFrameBuilder and ShdlcSerialMisoFrameBuilder.
+    Base class for
+    :py:class:`~sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMosiFrameBuilder`
+    and
+    :py:class:`~sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder`.
     """
 
     _START_STOP_BYTE = 0x7E
