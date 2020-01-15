@@ -36,20 +36,14 @@ class ShdlcPort(object):
     @property
     def bitrate(self):
         """
-        Get the current bitrate.
+        The current bitrate in bit/s.
 
-        :return: Bitrate in bit/s.
-        :rtype: int
+        :type: int
         """
         raise NotImplementedError()
 
     @bitrate.setter
     def bitrate(self, bitrate):
-        """
-        Set the bitrate.
-
-        :param int bitrate: Bitrate in bit/s.
-        """
         raise NotImplementedError()
 
     @property
@@ -166,21 +160,15 @@ class ShdlcSerialPort(ShdlcPort):
     @property
     def bitrate(self):
         """
-        Get the current bitrate.
+        The current bitrate in bit/s.
 
-        :return: Bitrate in bit/s.
-        :rtype: int
+        :type: int
         """
         with self._lock:
             return self._serial.baudrate
 
     @bitrate.setter
     def bitrate(self, bitrate):
-        """
-        Set the bitrate.
-
-        :param int bitrate: Bitrate in bit/s.
-        """
         with self._lock:
             self._serial.baudrate = bitrate
 
