@@ -14,4 +14,5 @@ Contents
    shdlc
    installation
    quickstart
+   logging_debugging
    api
