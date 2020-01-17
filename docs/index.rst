@@ -14,5 +14,6 @@ Contents
    shdlc
    installation
    quickstart
+   custom_commands
    logging_debugging
    api
