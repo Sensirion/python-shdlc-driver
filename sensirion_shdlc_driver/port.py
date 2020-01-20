@@ -36,20 +36,14 @@ class ShdlcPort(object):
     @property
     def bitrate(self):
         """
-        Get the current bitrate.
+        The current bitrate in bit/s.
 
-        :return: Bitrate in bit/s.
-        :rtype: int
+        :type: int
         """
         raise NotImplementedError()
 
     @bitrate.setter
     def bitrate(self, bitrate):
-        """
-        Set the bitrate.
-
-        :param int bitrate: Bitrate in bit/s.
-        """
         raise NotImplementedError()
 
     @property
@@ -96,8 +90,10 @@ class ShdlcPort(object):
                                        time until the first byte is received).
         :return: Received address, command_id, state, and payload.
         :rtype: byte, byte, byte, bytes
-        :raise ShdlcTimeoutError: If no response received within timeout.
-        :raise ShdlcResponseError: If the received response is invalid.
+        :raise ~sensirion_shdlc_driver.errors.ShdlcTimeoutError:
+            If no response received within timeout.
+        :raise ~sensirion_shdlc_driver.errors.ShdlcResponseError:
+            If the received response is invalid.
         """
         raise NotImplementedError()
 
@@ -166,21 +162,15 @@ class ShdlcSerialPort(ShdlcPort):
     @property
     def bitrate(self):
         """
-        Get the current bitrate.
+        The current bitrate in bit/s.
 
-        :return: Bitrate in bit/s.
-        :rtype: int
+        :type: int
         """
         with self._lock:
             return self._serial.baudrate
 
     @bitrate.setter
     def bitrate(self, bitrate):
-        """
-        Set the bitrate.
-
-        :param int bitrate: Bitrate in bit/s.
-        """
         with self._lock:
             self._serial.baudrate = bitrate
 
@@ -247,8 +237,10 @@ class ShdlcSerialPort(ShdlcPort):
                                        time until the first byte is received).
         :return: Received address, command_id, state, and payload.
         :rtype: byte, byte, byte, bytes
-        :raise ShdlcTimeoutError: If no response received within timeout.
-        :raise ShdlcResponseError: If the received response is invalid.
+        :raise ~sensirion_shdlc_driver.errors.ShdlcTimeoutError:
+            If no response received within timeout.
+        :raise ~sensirion_shdlc_driver.errors.ShdlcResponseError:
+            If the received response is invalid.
         """
         with self._lock:
             self._serial.flushInput()
@@ -445,8 +437,10 @@ class ShdlcTcpPort(ShdlcPort):
             and the socket base timeout.
         :return: Received address, command_id, state, and payload.
         :rtype: byte, byte, byte, bytes
-        :raise ShdlcTimeoutError: If no response received within timeout.
-        :raise ShdlcResponseError: If the received response is invalid.
+        :raise ~sensirion_shdlc_driver.errors.ShdlcTimeoutError:
+            If no response received within timeout.
+        :raise ~sensirion_shdlc_driver.errors.ShdlcResponseError:
+            If the received response is invalid.
         """
         with self._lock:
             self._socket.settimeout(self._socket_timeout + response_timeout)

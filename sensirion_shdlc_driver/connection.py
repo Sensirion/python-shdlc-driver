@@ -27,8 +27,9 @@ class ShdlcConnection(object):
         .. note:: This constructor does not send or receive any data to resp.
                   from the specified port.
 
-        :param ShdlcPort port: The port used for communication (must implement
-                               the ShdlcPort interface)
+        :param ~sensirion_shdlc_driver.port.ShdlcPort port:
+            The port used for communication (must implement the
+            :py:class:`~sensirion_shdlc_driver.port.ShdlcPort` interface)
         """
         super(ShdlcConnection, self).__init__()
         self._port = port
@@ -39,8 +40,8 @@ class ShdlcConnection(object):
         """
         Get the underlying port.
 
-        :return: An ShdlcPort object.
-        :rtype: ShdlcPort
+        :return: An :py:class:`~sensirion_shdlc_driver.port.ShdlcPort` object.
+        :rtype: ~sensirion_shdlc_driver.port.ShdlcPort
         """
         return self._port
 
@@ -54,11 +55,13 @@ class ShdlcConnection(object):
         - Validate and interpret response data
         - Wait until post processing is done (optional, and only if needed)
 
-        :param byte slave_address: Slave address.
-        :param ShdlcCommand command: SHDLC command (ShdlcCommand object).
-        :param bool wait_post_process: If true and the command needs some time
-                                       for post processing, this thread blocks
-                                       until post processing is done.
+        :param byte slave_address:
+            Slave address.
+        :param ~sensirion_shdlc_driver.command.ShdlcCommand command:
+            SHDLC command to execute.
+        :param bool wait_post_process:
+            If true and the command needs some time for post processing, this
+            thread blocks until post processing is done.
         :return: Received response (interpreted) and error state flag.
         :rtype: object, bool
         """

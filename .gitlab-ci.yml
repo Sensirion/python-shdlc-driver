@@ -71,7 +71,7 @@ build_docs:
     - python setup.py install
     - pip install -r docs/requirements.txt
     - ./ci/set_git_config.sh
-    - sphinx-versioning build -r "$CI_COMMIT_REF_NAME" docs docs/_build/html
+    - sphinx-versioning build -r "$CI_COMMIT_REF_NAME" -w "$CI_COMMIT_REF_NAME" docs docs/_build/html
 
 deploy_staging:
     stage: deploy

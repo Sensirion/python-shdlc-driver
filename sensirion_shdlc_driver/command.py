@@ -86,7 +86,8 @@ class ShdlcCommand(object):
         Check if the response length is correct.
 
         :param bytes data: Raw data (payload) received from the device.
-        :raise ShdlcResponseError: If length is wrong.
+        :raise ~sensirion_shdlc_driver.errors.ShdlcResponseError:
+            If length is wrong.
         """
         if not (self._min_rx_len <= len(data) <= self._max_rx_len):
             raise ShdlcResponseError(
