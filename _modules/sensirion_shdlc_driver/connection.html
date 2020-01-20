@@ -90,6 +90,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../shdlc.html">SHDLC Protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_commands.html">Executing Custom Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging_debugging.html">Logging / Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
 </ul>
 
@@ -183,8 +185,9 @@
 <span class="sd">        .. note:: This constructor does not send or receive any data to resp.</span>
 <span class="sd">                  from the specified port.</span>
 
-<span class="sd">        :param ShdlcPort port: The port used for communication (must implement</span>
-<span class="sd">                               the ShdlcPort interface)</span>
+<span class="sd">        :param ~sensirion_shdlc_driver.port.ShdlcPort port:</span>
+<span class="sd">            The port used for communication (must implement the</span>
+<span class="sd">            :py:class:`~sensirion_shdlc_driver.port.ShdlcPort` interface)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcConnection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_port</span> <span class="o">=</span> <span class="n">port</span>
@@ -195,8 +198,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the underlying port.</span>
 
-<span class="sd">        :return: An ShdlcPort object.</span>
-<span class="sd">        :rtype: ShdlcPort</span>
+<span class="sd">        :return: An :py:class:`~sensirion_shdlc_driver.port.ShdlcPort` object.</span>
+<span class="sd">        :rtype: ~sensirion_shdlc_driver.port.ShdlcPort</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_port</span>
 
@@ -210,11 +213,13 @@
 <span class="sd">        - Validate and interpret response data</span>
 <span class="sd">        - Wait until post processing is done (optional, and only if needed)</span>
 
-<span class="sd">        :param byte slave_address: Slave address.</span>
-<span class="sd">        :param ShdlcCommand command: SHDLC command (ShdlcCommand object).</span>
-<span class="sd">        :param bool wait_post_process: If true and the command needs some time</span>
-<span class="sd">                                       for post processing, this thread blocks</span>
-<span class="sd">                                       until post processing is done.</span>
+<span class="sd">        :param byte slave_address:</span>
+<span class="sd">            Slave address.</span>
+<span class="sd">        :param ~sensirion_shdlc_driver.command.ShdlcCommand command:</span>
+<span class="sd">            SHDLC command to execute.</span>
+<span class="sd">        :param bool wait_post_process:</span>
+<span class="sd">            If true and the command needs some time for post processing, this</span>
+<span class="sd">            thread blocks until post processing is done.</span>
 <span class="sd">        :return: Received response (interpreted) and error state flag.</span>
 <span class="sd">        :rtype: object, bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -269,7 +274,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019 Sensirion AG, Switzerland
+        &copy; Copyright 2020 Sensirion AG, Switzerland
 
     </p>
   </div>

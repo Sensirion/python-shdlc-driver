@@ -90,6 +90,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../shdlc.html">SHDLC Protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_commands.html">Executing Custom Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging_debugging.html">Logging / Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
 </ul>
 
@@ -236,9 +238,12 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 
-<span class="sd">        :param FirmwareVersion firmware: Firmware version.</span>
-<span class="sd">        :param HardwareVersion hardware: Hardware version.</span>
-<span class="sd">        :param ProtocolVersion protocol: SHDLC protocol version.</span>
+<span class="sd">        :param ~sensirion_shdlc_driver.types.FirmwareVersion firmware:</span>
+<span class="sd">            Firmware version.</span>
+<span class="sd">        :param ~sensirion_shdlc_driver.types.HardwareVersion hardware:</span>
+<span class="sd">            Hardware version.</span>
+<span class="sd">        :param ~sensirion_shdlc_driver.types.ProtocolVersion protocol:</span>
+<span class="sd">            SHDLC protocol version.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Version</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span> <span class="o">=</span> <span class="n">firmware</span>
@@ -261,7 +266,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019 Sensirion AG, Switzerland
+        &copy; Copyright 2020 Sensirion AG, Switzerland
 
     </p>
   </div>

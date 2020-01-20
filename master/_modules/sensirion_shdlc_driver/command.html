@@ -90,6 +90,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../shdlc.html">SHDLC Protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_commands.html">Executing Custom Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging_debugging.html">Logging / Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
 </ul>
 
@@ -242,7 +244,8 @@
 <span class="sd">        Check if the response length is correct.</span>
 
 <span class="sd">        :param bytes data: Raw data (payload) received from the device.</span>
-<span class="sd">        :raise ShdlcResponseError: If length is wrong.</span>
+<span class="sd">        :raise ~sensirion_shdlc_driver.errors.ShdlcResponseError:</span>
+<span class="sd">            If length is wrong.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_min_rx_len</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_rx_len</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">ShdlcResponseError</span><span class="p">(</span>
@@ -273,7 +276,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019 Sensirion AG, Switzerland
+        &copy; Copyright 2020 Sensirion AG, Switzerland
 
     </p>
   </div>

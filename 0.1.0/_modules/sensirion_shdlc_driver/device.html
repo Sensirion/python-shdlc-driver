@@ -188,9 +188,10 @@
 <span class="sd">    interface.</span>
 
 <span class="sd">    There is no (or very few) caching functionality in this driver. For example</span>
-<span class="sd">    if you call get_serial_number() 100 times, it will send the command 100</span>
-<span class="sd">    times over the SHDLC interface to the device. This makes the driver</span>
-<span class="sd">    (nearly) stateless.</span>
+<span class="sd">    if you call</span>
+<span class="sd">    :py:meth:`~sensirion_shdlc_driver.device.ShdlcDevice.get_serial_number()`</span>
+<span class="sd">    100 times, it will send the command 100 times over the SHDLC interface to</span>
+<span class="sd">    the device. This makes the driver (nearly) stateless.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ShdlcDevice.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.device.ShdlcDevice.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">):</span>
@@ -201,10 +202,10 @@
 <span class="sd">                  it&#39;s possible to instantiate an object even if the device is</span>
 <span class="sd">                  not connected or powered yet.</span>
 
-<span class="sd">        :param ShdlcConnection connection: The connection used for the</span>
-<span class="sd">                                           communication (must be an</span>
-<span class="sd">                                           ShdlcConnection object)</span>
-<span class="sd">        :param byte slave_address: The address of the device.</span>
+<span class="sd">        :param ~sensirion_shdlc_driver.connection.ShdlcConnection connection:</span>
+<span class="sd">            The connection used for the communication.</span>
+<span class="sd">        :param byte slave_address:</span>
+<span class="sd">            The address of the device.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcDevice</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span> <span class="o">=</span> <span class="n">connection</span>
@@ -219,7 +220,7 @@
 <span class="sd">        Get the used SHDLC connection.</span>
 
 <span class="sd">        :return: The used SHDLC connection.</span>
-<span class="sd">        :rtype: ShdlcConnection</span>
+<span class="sd">        :rtype: :py:class:`~sensirion_shdlc_driver.connection.ShdlcConnection`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span>
 
@@ -239,11 +240,13 @@
 <span class="sd">        Get the error flag which was received with the last response of the</span>
 <span class="sd">        device. So this flag gets updated with every command sent to the</span>
 <span class="sd">        device. If the flag is True, the exact error reason can be read with</span>
-<span class="sd">        the method get_error_state().</span>
+<span class="sd">        the method</span>
+<span class="sd">        :py:meth:`~sensirion_shdlc_driver.device.ShdlcDevice.get_error_state()`.</span>
 
-<span class="sd">        .. note:: When creating an instance of the ShdlcDevice, this property</span>
-<span class="sd">                  is initialized with False and will not be updated until you</span>
-<span class="sd">                  send the first command to the device.</span>
+<span class="sd">        .. note:: When creating an instance of</span>
+<span class="sd">                  :py:class:`~sensirion_shdlc_driver.device.ShdlcDevice`, this</span>
+<span class="sd">                  property is initialized with ``False`` and will not be</span>
+<span class="sd">                  updated until you send the first command to the device.</span>
 
 <span class="sd">        :return: True if the device indicated an error, False otherwise.</span>
 <span class="sd">        :rtype: bool</span>
@@ -254,8 +257,10 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Execute an SHDLC command.</span>
 
-<span class="sd">        :param ShdlcCommand command: The command to execute.</span>
-<span class="sd">        :return: The interpreted response of the executed command.</span>
+<span class="sd">        :param ~sensirion_shdlc_driver.command.ShdlcCommand command:</span>
+<span class="sd">            The command to execute.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            The interpreted response of the executed command.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">data</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_slave_address</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
@@ -270,7 +275,7 @@
 <span class="sd">        Get the product type. The product type (sometimes also called &quot;device</span>
 <span class="sd">        type&quot;) can be used to detect what kind of SHDLC product is connected.</span>
 
-<span class="sd">        :param bool as_int: If True, the product type is returned as an</span>
+<span class="sd">        :param bool as_int: If ``True``, the product type is returned as an</span>
 <span class="sd">                            integer, otherwise as a string of hexadecimal</span>
 <span class="sd">                            digits (default).</span>
 <span class="sd">        :return: The product type as an integer or string of hexadecimal</span>
@@ -288,7 +293,7 @@
 <span class="sd">        different variants, this command allows to determine the exact variant</span>
 <span class="sd">        of the connected device. Sometimes this is called &quot;device subtype&quot;.</span>
 
-<span class="sd">        Note: This command is not supported by every product type.</span>
+<span class="sd">        .. note:: This command is not supported by every product type.</span>
 
 <span class="sd">        :return: The product subtype as a byte (the interpretation depends on</span>
 <span class="sd">                 the connected product type).</span>
@@ -300,7 +305,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the product name of the device.</span>
 
-<span class="sd">        Note: This command is not supported by every product type.</span>
+<span class="sd">        .. note:: This command is not supported by every product type.</span>
 
 <span class="sd">        :return: The product name as an ASCII string.</span>
 <span class="sd">        :rtype: string</span>
@@ -311,7 +316,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the article code of the device.</span>
 
-<span class="sd">        Note: This command is not supported by every product type.</span>
+<span class="sd">        .. note:: This command is not supported by every product type.</span>
 
 <span class="sd">        :return: The article code as an ASCII string.</span>
 <span class="sd">        :rtype: string</span>
@@ -342,13 +347,17 @@
 <span class="sd">        state and error code interpretation depends on the connected device</span>
 <span class="sd">        type.</span>
 
-<span class="sd">        :param bool clear: If true, the error state on the device gets cleared.</span>
-<span class="sd">        :param bool as_exception: If true, the error state is returned as an</span>
-<span class="sd">                                  ShdlcDeviceError object instead of a byte.</span>
-<span class="sd">        :return: The device_state as a 32bit unsigned integer containing all</span>
+<span class="sd">        :param bool clear:</span>
+<span class="sd">            If ``True``, the error state on the device gets cleared.</span>
+<span class="sd">        :param bool as_exception:</span>
+<span class="sd">            If ``True``, the error state is returned as an</span>
+<span class="sd">            :py:class:`~sensirion_shdlc_driver.errors.ShdlcDeviceError`</span>
+<span class="sd">            object instead of a byte.</span>
+<span class="sd">        :return: The device state as a 32-bit unsigned integer containing all</span>
 <span class="sd">                 error flags, and the last error which occurred on the device.</span>
-<span class="sd">                 If as_exception is True, it&#39;s returned as an ShdlcDeviceError</span>
-<span class="sd">                 object or None, otherwise as a byte.</span>
+<span class="sd">                 If ``as_exception`` is ``True``, it&#39;s returned as an</span>
+<span class="sd">                 :py:class:`~sensirion_shdlc_driver.errors.ShdlcDeviceError`</span>
+<span class="sd">                 object or ``None``, otherwise as a byte.</span>
 <span class="sd">        :rtype: int, byte/ShdlcDeviceError/None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">state</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ShdlcCmdGetErrorState</span><span class="p">(</span><span class="n">clear</span><span class="o">=</span><span class="n">clear</span><span class="p">))</span>
@@ -360,10 +369,12 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the SHDLC slave address of the device.</span>
 
-<span class="sd">        .. note:: See also the property :attr:`slave_address` which returns</span>
-<span class="sd">                  the device&#39;s slave address without sending a command. This</span>
-<span class="sd">                  method really sends a command to the device, even though the</span>
-<span class="sd">                  slave address is actually already known by this object.</span>
+<span class="sd">        .. note:: See also the property</span>
+<span class="sd">                  :py:attr:`~sensirion_shdlc_driver.device.ShdlcDevice.slave_address`</span>
+<span class="sd">                  which returns the device&#39;s slave address without sending a</span>
+<span class="sd">                  command. This method really sends a command to the device,</span>
+<span class="sd">                  even though the slave address is actually already known by</span>
+<span class="sd">                  this object.</span>
 
 <span class="sd">        :return: The slave address of the device.</span>
 <span class="sd">        :rtype: byte</span>
@@ -384,13 +395,15 @@
 <span class="sd">                     In that case you would get communication issues which can</span>
 <span class="sd">                     only be fixed by disconnecting one of the slaves.</span>
 
-<span class="sd">        :param byte slave_address: The new slave address [0..254]. The address</span>
-<span class="sd">                                   255 is reserved for broadcasts.</span>
-<span class="sd">        :param bool update_driver: If true, the property</span>
-<span class="sd">                                   :attr:`slave_address` of this object is</span>
-<span class="sd">                                   also updated with the new address. This is</span>
-<span class="sd">                                   needed to allow further communication with</span>
-<span class="sd">                                   the device, as its address has changed.</span>
+<span class="sd">        :param byte slave_address:</span>
+<span class="sd">            The new slave address [0..254]. The address 255 is reserved for</span>
+<span class="sd">            broadcasts.</span>
+<span class="sd">        :param bool update_driver:</span>
+<span class="sd">            If ``True``, the property</span>
+<span class="sd">            :py:attr:`~sensirion_shdlc_driver.device.ShdlcDevice.slave_address`</span>
+<span class="sd">            of this object is also updated with the new address. This is</span>
+<span class="sd">            needed to allow further communication with the device, as its</span>
+<span class="sd">            address has changed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ShdlcCmdSetSlaveAddress</span><span class="p">(</span><span class="n">slave_address</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">update_driver</span><span class="p">:</span>
@@ -402,7 +415,7 @@
 
 <span class="sd">        .. note:: This method really sends a command to the device, even though</span>
 <span class="sd">                  the baudrate is already known by the used</span>
-<span class="sd">                  :class:`~sensirion_shdlc_driver.port.ShdlcPort` object.</span>
+<span class="sd">                  :py:class:`~sensirion_shdlc_driver.port.ShdlcPort` object.</span>
 
 <span class="sd">        :return: The baudrate of the device [bit/s].</span>
 <span class="sd">        :rtype: int</span>
@@ -418,24 +431,24 @@
 <span class="sd">                  time connecting to the device, you have to use the new</span>
 <span class="sd">                  baudrate.</span>
 
-<span class="sd">        .. warning:: If you pass `True` to the argument `update_driver`, the</span>
-<span class="sd">                     baudrate of the underlaying</span>
-<span class="sd">                     :class:`~sensirion_shdlc_driver.port.ShdlcPort` object</span>
+<span class="sd">        .. warning:: If you pass ``True`` to the argument ``update_driver``,</span>
+<span class="sd">                     the baudrate of the underlaying</span>
+<span class="sd">                     :py:class:`~sensirion_shdlc_driver.port.ShdlcPort` object</span>
 <span class="sd">                     is changed. As the baudrate applies to the whole bus (with</span>
 <span class="sd">                     all its slaves), you might no longer be able to</span>
 <span class="sd">                     communicate with other slaves. Generally you should change</span>
 <span class="sd">                     the baudrate of all slaves consecutively, and only set</span>
-<span class="sd">                     `update_driver` to `True` the last time.</span>
+<span class="sd">                     ``update_driver`` to ``True`` the last time.</span>
 
-<span class="sd">        :param int baudrate: The new baudrate. See device documentation for a</span>
-<span class="sd">                             list of supported baudrates. Many devices support</span>
-<span class="sd">                             the baudrates 9600, 19200 and 115200.</span>
-<span class="sd">        :param bool update_driver: If true, the baudrate of the</span>
-<span class="sd">                                   :class:`~sensirion_shdlc_driver.port.ShdlcPort`</span>
-<span class="sd">                                   object is also updated with the baudrate.</span>
-<span class="sd">                                   This is needed to allow further</span>
-<span class="sd">                                   communication with the device, as its</span>
-<span class="sd">                                   baudrate has changed.</span>
+<span class="sd">        :param int baudrate:</span>
+<span class="sd">            The new baudrate. See device documentation for a list of supported</span>
+<span class="sd">            baudrates. Many devices support the baudrates 9600, 19200 and</span>
+<span class="sd">            115200.</span>
+<span class="sd">        :param bool update_driver:</span>
+<span class="sd">            If true, the baudrate of the</span>
+<span class="sd">            :py:class:`~sensirion_shdlc_driver.port.ShdlcPort` object is also</span>
+<span class="sd">            updated with the baudrate. This is needed to allow further</span>
+<span class="sd">            communication with the device, as its baudrate has changed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ShdlcCmdSetBaudrate</span><span class="p">(</span><span class="n">baudrate</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">update_driver</span><span class="p">:</span>
@@ -445,7 +458,9 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the SHDLC reply delay of the device.</span>
 
-<span class="sd">        See :func:`set_reply_delay()` for details.</span>
+<span class="sd">        See</span>
+<span class="sd">        :py:meth:`~sensirion_shdlc_driver.device.ShdlcDevice.set_reply_delay()`</span>
+<span class="sd">        for details.</span>
 
 <span class="sd">        :return: The reply delay of the device [μs].</span>
 <span class="sd">        :rtype: byte</span>
@@ -504,8 +519,10 @@
 <span class="sd">        can (and should!) be called by subclasses of ShdlcDevice to register</span>
 <span class="sd">        device-specific errors.</span>
 
-<span class="sd">        :param list errors: A list of ShdlcDeviceError (or subclass) exception</span>
-<span class="sd">                            instances.</span>
+<span class="sd">        :param list errors:</span>
+<span class="sd">            A list of</span>
+<span class="sd">            :py:class:`~sensirion_shdlc_driver.errors.ShdlcDeviceError` (or</span>
+<span class="sd">            subclass) exception instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_device_errors</span><span class="p">[</span><span class="n">error</span><span class="o">.</span><span class="n">error_code</span><span class="p">]</span> <span class="o">=</span> <span class="n">error</span>
@@ -514,9 +531,12 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the device error exception object for a specific device error code.</span>
 
-<span class="sd">        :param byte code: The device error code received from the device.</span>
-<span class="sd">        :return: The corresponding exception object (ShdlcDeviceError or a</span>
-<span class="sd">                 subclass of it), or None if code is zero.</span>
+<span class="sd">        :param byte code:</span>
+<span class="sd">            The device error code received from the device.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            The corresponding exception object</span>
+<span class="sd">            (:py:class:`~sensirion_shdlc_driver.errors.ShdlcDeviceError` or a</span>
+<span class="sd">            subclass of it), or ``None`` if ``code`` is zero.</span>
 <span class="sd">        :rtype: ShdlcDeviceError/None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">code</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -535,7 +555,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019 Sensirion AG, Switzerland
+        &copy; Copyright 2020 Sensirion AG, Switzerland
 
     </p>
   </div>

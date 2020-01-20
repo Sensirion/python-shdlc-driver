@@ -192,20 +192,14 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">bitrate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the current bitrate.</span>
+<span class="sd">        The current bitrate in bit/s.</span>
 
-<span class="sd">        :return: Bitrate in bit/s.</span>
-<span class="sd">        :rtype: int</span>
+<span class="sd">        :type: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
     <span class="nd">@bitrate</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">bitrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bitrate</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set the bitrate.</span>
-
-<span class="sd">        :param int bitrate: Bitrate in bit/s.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
     <span class="nd">@property</span>
@@ -252,8 +246,10 @@
 <span class="sd">                                       time until the first byte is received).</span>
 <span class="sd">        :return: Received address, command_id, state, and payload.</span>
 <span class="sd">        :rtype: byte, byte, byte, bytes</span>
-<span class="sd">        :raise ShdlcTimeoutError: If no response received within timeout.</span>
-<span class="sd">        :raise ShdlcResponseError: If the received response is invalid.</span>
+<span class="sd">        :raise ~sensirion_shdlc_driver.errors.ShdlcTimeoutError:</span>
+<span class="sd">            If no response received within timeout.</span>
+<span class="sd">        :raise ~sensirion_shdlc_driver.errors.ShdlcResponseError:</span>
+<span class="sd">            If the received response is invalid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div></div>
 
@@ -322,21 +318,15 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">bitrate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the current bitrate.</span>
+<span class="sd">        The current bitrate in bit/s.</span>
 
-<span class="sd">        :return: Bitrate in bit/s.</span>
-<span class="sd">        :rtype: int</span>
+<span class="sd">        :type: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">baudrate</span>
 
     <span class="nd">@bitrate</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">bitrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bitrate</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set the bitrate.</span>
-
-<span class="sd">        :param int bitrate: Bitrate in bit/s.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">baudrate</span> <span class="o">=</span> <span class="n">bitrate</span>
 
@@ -403,8 +393,10 @@
 <span class="sd">                                       time until the first byte is received).</span>
 <span class="sd">        :return: Received address, command_id, state, and payload.</span>
 <span class="sd">        :rtype: byte, byte, byte, bytes</span>
-<span class="sd">        :raise ShdlcTimeoutError: If no response received within timeout.</span>
-<span class="sd">        :raise ShdlcResponseError: If the received response is invalid.</span>
+<span class="sd">        :raise ~sensirion_shdlc_driver.errors.ShdlcTimeoutError:</span>
+<span class="sd">            If no response received within timeout.</span>
+<span class="sd">        :raise ~sensirion_shdlc_driver.errors.ShdlcResponseError:</span>
+<span class="sd">            If the received response is invalid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span><span class="o">.</span><span class="n">flushInput</span><span class="p">()</span>
@@ -601,8 +593,10 @@
 <span class="sd">            and the socket base timeout.</span>
 <span class="sd">        :return: Received address, command_id, state, and payload.</span>
 <span class="sd">        :rtype: byte, byte, byte, bytes</span>
-<span class="sd">        :raise ShdlcTimeoutError: If no response received within timeout.</span>
-<span class="sd">        :raise ShdlcResponseError: If the received response is invalid.</span>
+<span class="sd">        :raise ~sensirion_shdlc_driver.errors.ShdlcTimeoutError:</span>
+<span class="sd">            If no response received within timeout.</span>
+<span class="sd">        :raise ~sensirion_shdlc_driver.errors.ShdlcResponseError:</span>
+<span class="sd">            If the received response is invalid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_socket_timeout</span> <span class="o">+</span> <span class="n">response_timeout</span><span class="p">)</span>
@@ -659,7 +653,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019 Sensirion AG, Switzerland
+        &copy; Copyright 2020 Sensirion AG, Switzerland
 
     </p>
   </div>
