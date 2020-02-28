@@ -166,10 +166,10 @@
 
 <span class="k">with</span> <span class="n">ShdlcSerialPort</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="s1">&#39;COM1&#39;</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="mi">115200</span><span class="p">)</span> <span class="k">as</span> <span class="n">port</span><span class="p">:</span>
     <span class="n">device</span> <span class="o">=</span> <span class="n">ShdlcDevice</span><span class="p">(</span><span class="n">ShdlcConnection</span><span class="p">(</span><span class="n">port</span><span class="p">),</span> <span class="n">slave_address</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Version: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_version</span><span class="p">()))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Product Name: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_product_name</span><span class="p">()))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Article Code: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_article_code</span><span class="p">()))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Serial Number: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_serial_number</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Version: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_version</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Product Name: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_product_name</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Article Code: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_article_code</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Serial Number: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_serial_number</span><span class="p">()))</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -227,6 +227,7 @@ doesn’t support them.</p>
             <dd><a href="0.1.0/quickstart.html">0.1.0</a></dd>
             <dd><a href="0.1.1/quickstart.html">0.1.1</a></dd>
             <dd><a href="0.1.2/quickstart.html">0.1.2</a></dd>
+            <dd><a href="0.1.3/quickstart.html">0.1.3</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>

@@ -192,11 +192,11 @@ device:</p>
         <span class="n">data</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x01</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="c1"># The payload data to send</span>
         <span class="n">max_response_time</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>  <span class="c1"># Maximum response time in Seconds</span>
     <span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Raw Response: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">raw_response</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raw Response: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">raw_response</span><span class="p">))</span>
 
     <span class="c1"># Convert raw response to proper data types</span>
     <span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;IB&#39;</span><span class="p">,</span> <span class="n">raw_response</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Response: {}, {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Response: </span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>For more options and detailed information, please take a look at the
@@ -229,8 +229,8 @@ returning the converted response.</p>
 
 <span class="k">with</span> <span class="n">ShdlcSerialPort</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="s1">&#39;COM1&#39;</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="mi">115200</span><span class="p">)</span> <span class="k">as</span> <span class="n">port</span><span class="p">:</span>
     <span class="n">device</span> <span class="o">=</span> <span class="n">ShdlcDevice</span><span class="p">(</span><span class="n">ShdlcConnection</span><span class="p">(</span><span class="n">port</span><span class="p">),</span> <span class="n">slave_address</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">MyCustomCommand</span><span class="p">(</span><span class="n">bool_parameter</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Response: {}, {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span><span class="p">))</span>
+    <span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">MyCustomCommand</span><span class="p">(</span><span class="n">bool_parameter</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Response: </span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -268,9 +268,9 @@ providing all the common SHDLC commands in addition to your custom commands:</p>
 
 <span class="k">with</span> <span class="n">ShdlcSerialPort</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="s1">&#39;COM1&#39;</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="mi">115200</span><span class="p">)</span> <span class="k">as</span> <span class="n">port</span><span class="p">:</span>
     <span class="n">device</span> <span class="o">=</span> <span class="n">MyCustomShdlcDevice</span><span class="p">(</span><span class="n">ShdlcConnection</span><span class="p">(</span><span class="n">port</span><span class="p">),</span> <span class="n">slave_address</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Version: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_version</span><span class="p">()))</span>
-    <span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">my_custom_command</span><span class="p">(</span><span class="n">bool_parameter</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Response: {}, {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Version: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_version</span><span class="p">()))</span>
+    <span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">my_custom_command</span><span class="p">(</span><span class="n">bool_parameter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Response: </span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -323,6 +323,7 @@ providing all the common SHDLC commands in addition to your custom commands:</p>
             <dd><a href="../0.1.0/index.html">0.1.0</a></dd>
             <dd><a href="../0.1.1/index.html">0.1.1</a></dd>
             <dd><a href="../0.1.2/index.html">0.1.2</a></dd>
+            <dd><a href="../0.1.3/custom_commands.html">0.1.3</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>

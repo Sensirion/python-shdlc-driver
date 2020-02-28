@@ -159,7 +159,7 @@
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># (c) Copyright 2019 Sensirion AG, Switzerland</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -176,7 +176,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SHDLC firmware image signature error.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ShdlcFirmwareImageSignatureError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareImageSignatureError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signature</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcFirmwareImageSignatureError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareImageSignatureError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signature</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 
@@ -191,7 +191,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SHDLC firmware image incompatibility error.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ShdlcFirmwareImageIncompatibilityError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareImageIncompatibilityError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_type</span><span class="p">,</span> <span class="n">device_type</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcFirmwareImageIncompatibilityError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareImageIncompatibilityError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_type</span><span class="p">,</span> <span class="n">device_type</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 
@@ -208,7 +208,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SHDLC timeout exception (device did not respond to command).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ShdlcTimeoutError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcTimeoutError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcTimeoutError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcTimeoutError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcTimeoutError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="s2">&quot;Timeout while waiting for response from SHDLC device. &quot;</span>
             <span class="s2">&quot;Check connection to device and make sure it is powered on.&quot;</span>
@@ -219,7 +219,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SHDLC response error (slave response contains invalid data)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ShdlcResponseError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcResponseError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">received_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcResponseError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcResponseError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">received_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 
@@ -253,7 +253,7 @@
 <span class="sd">    execute a command). For each error code a subclass exists to provide the</span>
 <span class="sd">    corresponding error messages.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ShdlcDeviceError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcDeviceError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Unknown error.&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcDeviceError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcDeviceError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Unknown error.&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 
@@ -291,7 +291,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SHDLC device error for wrong data size.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ShdlcCommandDataSizeError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcCommandDataSizeError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCommandDataSizeError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Illegal data size of the MOSI frame. Either a wrong command &quot;</span>
                <span class="s2">&quot;was sent, or the device firmware does not support the &quot;</span>
@@ -303,7 +303,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SHDLC device error for unknown command.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ShdlcUnknownCommandError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcUnknownCommandError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcUnknownCommandError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Unknown command. Check if you sent the correct command and if &quot;</span>
                <span class="s2">&quot;the firmware on the device supports it.&quot;</span>
@@ -314,7 +314,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SHDLC device error for wrong access right.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ShdlcAccessRightError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcAccessRightError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcAccessRightError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcAccessRightError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcAccessRightError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;No access right for this command. Higher access rights are &quot;</span>
                <span class="s2">&quot;required to execute this command.&quot;</span>
@@ -325,7 +325,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SHDLC device error for illegal command parameter.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ShdlcCommandParameterError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcCommandParameterError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcCommandParameterError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcCommandParameterError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcCommandParameterError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Parameter out of range. Check if you sent the correct command &quot;</span>
                <span class="s2">&quot;parameters and if the firmware on the device supports them.&quot;</span>
@@ -336,7 +336,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SHDLC device error for wrong checksum.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ShdlcChecksumError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcChecksumError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcChecksumError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcChecksumError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcChecksumError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;Wrong checksum received.&quot;</span>
         <span class="p">)</span></div></div>
@@ -346,7 +346,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SHDLC device error for firmware update failure.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ShdlcFirmwareUpdateError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcFirmwareUpdateError.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcFirmwareUpdateError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;Firmware update operation failed. Flash couldn&#39;t be written &quot;</span>
                <span class="s2">&quot;or flash validation failed.&quot;</span>
@@ -403,6 +403,7 @@
             <dd><a href="../../../0.1.0/index.html">0.1.0</a></dd>
             <dd><a href="../../../0.1.1/index.html">0.1.1</a></dd>
             <dd><a href="../../../0.1.2/index.html">0.1.2</a></dd>
+            <dd><a href="../../../0.1.3/index.html">0.1.3</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>

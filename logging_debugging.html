@@ -190,7 +190,7 @@ level to <code class="docutils literal notranslate"><span class="pre">DEBUG</spa
 
 <span class="k">with</span> <span class="n">ShdlcSerialPort</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="s1">&#39;COM1&#39;</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="mi">115200</span><span class="p">)</span> <span class="k">as</span> <span class="n">port</span><span class="p">:</span>
     <span class="n">device</span> <span class="o">=</span> <span class="n">ShdlcDevice</span><span class="p">(</span><span class="n">ShdlcConnection</span><span class="p">(</span><span class="n">port</span><span class="p">),</span> <span class="n">slave_address</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Version: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_version</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Version: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_version</span><span class="p">()))</span>
 </pre></div>
 </div>
 <p>This way the raw data is printed to the console:</p>
@@ -220,7 +220,7 @@ critical messages will be logged):</p>
 
 <span class="k">with</span> <span class="n">ShdlcSerialPort</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="s1">&#39;COM1&#39;</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="mi">115200</span><span class="p">)</span> <span class="k">as</span> <span class="n">port</span><span class="p">:</span>
     <span class="n">device</span> <span class="o">=</span> <span class="n">ShdlcDevice</span><span class="p">(</span><span class="n">ShdlcConnection</span><span class="p">(</span><span class="n">port</span><span class="p">),</span> <span class="n">slave_address</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Version: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_version</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Version: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">get_version</span><span class="p">()))</span>
 </pre></div>
 </div>
 <p>This way you won’t see the raw transmitted data:</p>
@@ -278,6 +278,7 @@ critical messages will be logged):</p>
             <dd><a href="0.1.0/index.html">0.1.0</a></dd>
             <dd><a href="0.1.1/index.html">0.1.1</a></dd>
             <dd><a href="0.1.2/index.html">0.1.2</a></dd>
+            <dd><a href="0.1.3/logging_debugging.html">0.1.3</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>

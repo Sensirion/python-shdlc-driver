@@ -157,11 +157,11 @@
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># (c) Copyright 2019 Sensirion AG, Switzerland</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
-<span class="kn">from</span> <span class="nn">.commands.bootloader</span> <span class="k">import</span> <span class="n">ShdlcCmdEnterBootloader</span><span class="p">,</span> \
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">.commands.bootloader</span> <span class="kn">import</span> <span class="n">ShdlcCmdEnterBootloader</span><span class="p">,</span> \
     <span class="n">ShdlcCmdFirmwareUpdateStart</span><span class="p">,</span> <span class="n">ShdlcCmdFirmwareUpdateData</span><span class="p">,</span> \
     <span class="n">ShdlcCmdFirmwareUpdateStop</span>
-<span class="kn">from</span> <span class="nn">.errors</span> <span class="k">import</span> <span class="n">ShdlcFirmwareImageIncompatibilityError</span>
+<span class="kn">from</span> <span class="nn">.errors</span> <span class="kn">import</span> <span class="n">ShdlcFirmwareImageIncompatibilityError</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -181,7 +181,7 @@
     <span class="n">BOOTLOADER_BITRATE</span> <span class="o">=</span> <span class="mi">115200</span>
     <span class="n">BOOTLOADER_SLAVE_ADDRESS</span> <span class="o">=</span> <span class="mi">0</span>
 
-<div class="viewcode-block" id="ShdlcFirmwareUpdate.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">status_callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="ShdlcFirmwareUpdate.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">status_callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">progress_callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
@@ -380,6 +380,7 @@
             <dd><a href="../../../0.1.0/index.html">0.1.0</a></dd>
             <dd><a href="../../../0.1.1/index.html">0.1.1</a></dd>
             <dd><a href="firmware_update.html">0.1.2</a></dd>
+            <dd><a href="../../../0.1.3/index.html">0.1.3</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>

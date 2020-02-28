@@ -159,20 +159,20 @@
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># (c) Copyright 2019 Sensirion AG, Switzerland</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
-<span class="kn">from</span> <span class="nn">.errors</span> <span class="k">import</span> <span class="n">ShdlcDeviceError</span><span class="p">,</span> <span class="n">SHDLC_DEVICE_ERROR_LIST</span>
-<span class="kn">from</span> <span class="nn">.commands.device_info</span> <span class="k">import</span> <span class="n">ShdlcCmdGetProductType</span><span class="p">,</span> \
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">.errors</span> <span class="kn">import</span> <span class="n">ShdlcDeviceError</span><span class="p">,</span> <span class="n">SHDLC_DEVICE_ERROR_LIST</span>
+<span class="kn">from</span> <span class="nn">.commands.device_info</span> <span class="kn">import</span> <span class="n">ShdlcCmdGetProductType</span><span class="p">,</span> \
     <span class="n">ShdlcCmdGetProductName</span><span class="p">,</span> <span class="n">ShdlcCmdGetArticleCode</span><span class="p">,</span> <span class="n">ShdlcCmdGetSerialNumber</span><span class="p">,</span> \
     <span class="n">ShdlcCmdGetProductSubType</span>
-<span class="kn">from</span> <span class="nn">.commands.device_version</span> <span class="k">import</span> <span class="n">ShdlcCmdGetVersion</span>
-<span class="kn">from</span> <span class="nn">.commands.error_state</span> <span class="k">import</span> <span class="n">ShdlcCmdGetErrorState</span>
-<span class="kn">from</span> <span class="nn">.commands.device_reset</span> <span class="k">import</span> <span class="n">ShdlcCmdDeviceReset</span>
-<span class="kn">from</span> <span class="nn">.commands.slave_address</span> <span class="k">import</span> <span class="n">ShdlcCmdGetSlaveAddress</span><span class="p">,</span> \
+<span class="kn">from</span> <span class="nn">.commands.device_version</span> <span class="kn">import</span> <span class="n">ShdlcCmdGetVersion</span>
+<span class="kn">from</span> <span class="nn">.commands.error_state</span> <span class="kn">import</span> <span class="n">ShdlcCmdGetErrorState</span>
+<span class="kn">from</span> <span class="nn">.commands.device_reset</span> <span class="kn">import</span> <span class="n">ShdlcCmdDeviceReset</span>
+<span class="kn">from</span> <span class="nn">.commands.slave_address</span> <span class="kn">import</span> <span class="n">ShdlcCmdGetSlaveAddress</span><span class="p">,</span> \
     <span class="n">ShdlcCmdSetSlaveAddress</span>
-<span class="kn">from</span> <span class="nn">.commands.baudrate</span> <span class="k">import</span> <span class="n">ShdlcCmdGetBaudrate</span><span class="p">,</span> <span class="n">ShdlcCmdSetBaudrate</span>
-<span class="kn">from</span> <span class="nn">.commands.reply_delay</span> <span class="k">import</span> <span class="n">ShdlcCmdGetReplyDelay</span><span class="p">,</span> <span class="n">ShdlcCmdSetReplyDelay</span>
-<span class="kn">from</span> <span class="nn">.commands.system_up_time</span> <span class="k">import</span> <span class="n">ShdlcCmdGetSystemUpTime</span>
-<span class="kn">from</span> <span class="nn">.commands.factory_reset</span> <span class="k">import</span> <span class="n">ShdlcCmdFactoryReset</span>
+<span class="kn">from</span> <span class="nn">.commands.baudrate</span> <span class="kn">import</span> <span class="n">ShdlcCmdGetBaudrate</span><span class="p">,</span> <span class="n">ShdlcCmdSetBaudrate</span>
+<span class="kn">from</span> <span class="nn">.commands.reply_delay</span> <span class="kn">import</span> <span class="n">ShdlcCmdGetReplyDelay</span><span class="p">,</span> <span class="n">ShdlcCmdSetReplyDelay</span>
+<span class="kn">from</span> <span class="nn">.commands.system_up_time</span> <span class="kn">import</span> <span class="n">ShdlcCmdGetSystemUpTime</span>
+<span class="kn">from</span> <span class="nn">.commands.factory_reset</span> <span class="kn">import</span> <span class="n">ShdlcCmdFactoryReset</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -196,7 +196,7 @@
 <span class="sd">    the device. This makes the driver (nearly) stateless.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="ShdlcDevice.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.device.ShdlcDevice.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcDevice.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.device.ShdlcDevice.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create an SHDLC device instance on an SHDLC connection.</span>
 
@@ -584,6 +584,7 @@
             <dd><a href="../../../0.1.0/index.html">0.1.0</a></dd>
             <dd><a href="../../../0.1.1/index.html">0.1.1</a></dd>
             <dd><a href="../../../0.1.2/index.html">0.1.2</a></dd>
+            <dd><a href="../../../0.1.3/index.html">0.1.3</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>

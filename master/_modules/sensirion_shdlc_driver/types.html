@@ -159,7 +159,7 @@
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># (c) Copyright 2019 Sensirion AG, Switzerland</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -170,7 +170,7 @@
 <span class="sd">    Class representing the firmware version of an SHDLC device.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="FirmwareVersion.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.FirmwareVersion.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">,</span> <span class="n">debug</span><span class="p">):</span>
+<div class="viewcode-block" id="FirmwareVersion.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.FirmwareVersion.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">,</span> <span class="n">debug</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 
@@ -183,7 +183,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">minor</span> <span class="o">=</span> <span class="n">minor</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span></div>
 
-<div class="viewcode-block" id="FirmwareVersion.__str__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.FirmwareVersion.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FirmwareVersion.__str__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.FirmwareVersion.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="ow">and</span> <span class="s1">&#39;-debug&#39;</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">)</span></div></div>
 
@@ -193,7 +193,7 @@
 <span class="sd">    Class representing the hardware version of an SHDLC device.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="HardwareVersion.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.HardwareVersion.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">):</span>
+<div class="viewcode-block" id="HardwareVersion.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.HardwareVersion.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 
@@ -204,7 +204,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">major</span> <span class="o">=</span> <span class="n">major</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minor</span> <span class="o">=</span> <span class="n">minor</span></div>
 
-<div class="viewcode-block" id="HardwareVersion.__str__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.HardwareVersion.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="HardwareVersion.__str__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.HardwareVersion.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">)</span></div></div>
 
 
@@ -213,7 +213,7 @@
 <span class="sd">    Class representing the SHDLC protocol version of an SHDLC device.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="ProtocolVersion.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.ProtocolVersion.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtocolVersion.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.ProtocolVersion.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 
@@ -224,7 +224,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">major</span> <span class="o">=</span> <span class="n">major</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minor</span> <span class="o">=</span> <span class="n">minor</span></div>
 
-<div class="viewcode-block" id="ProtocolVersion.__str__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.ProtocolVersion.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtocolVersion.__str__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.ProtocolVersion.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">)</span></div></div>
 
 
@@ -234,7 +234,7 @@
 <span class="sd">    for the &quot;Get Version&quot; command.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Version.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.Version.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firmware</span><span class="p">,</span> <span class="n">hardware</span><span class="p">,</span> <span class="n">protocol</span><span class="p">):</span>
+<div class="viewcode-block" id="Version.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.Version.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firmware</span><span class="p">,</span> <span class="n">hardware</span><span class="p">,</span> <span class="n">protocol</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 
@@ -250,7 +250,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">hardware</span> <span class="o">=</span> <span class="n">hardware</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span> <span class="o">=</span> <span class="n">protocol</span></div>
 
-<div class="viewcode-block" id="Version.__str__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.Version.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Version.__str__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.Version.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;Firmware </span><span class="si">{}</span><span class="s1">, Hardware </span><span class="si">{}</span><span class="s1">, Protocol </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hardware</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span>
         <span class="p">)</span></div></div>
@@ -293,6 +293,7 @@
             <dd><a href="../../../0.1.0/index.html">0.1.0</a></dd>
             <dd><a href="../../../0.1.1/index.html">0.1.1</a></dd>
             <dd><a href="../../../0.1.2/index.html">0.1.2</a></dd>
+            <dd><a href="../../../0.1.3/index.html">0.1.3</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
