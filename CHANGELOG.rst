@@ -1,6 +1,12 @@
 CHANGELOG
 ---------
 
+0.1.3
+:::::
+- Add property ``is_open`` to ``ShdlcPort``, ``ShdlcSerialPort`` and
+  ``ShdlcTcpPort``
+- Improve/extend documentation
+
 0.1.2
 :::::
 - Add ``ShdlcTcpPort`` class to communicate with SHDLC devices through TCP/IP
