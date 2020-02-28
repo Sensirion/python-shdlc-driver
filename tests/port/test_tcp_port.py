@@ -96,6 +96,19 @@ def test_close_multiple_times(tcp_ip, tcp_port):
 
 
 @pytest.mark.needs_tcp
+def test_is_open(tcp_ip, tcp_port):
+    """
+    Test if the property is_open is updated when opening and closing the port.
+    """
+    with ShdlcTcpPort(tcp_ip, tcp_port, do_open=False) as port:
+        assert port.is_open is False
+        port.open()
+        assert port.is_open is True
+        port.close()
+        assert port.is_open is False
+
+
+@pytest.mark.needs_tcp
 def test_transceive_success(tcp_ip, tcp_port, tcp_slave_address):
     """
     Test the transceive() method on a valid IP and port. Note that a device
@@ -183,6 +196,15 @@ def test_create_without_open_invalid_port():
     port = ShdlcTcpPort('localhost', 0, do_open=False)
     with pytest.raises(IOError):
         port.open()
+
+
+def test_is_open_on_closed_port():
+    """
+    Test if the property is_open returns False on a port which is not open.
+    """
+    with ShdlcTcpPort('localhost', 0, do_open=False) as port:
+        assert type(port.is_open) is bool
+        assert port.is_open is False
 
 
 def test_description():

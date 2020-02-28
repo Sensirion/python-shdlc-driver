@@ -57,6 +57,16 @@ class ShdlcPort(object):
         """
         raise NotImplementedError()
 
+    @property
+    def is_open(self):
+        """
+        Indicates whether the port is open.
+
+        :return: If ``True`` the port is open, if ``False`` the port is closed.
+        :rtype: bool
+        """
+        raise NotImplementedError()
+
     def open(self):
         """
         Open the port. Only needs to be called if the port is not already
@@ -208,6 +218,16 @@ class ShdlcSerialPort(ShdlcPort):
         :rtype: threading.RLock
         """
         return self._lock
+
+    @property
+    def is_open(self):
+        """
+        Indicates whether the port is open.
+
+        :return: If ``True`` the port is open, if ``False`` the port is closed.
+        :rtype: bool
+        """
+        return self._serial.is_open
 
     def open(self):
         """
@@ -406,6 +426,16 @@ class ShdlcTcpPort(ShdlcPort):
         :rtype: threading.RLock
         """
         return self._lock
+
+    @property
+    def is_open(self):
+        """
+        Indicates whether the port is open.
+
+        :return: If ``True`` the port is open, if ``False`` the port is closed.
+        :rtype: bool
+        """
+        return self._is_open
 
     def open(self):
         """

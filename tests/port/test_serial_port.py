@@ -30,6 +30,19 @@ def test_close_multiple_times(serial_port, serial_bitrate):
 
 
 @pytest.mark.needs_serialport
+def test_is_open(serial_port, serial_bitrate):
+    """
+    Test if the property is_open is updated when opening and closing the port.
+    """
+    with ShdlcSerialPort(serial_port, serial_bitrate, do_open=False) as port:
+        assert port.is_open is False
+        port.open()
+        assert port.is_open is True
+        port.close()
+        assert port.is_open is False
+
+
+@pytest.mark.needs_serialport
 def test_change_bitrate(serial_port, serial_bitrate):
     """
     Test if the bitrate can be changed on an opened port.
@@ -136,6 +149,15 @@ def test_create_without_open_invalid_port():
     port = ShdlcSerialPort('/non/existing/port', 115200, do_open=False)
     with pytest.raises(SerialException):
         port.open()
+
+
+def test_is_open_on_closed_port():
+    """
+    Test if the property is_open returns False on a port which is not open.
+    """
+    with ShdlcSerialPort('/non/existing/port', 115200, do_open=False) as port:
+        assert type(port.is_open) is bool
+        assert port.is_open is False
 
 
 def test_description():
