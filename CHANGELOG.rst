@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+0.1.4
+:::::
+- Make signature and version offset configurable for ``ShdlcFirmwareImage``
+
 0.1.3
 :::::
 - Add property ``is_open`` to ``ShdlcPort``, ``ShdlcSerialPort`` and
