@@ -22,10 +22,11 @@ class ShdlcFirmwareImageSignatureError(ShdlcError):
         """
         Constructor.
 
-        :param int signature: Firmware image signature.
+        :param bytes signature: Firmware image signature.
         """
         super(ShdlcFirmwareImageSignatureError, self).__init__(
-            "Invalid signature in firmware image: 0x{:08X}".format(signature)
+            "Invalid signature in firmware image: 0x" +
+            "".join(['{:02X}'.format(i) for i in bytearray(signature)])
         )
 
 

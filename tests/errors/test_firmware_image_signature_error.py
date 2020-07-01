@@ -9,6 +9,6 @@ def test_message():
     """
     Test if the message is a non-empty string.
     """
-    err = ShdlcFirmwareImageSignatureError(signature=1234)
+    err = ShdlcFirmwareImageSignatureError(signature=b'\x12\x34\x56\x78')
     msg = str(err)
     assert len(msg) > 0
