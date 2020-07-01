@@ -29,14 +29,10 @@ class ShdlcFirmwareImage(object):
               :ref:`firmware-updater-dependencies` for details.
     """
 
-    SIGNATURE = 0x4B4F474A  # Signature to identify compatible hexfiles
-    PRODUCT_TYPE_OFFSET = 0x04        # Product type address offset
-    APP_VERSION_MINOR_OFFSET = 0x08   # Application minor version addr. offset
-    APP_VERSION_MAJOR_OFFSET = 0x09   # Application major version addr. offset
-    BL_VERSION_MINOR_OFFSET = 0x1004  # Bootloader minor version address offset
-    BL_VERSION_MAJOR_OFFSET = 0x1005  # Bootloader major version address offset
+    _PRODUCT_TYPE_SIZE = 4  # Product type size
 
-    def __init__(self, hexfile, bl_start_addr, app_start_addr):
+    def __init__(self, hexfile, bl_start_addr, app_start_addr,
+                 signature=b'\x4A\x47\x4F\x4B', bl_version_offset=0x1004):
         """
         Constructor which loads and parses the firmware from a hex file.
 
@@ -46,6 +42,9 @@ class ShdlcFirmwareImage(object):
                                     the firmware image.
         :param int app_start_addr:  The base address of the application
                                     inside the firmware image.
+        :param bytes signature:     Signature bytes used for the application.
+        :param int bl_version_offset: Bootloader version address offset.
+
         :raise ~sensirion_shdlc_driver.errors.ShdlcFirmwareImageSignatureError:
             If the signature of the image is invalid.
         """
@@ -55,6 +54,8 @@ class ShdlcFirmwareImage(object):
         from intelhex import IntelHex
         self._bl_start_addr = int(bl_start_addr)
         self._app_start_addr = int(app_start_addr)
+        self._signature = bytes(bytearray(signature))
+        self._bl_version_offset = int(bl_version_offset)
         self._app_data_index = 0
         self._data = IntelHex(hexfile)
         self._data.padding = 0xFF  # is returned when reading undefined regions
@@ -160,8 +161,9 @@ class ShdlcFirmwareImage(object):
         Check the signature of the loaded image and throw an exception if it's
         invalid.
         """
-        signature = self._read_uint32(self._app_start_addr)
-        if signature != self.SIGNATURE:
+        signature = self._read_bytes(
+            self._app_start_addr, len(self._signature))
+        if signature != self._signature:
             raise ShdlcFirmwareImageSignatureError(signature)
 
     def _read_product_type(self):
@@ -171,7 +173,7 @@ class ShdlcFirmwareImage(object):
         :return: The read product type.
         :rtype: int
         """
-        address = self._app_start_addr + self.PRODUCT_TYPE_OFFSET
+        address = self._app_start_addr + len(self._signature)
         return self._read_uint32(address)
 
     def _read_bootloader_version(self):
@@ -181,8 +183,8 @@ class ShdlcFirmwareImage(object):
         :return: The read bootloader version.
         :rtype: ~sensirion_shdlc_driver.types.FirmwareVersion
         """
-        addr_major = self._bl_start_addr + self.BL_VERSION_MAJOR_OFFSET
-        addr_minor = self._bl_start_addr + self.BL_VERSION_MINOR_OFFSET
+        addr_major = self._bl_start_addr + self._bl_version_offset + 1
+        addr_minor = self._bl_start_addr + self._bl_version_offset
         return FirmwareVersion(major=self._data[addr_major],
                                minor=self._data[addr_minor],
                                debug=False)
@@ -194,8 +196,10 @@ class ShdlcFirmwareImage(object):
         :return: The read application version.
         :rtype: ~sensirion_shdlc_driver.types.FirmwareVersion
         """
-        addr_major = self._app_start_addr + self.APP_VERSION_MAJOR_OFFSET
-        addr_minor = self._app_start_addr + self.APP_VERSION_MINOR_OFFSET
+        addr_major = self._app_start_addr + len(self._signature) + \
+            self._PRODUCT_TYPE_SIZE + 1
+        addr_minor = self._app_start_addr + len(self._signature) + \
+            self._PRODUCT_TYPE_SIZE
         return FirmwareVersion(major=self._data[addr_major],
                                minor=self._data[addr_minor],
                                debug=False)
@@ -208,7 +212,7 @@ class ShdlcFirmwareImage(object):
         :rtype: bytearray
         """
         # Skip the signature because it must not be sent to the bootloader!
-        start_addr = self._app_start_addr + 4
+        start_addr = self._app_start_addr + len(self._signature)
         if self._bl_start_addr > self._app_start_addr:
             end_addr = self._bl_start_addr - 1  # Don't include bootloader
         else:
@@ -224,6 +228,17 @@ class ShdlcFirmwareImage(object):
         :rtype: int
         """
         return unpack("<I", self._data.tobinarray(start=address, size=4))[0]
+
+    def _read_bytes(self, address, number_of_bytes):
+        """
+        Read at a specific image address.
+
+        :param int address: The address to read from.
+        :param int number_of_bytes: Number of bytes to read
+        :return: The bytes from the specified address.
+        :rtype: bytes
+        """
+        return self._data.tobinstr(start=address, size=number_of_bytes)
 
     def _calc_application_checksum(self):
         """
