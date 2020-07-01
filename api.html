@@ -1361,7 +1361,7 @@ to allow further communication with the device.</p>
 <span id="shdlcfirmwareimage"></span><h2>ShdlcFirmwareImage<a class="headerlink" href="#module-sensirion_shdlc_driver.firmware_image" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage">
-<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.firmware_image.</code><code class="descname">ShdlcFirmwareImage</code><span class="sig-paren">(</span><em>hexfile</em>, <em>bl_start_addr</em>, <em>app_start_addr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/firmware_image.html#ShdlcFirmwareImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.firmware_image.</code><code class="descname">ShdlcFirmwareImage</code><span class="sig-paren">(</span><em>hexfile</em>, <em>bl_start_addr</em>, <em>app_start_addr</em>, <em>signature=b'JGOK'</em>, <em>bl_version_offset=4100</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/firmware_image.html#ShdlcFirmwareImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class represents a firmware image for an SHDLC device. It is used to
 load and verify Intel-Hex files for performing firmware updates over SHDLC.</p>
 <p>Since the different SHDLC devices use different memory layouts, this class
@@ -1382,7 +1382,7 @@ system aren’t supported by this class.</p>
 </div>
 <dl class="method">
 <dt id="sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>hexfile</em>, <em>bl_start_addr</em>, <em>app_start_addr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/firmware_image.html#ShdlcFirmwareImage.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>hexfile</em>, <em>bl_start_addr</em>, <em>app_start_addr</em>, <em>signature=b'JGOK'</em>, <em>bl_version_offset=4100</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/firmware_image.html#ShdlcFirmwareImage.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor which loads and parses the firmware from a hex file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1395,6 +1395,8 @@ the firmware in Intel-Hex format (*.hex).</li>
 the firmware image.</li>
 <li><strong>app_start_addr</strong> (<em>int</em>) – The base address of the application
 inside the firmware image.</li>
+<li><strong>signature</strong> (<em>bytes</em>) – Signature bytes used for the application.</li>
+<li><strong>bl_version_offset</strong> (<em>int</em>) – Bootloader version address offset.</li>
 </ul>
 </td>
 </tr>
@@ -2989,7 +2991,7 @@ for the “Get Version” command.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>signature</strong> (<em>int</em>) – Firmware image signature.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>signature</strong> (<em>bytes</em>) – Firmware image signature.</td>
 </tr>
 </tbody>
 </table>

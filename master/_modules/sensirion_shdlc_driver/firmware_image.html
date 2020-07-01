@@ -187,14 +187,10 @@
 <span class="sd">              :ref:`firmware-updater-dependencies` for details.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">SIGNATURE</span> <span class="o">=</span> <span class="mh">0x4B4F474A</span>  <span class="c1"># Signature to identify compatible hexfiles</span>
-    <span class="n">PRODUCT_TYPE_OFFSET</span> <span class="o">=</span> <span class="mh">0x04</span>        <span class="c1"># Product type address offset</span>
-    <span class="n">APP_VERSION_MINOR_OFFSET</span> <span class="o">=</span> <span class="mh">0x08</span>   <span class="c1"># Application minor version addr. offset</span>
-    <span class="n">APP_VERSION_MAJOR_OFFSET</span> <span class="o">=</span> <span class="mh">0x09</span>   <span class="c1"># Application major version addr. offset</span>
-    <span class="n">BL_VERSION_MINOR_OFFSET</span> <span class="o">=</span> <span class="mh">0x1004</span>  <span class="c1"># Bootloader minor version address offset</span>
-    <span class="n">BL_VERSION_MAJOR_OFFSET</span> <span class="o">=</span> <span class="mh">0x1005</span>  <span class="c1"># Bootloader major version address offset</span>
+    <span class="n">_PRODUCT_TYPE_SIZE</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># Product type size</span>
 
-<div class="viewcode-block" id="ShdlcFirmwareImage.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hexfile</span><span class="p">,</span> <span class="n">bl_start_addr</span><span class="p">,</span> <span class="n">app_start_addr</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcFirmwareImage.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hexfile</span><span class="p">,</span> <span class="n">bl_start_addr</span><span class="p">,</span> <span class="n">app_start_addr</span><span class="p">,</span>
+                 <span class="n">signature</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x4A\x47\x4F\x4B</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">bl_version_offset</span><span class="o">=</span><span class="mh">0x1004</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor which loads and parses the firmware from a hex file.</span>
 
@@ -204,6 +200,9 @@
 <span class="sd">                                    the firmware image.</span>
 <span class="sd">        :param int app_start_addr:  The base address of the application</span>
 <span class="sd">                                    inside the firmware image.</span>
+<span class="sd">        :param bytes signature:     Signature bytes used for the application.</span>
+<span class="sd">        :param int bl_version_offset: Bootloader version address offset.</span>
+
 <span class="sd">        :raise ~sensirion_shdlc_driver.errors.ShdlcFirmwareImageSignatureError:</span>
 <span class="sd">            If the signature of the image is invalid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -213,6 +212,8 @@
         <span class="kn">from</span> <span class="nn">intelhex</span> <span class="kn">import</span> <span class="n">IntelHex</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_bl_start_addr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bl_start_addr</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_app_start_addr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">app_start_addr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_signature</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">signature</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bl_version_offset</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bl_version_offset</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_app_data_index</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">IntelHex</span><span class="p">(</span><span class="n">hexfile</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="mh">0xFF</span>  <span class="c1"># is returned when reading undefined regions</span>
@@ -318,8 +319,9 @@
 <span class="sd">        Check the signature of the loaded image and throw an exception if it&#39;s</span>
 <span class="sd">        invalid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">signature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_uint32</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_app_start_addr</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">signature</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SIGNATURE</span><span class="p">:</span>
+        <span class="n">signature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_bytes</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_app_start_addr</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_signature</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">signature</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_signature</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ShdlcFirmwareImageSignatureError</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_read_product_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -329,7 +331,7 @@
 <span class="sd">        :return: The read product type.</span>
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_app_start_addr</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">PRODUCT_TYPE_OFFSET</span>
+        <span class="n">address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_app_start_addr</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_signature</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_uint32</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_read_bootloader_version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -339,8 +341,8 @@
 <span class="sd">        :return: The read bootloader version.</span>
 <span class="sd">        :rtype: ~sensirion_shdlc_driver.types.FirmwareVersion</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">addr_major</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bl_start_addr</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">BL_VERSION_MAJOR_OFFSET</span>
-        <span class="n">addr_minor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bl_start_addr</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">BL_VERSION_MINOR_OFFSET</span>
+        <span class="n">addr_major</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bl_start_addr</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bl_version_offset</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">addr_minor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bl_start_addr</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bl_version_offset</span>
         <span class="k">return</span> <span class="n">FirmwareVersion</span><span class="p">(</span><span class="n">major</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">addr_major</span><span class="p">],</span>
                                <span class="n">minor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">addr_minor</span><span class="p">],</span>
                                <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -352,8 +354,10 @@
 <span class="sd">        :return: The read application version.</span>
 <span class="sd">        :rtype: ~sensirion_shdlc_driver.types.FirmwareVersion</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">addr_major</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_app_start_addr</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP_VERSION_MAJOR_OFFSET</span>
-        <span class="n">addr_minor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_app_start_addr</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP_VERSION_MINOR_OFFSET</span>
+        <span class="n">addr_major</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_app_start_addr</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_signature</span><span class="p">)</span> <span class="o">+</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_PRODUCT_TYPE_SIZE</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">addr_minor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_app_start_addr</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_signature</span><span class="p">)</span> <span class="o">+</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_PRODUCT_TYPE_SIZE</span>
         <span class="k">return</span> <span class="n">FirmwareVersion</span><span class="p">(</span><span class="n">major</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">addr_major</span><span class="p">],</span>
                                <span class="n">minor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">addr_minor</span><span class="p">],</span>
                                <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -366,7 +370,7 @@
 <span class="sd">        :rtype: bytearray</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Skip the signature because it must not be sent to the bootloader!</span>
-        <span class="n">start_addr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_app_start_addr</span> <span class="o">+</span> <span class="mi">4</span>
+        <span class="n">start_addr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_app_start_addr</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_signature</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bl_start_addr</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_app_start_addr</span><span class="p">:</span>
             <span class="n">end_addr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bl_start_addr</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># Don&#39;t include bootloader</span>
         <span class="k">else</span><span class="p">:</span>
@@ -382,6 +386,17 @@
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&lt;I&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">tobinarray</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">address</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_read_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">number_of_bytes</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read at a specific image address.</span>
+
+<span class="sd">        :param int address: The address to read from.</span>
+<span class="sd">        :param int number_of_bytes: Number of bytes to read</span>
+<span class="sd">        :return: The bytes from the specified address.</span>
+<span class="sd">        :rtype: bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">tobinstr</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">address</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">number_of_bytes</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_calc_application_checksum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
