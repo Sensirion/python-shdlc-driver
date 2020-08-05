@@ -2,7 +2,7 @@
 # (c) Copyright 2019 Sensirion AG, Switzerland
 
 from __future__ import absolute_import, division, print_function
-from .errors import ShdlcDeviceError, SHDLC_DEVICE_ERROR_LIST
+from .device_base import ShdlcDeviceBase
 from .commands.device_info import ShdlcCmdGetProductType, \
     ShdlcCmdGetProductName, ShdlcCmdGetArticleCode, ShdlcCmdGetSerialNumber, \
     ShdlcCmdGetProductSubType
@@ -20,10 +20,14 @@ import logging
 log = logging.getLogger(__name__)
 
 
-class ShdlcDevice(object):
+class ShdlcDevice(ShdlcDeviceBase):
     """
-    Base class for all SHDLC devices, providing only common SHDLC commands.
-    For device-specific commands, there are derived classes available.
+    Generic SHDLC device, providing only common SHDLC commands. This class is
+    intended only to communicate with devices which do not provide a
+    corresponding device driver (yet). With this class you can for example
+    read the serial number of a device even if no device specific driver
+    exists. But if there exists a device specific driver, you should always
+    use it instead of this driver.
 
     This is a low-level driver which just provides all SHDLC commands as Python
     methods. Typically, calling a method sends one SHDLC request to the device
@@ -51,68 +55,7 @@ class ShdlcDevice(object):
         :param byte slave_address:
             The address of the device.
         """
-        super(ShdlcDevice, self).__init__()
-        self._connection = connection
-        self._slave_address = slave_address
-        self._last_error_flag = False
-        self._device_errors = dict()
-        self._register_device_errors(SHDLC_DEVICE_ERROR_LIST)
-
-    @property
-    def connection(self):
-        """
-        Get the used SHDLC connection.
-
-        :return: The used SHDLC connection.
-        :rtype: :py:class:`~sensirion_shdlc_driver.connection.ShdlcConnection`
-        """
-        return self._connection
-
-    @property
-    def slave_address(self):
-        """
-        Get the slave address (not read from the device!).
-
-        :return: The slave address.
-        :rtype: byte
-        """
-        return self._slave_address
-
-    @property
-    def last_error_flag(self):
-        """
-        Get the error flag which was received with the last response of the
-        device. So this flag gets updated with every command sent to the
-        device. If the flag is True, the exact error reason can be read with
-        the method
-        :py:meth:`~sensirion_shdlc_driver.device.ShdlcDevice.get_error_state()`.
-
-        .. note:: When creating an instance of
-                  :py:class:`~sensirion_shdlc_driver.device.ShdlcDevice`, this
-                  property is initialized with ``False`` and will not be
-                  updated until you send the first command to the device.
-
-        :return: True if the device indicated an error, False otherwise.
-        :rtype: bool
-        """
-        return self._last_error_flag
-
-    def execute(self, command):
-        """
-        Execute an SHDLC command.
-
-        :param ~sensirion_shdlc_driver.command.ShdlcCommand command:
-            The command to execute.
-        :return:
-            The interpreted response of the executed command.
-        """
-        try:
-            data, err = self._connection.execute(self._slave_address, command)
-            self._last_error_flag = err  # Memorize error flag
-            return data
-        except ShdlcDeviceError as exc:
-            assert exc.error_code != 0
-            raise self._get_device_error(exc.error_code)
+        super(ShdlcDevice, self).__init__(connection, slave_address)
 
     def get_product_type(self, as_int=False):
         """
@@ -341,7 +284,6 @@ class ShdlcDevice(object):
         Execute a device reset (reboot firmware, similar to power cycle).
         """
         self.execute(ShdlcCmdDeviceReset())
-        self._last_error_flag = False  # Reset "cache"
 
     def factory_reset(self):
         """
@@ -355,35 +297,3 @@ class ShdlcDevice(object):
                      to allow further communication with the device.
         """
         self.execute(ShdlcCmdFactoryReset())
-        self._last_error_flag = False  # Reset "cache"
-
-    def _register_device_errors(self, errors):
-        """
-        Register new device errors for the connected device type. This method
-        can (and should!) be called by subclasses of ShdlcDevice to register
-        device-specific errors.
-
-        :param list errors:
-            A list of
-            :py:class:`~sensirion_shdlc_driver.errors.ShdlcDeviceError` (or
-            subclass) exception instances.
-        """
-        for error in errors:
-            self._device_errors[error.error_code] = error
-
-    def _get_device_error(self, code):
-        """
-        Get the device error exception object for a specific device error code.
-
-        :param byte code:
-            The device error code received from the device.
-        :return:
-            The corresponding exception object
-            (:py:class:`~sensirion_shdlc_driver.errors.ShdlcDeviceError` or a
-            subclass of it), or ``None`` if ``code`` is zero.
-        :rtype: ShdlcDeviceError/None
-        """
-        if code != 0:
-            return self._device_errors.get(code, ShdlcDeviceError(code))
-        else:
-            return None

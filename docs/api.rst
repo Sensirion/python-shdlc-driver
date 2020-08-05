@@ -24,6 +24,8 @@ ShdlcConnection
 ShdlcDevice
 -----------
 
+.. autoclass:: sensirion_shdlc_driver.device_base.ShdlcDeviceBase
+
 .. autoclass:: sensirion_shdlc_driver.device.ShdlcDevice
 
 

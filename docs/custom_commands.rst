@@ -84,13 +84,28 @@ Creating a Device Class
 -----------------------
 
 To create a more convenient API, it might make sense to wrap the custom
-commands in a new device class. When inheriting from
-:py:class:`~sensirion_shdlc_driver.device.ShdlcDevice`, you even get a class
-providing all the common SHDLC commands in addition to your custom commands:
+commands in a new device class. You have two options to create a device class:
+
+* Inherit from :py:class:`~sensirion_shdlc_driver.device_base.ShdlcDeviceBase`
+  and add methods for all the supported SHDLC commands of the device, including
+  common commands. This is the preferred way since it leads to a device class
+  which perfectly fits the particular device, but it requires additional effort
+  to also implement all the common SHDLC commands. To reduce effort, you can
+  start by copying the needed methods from
+  :py:class:`~sensirion_shdlc_driver.device.ShdlcDevice`.
+* Inherit from :py:class:`~sensirion_shdlc_driver.device.ShdlcDevice` and add
+  only the device-specific commands since the common commands are automatically
+  available since the base class already provides them. This is simpler, but
+  has the downside that you even inherit methods which the particular device
+  might not support, or parameters like response time or post processing time
+  might be wrong since they are device specific.
+
+No matter which way you choose, implementing the device class works exactly
+the same way:
 
 .. sourcecode:: python
 
-    from sensirion_shdlc_driver import ShdlcSerialPort, ShdlcConnection, ShdlcDevice
+    from sensirion_shdlc_driver import ShdlcSerialPort, ShdlcConnection, ShdlcDeviceBase
     from sensirion_shdlc_driver.command import ShdlcCommand
     from struct import pack, unpack
 
@@ -108,7 +123,7 @@ providing all the common SHDLC commands in addition to your custom commands:
             return uint32, uint8
 
 
-    class MyCustomShdlcDevice(ShdlcDevice):
+    class MyCustomShdlcDevice(ShdlcDeviceBase):
         def __init__(self, connection, slave_address):
             super(MyCustomShdlcDevice, self).__init__(connection, slave_address)
 
@@ -118,7 +133,6 @@ providing all the common SHDLC commands in addition to your custom commands:
 
     with ShdlcSerialPort(port='COM1', baudrate=115200) as port:
         device = MyCustomShdlcDevice(ShdlcConnection(port), slave_address=0)
-        print("Version: {}".format(device.get_version()))
         uint32, uint8 = device.my_custom_command(bool_parameter=True)
         print("Response: {}, {}".format(uint32, uint8))
 
