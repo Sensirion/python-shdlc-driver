@@ -730,8 +730,12 @@ time until the first byte is received).</li>
 <dl class="class">
 <dt id="sensirion_shdlc_driver.device.ShdlcDevice">
 <em class="property">class </em><code class="descclassname">sensirion_shdlc_driver.device.</code><code class="descname">ShdlcDevice</code><span class="sig-paren">(</span><em>connection</em>, <em>slave_address</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Base class for all SHDLC devices, providing only common SHDLC commands.
-For device-specific commands, there are derived classes available.</p>
+<dd><p>Generic SHDLC device, providing only common SHDLC commands. This class is
+intended only to communicate with devices which do not provide a
+corresponding device driver (yet). With this class you can for example
+read the serial number of a device even if no device specific driver
+exists. But if there exists a device specific driver, you should always
+use it instead of this driver.</p>
 <p>This is a low-level driver which just provides all SHDLC commands as Python
 methods. Typically, calling a method sends one SHDLC request to the device
 and interprets its response. There is no higher level functionality
@@ -761,81 +765,6 @@ not connected or powered yet.</p>
 <li><strong>slave_address</strong> (<em>byte</em>) – The address of the device.</li>
 </ul>
 </td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.connection">
-<code class="descname">connection</code><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.connection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the used SHDLC connection.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The used SHDLC connection.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#sensirion_shdlc_driver.connection.ShdlcConnection" title="sensirion_shdlc_driver.connection.ShdlcConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShdlcConnection</span></code></a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.slave_address">
-<code class="descname">slave_address</code><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.slave_address" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the slave address (not read from the device!).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The slave address.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">byte</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.last_error_flag">
-<code class="descname">last_error_flag</code><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.last_error_flag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the error flag which was received with the last response of the
-device. So this flag gets updated with every command sent to the
-device. If the flag is True, the exact error reason can be read with
-the method
-<a class="reference internal" href="#sensirion_shdlc_driver.device.ShdlcDevice.get_error_state" title="sensirion_shdlc_driver.device.ShdlcDevice.get_error_state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_error_state()</span></code></a>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">When creating an instance of
-<a class="reference internal" href="#sensirion_shdlc_driver.device.ShdlcDevice" title="sensirion_shdlc_driver.device.ShdlcDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShdlcDevice</span></code></a>, this
-property is initialized with <code class="docutils literal notranslate"><span class="pre">False</span></code> and will not be
-updated until you send the first command to the device.</p>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the device indicated an error, False otherwise.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sensirion_shdlc_driver.device.ShdlcDevice.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_shdlc_driver/device.html#ShdlcDevice.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_shdlc_driver.device.ShdlcDevice.execute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Execute an SHDLC command.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>command</strong> (<a class="reference internal" href="#sensirion_shdlc_driver.command.ShdlcCommand" title="sensirion_shdlc_driver.command.ShdlcCommand"><em>ShdlcCommand</em></a>) – The command to execute.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The interpreted response of the executed command.</td>
 </tr>
 </tbody>
 </table>
@@ -997,7 +926,7 @@ object or <code class="docutils literal notranslate"><span class="pre">None</spa
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">See also the property
-<a class="reference internal" href="#sensirion_shdlc_driver.device.ShdlcDevice.slave_address" title="sensirion_shdlc_driver.device.ShdlcDevice.slave_address"><code class="xref py py-attr docutils literal notranslate"><span class="pre">slave_address</span></code></a>
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">slave_address</span></code>
 which returns the device’s slave address without sending a
 command. This method really sends a command to the device,
 even though the slave address is actually already known by
@@ -1041,7 +970,7 @@ only be fixed by disconnecting one of the slaves.</p>
 <li><strong>slave_address</strong> (<em>byte</em>) – The new slave address [0..254]. The address 255 is reserved for
 broadcasts.</li>
 <li><strong>update_driver</strong> (<em>bool</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the property
-<a class="reference internal" href="#sensirion_shdlc_driver.device.ShdlcDevice.slave_address" title="sensirion_shdlc_driver.device.ShdlcDevice.slave_address"><code class="xref py py-attr docutils literal notranslate"><span class="pre">slave_address</span></code></a>
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">slave_address</span></code>
 of this object is also updated with the new address. This is
 needed to allow further communication with the device, as its
 address has changed.</li>

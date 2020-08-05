@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sensirion_shdlc_driver.device_base &mdash; Sensirion SHDLC Python Driver 0.1.5 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Sensirion SHDLC Python Driver
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../shdlc.html">SHDLC Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_commands.html">Executing Custom Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging_debugging.html">Logging / Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Sensirion SHDLC Python Driver</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>sensirion_shdlc_driver.device_base</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for sensirion_shdlc_driver.device_base</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># (c) Copyright 2019 Sensirion AG, Switzerland</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">.errors</span> <span class="kn">import</span> <span class="n">ShdlcDeviceError</span><span class="p">,</span> <span class="n">SHDLC_DEVICE_ERROR_LIST</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ShdlcDeviceBase"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.device_base.ShdlcDeviceBase">[docs]</a><span class="k">class</span> <span class="nc">ShdlcDeviceBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for all SHDLC devices, providing only the basic functionality</span>
+<span class="sd">    without implementing any SHDLC commands. The main purpose of this class</span>
+<span class="sd">    is to allow derived classes to register their device-specific errors and</span>
+<span class="sd">    to allow executing SHDLC commands.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ShdlcDeviceBase.__init__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.device_base.ShdlcDeviceBase.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an SHDLC device instance on an SHDLC connection.</span>
+
+<span class="sd">        .. note:: This constructor does not communicate with the device, so</span>
+<span class="sd">                  it&#39;s possible to instantiate an object even if the device is</span>
+<span class="sd">                  not connected or powered yet.</span>
+
+<span class="sd">        :param ~sensirion_shdlc_driver.connection.ShdlcConnection connection:</span>
+<span class="sd">            The connection used for the communication.</span>
+<span class="sd">        :param byte slave_address:</span>
+<span class="sd">            The address of the device.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcDeviceBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span> <span class="o">=</span> <span class="n">connection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_slave_address</span> <span class="o">=</span> <span class="n">slave_address</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_error_flag</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_device_errors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register_device_errors</span><span class="p">(</span><span class="n">SHDLC_DEVICE_ERROR_LIST</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the used SHDLC connection.</span>
+
+<span class="sd">        :return: The used SHDLC connection.</span>
+<span class="sd">        :rtype: :py:class:`~sensirion_shdlc_driver.connection.ShdlcConnection`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">slave_address</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the slave address (not read from the device!).</span>
+
+<span class="sd">        :return: The slave address.</span>
+<span class="sd">        :rtype: byte</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slave_address</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">last_error_flag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the error flag which was received with the last response of the</span>
+<span class="sd">        device. So this flag gets updated with every command sent to the</span>
+<span class="sd">        device. If the flag is True, typically the derived classes provide a</span>
+<span class="sd">        method to read the exact error reason from the device (the</span>
+<span class="sd">        corresponding SHDLC command is called &quot;Get Device Status&quot;).</span>
+
+<span class="sd">        .. note:: When creating an instance of</span>
+<span class="sd">                  :py:class:`~sensirion_shdlc_driver.device.ShdlcDeviceBase`,</span>
+<span class="sd">                  this property is initialized with ``False`` and will not be</span>
+<span class="sd">                  updated until you send the first command to the device.</span>
+
+<span class="sd">        :return: True if the device indicated an error, False otherwise.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_error_flag</span>
+
+<div class="viewcode-block" id="ShdlcDeviceBase.execute"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.device_base.ShdlcDeviceBase.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute an SHDLC command.</span>
+
+<span class="sd">        :param ~sensirion_shdlc_driver.command.ShdlcCommand command:</span>
+<span class="sd">            The command to execute.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            The interpreted response of the executed command.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_slave_address</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_error_flag</span> <span class="o">=</span> <span class="n">err</span>  <span class="c1"># Memorize error flag</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">except</span> <span class="n">ShdlcDeviceError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">exc</span><span class="o">.</span><span class="n">error_code</span> <span class="o">!=</span> <span class="mi">0</span>
+            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_device_error</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">error_code</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_register_device_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">errors</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register new device errors for the connected device type. This method</span>
+<span class="sd">        can (and should!) be called by subclasses of</span>
+<span class="sd">        :py:class:`~sensirion_shdlc_driver.device.ShdlcDeviceBase` to register</span>
+<span class="sd">        device-specific errors.</span>
+
+<span class="sd">        :param list errors:</span>
+<span class="sd">            A list of</span>
+<span class="sd">            :py:class:`~sensirion_shdlc_driver.errors.ShdlcDeviceError` (or</span>
+<span class="sd">            subclass) exception instances.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_device_errors</span><span class="p">[</span><span class="n">error</span><span class="o">.</span><span class="n">error_code</span><span class="p">]</span> <span class="o">=</span> <span class="n">error</span>
+
+    <span class="k">def</span> <span class="nf">_get_device_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the device error exception object for a specific device error code.</span>
+
+<span class="sd">        :param byte code:</span>
+<span class="sd">            The device error code received from the device.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            The corresponding exception object</span>
+<span class="sd">            (:py:class:`~sensirion_shdlc_driver.errors.ShdlcDeviceError` or a</span>
+<span class="sd">            subclass of it), or ``None`` if ``code`` is zero.</span>
+<span class="sd">        :rtype: ShdlcDeviceError/None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">code</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_errors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">ShdlcDeviceError</span><span class="p">(</span><span class="n">code</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020 Sensirion AG, Switzerland
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../0.1.0/index.html">0.1.0</a></dd>
+            <dd><a href="../../../0.1.1/index.html">0.1.1</a></dd>
+            <dd><a href="../../../0.1.2/index.html">0.1.2</a></dd>
+            <dd><a href="../../../0.1.3/index.html">0.1.3</a></dd>
+            <dd><a href="../../../0.1.4/index.html">0.1.4</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="device_base.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

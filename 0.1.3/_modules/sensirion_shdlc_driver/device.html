@@ -160,7 +160,7 @@
 <span class="c1"># (c) Copyright 2019 Sensirion AG, Switzerland</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
-<span class="kn">from</span> <span class="nn">.errors</span> <span class="kn">import</span> <span class="n">ShdlcDeviceError</span><span class="p">,</span> <span class="n">SHDLC_DEVICE_ERROR_LIST</span>
+<span class="kn">from</span> <span class="nn">.device_base</span> <span class="kn">import</span> <span class="n">ShdlcDeviceBase</span>
 <span class="kn">from</span> <span class="nn">.commands.device_info</span> <span class="kn">import</span> <span class="n">ShdlcCmdGetProductType</span><span class="p">,</span> \
     <span class="n">ShdlcCmdGetProductName</span><span class="p">,</span> <span class="n">ShdlcCmdGetArticleCode</span><span class="p">,</span> <span class="n">ShdlcCmdGetSerialNumber</span><span class="p">,</span> \
     <span class="n">ShdlcCmdGetProductSubType</span>
@@ -178,10 +178,14 @@
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="ShdlcDevice"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.device.ShdlcDevice">[docs]</a><span class="k">class</span> <span class="nc">ShdlcDevice</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="ShdlcDevice"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.device.ShdlcDevice">[docs]</a><span class="k">class</span> <span class="nc">ShdlcDevice</span><span class="p">(</span><span class="n">ShdlcDeviceBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Base class for all SHDLC devices, providing only common SHDLC commands.</span>
-<span class="sd">    For device-specific commands, there are derived classes available.</span>
+<span class="sd">    Generic SHDLC device, providing only common SHDLC commands. This class is</span>
+<span class="sd">    intended only to communicate with devices which do not provide a</span>
+<span class="sd">    corresponding device driver (yet). With this class you can for example</span>
+<span class="sd">    read the serial number of a device even if no device specific driver</span>
+<span class="sd">    exists. But if there exists a device specific driver, you should always</span>
+<span class="sd">    use it instead of this driver.</span>
 
 <span class="sd">    This is a low-level driver which just provides all SHDLC commands as Python</span>
 <span class="sd">    methods. Typically, calling a method sends one SHDLC request to the device</span>
@@ -209,68 +213,7 @@
 <span class="sd">        :param byte slave_address:</span>
 <span class="sd">            The address of the device.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcDevice</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span> <span class="o">=</span> <span class="n">connection</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_slave_address</span> <span class="o">=</span> <span class="n">slave_address</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_last_error_flag</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_device_errors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_register_device_errors</span><span class="p">(</span><span class="n">SHDLC_DEVICE_ERROR_LIST</span><span class="p">)</span></div>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the used SHDLC connection.</span>
-
-<span class="sd">        :return: The used SHDLC connection.</span>
-<span class="sd">        :rtype: :py:class:`~sensirion_shdlc_driver.connection.ShdlcConnection`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">slave_address</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the slave address (not read from the device!).</span>
-
-<span class="sd">        :return: The slave address.</span>
-<span class="sd">        :rtype: byte</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slave_address</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">last_error_flag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the error flag which was received with the last response of the</span>
-<span class="sd">        device. So this flag gets updated with every command sent to the</span>
-<span class="sd">        device. If the flag is True, the exact error reason can be read with</span>
-<span class="sd">        the method</span>
-<span class="sd">        :py:meth:`~sensirion_shdlc_driver.device.ShdlcDevice.get_error_state()`.</span>
-
-<span class="sd">        .. note:: When creating an instance of</span>
-<span class="sd">                  :py:class:`~sensirion_shdlc_driver.device.ShdlcDevice`, this</span>
-<span class="sd">                  property is initialized with ``False`` and will not be</span>
-<span class="sd">                  updated until you send the first command to the device.</span>
-
-<span class="sd">        :return: True if the device indicated an error, False otherwise.</span>
-<span class="sd">        :rtype: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_error_flag</span>
-
-<div class="viewcode-block" id="ShdlcDevice.execute"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.device.ShdlcDevice.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Execute an SHDLC command.</span>
-
-<span class="sd">        :param ~sensirion_shdlc_driver.command.ShdlcCommand command:</span>
-<span class="sd">            The command to execute.</span>
-<span class="sd">        :return:</span>
-<span class="sd">            The interpreted response of the executed command.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">data</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_slave_address</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_last_error_flag</span> <span class="o">=</span> <span class="n">err</span>  <span class="c1"># Memorize error flag</span>
-            <span class="k">return</span> <span class="n">data</span>
-        <span class="k">except</span> <span class="n">ShdlcDeviceError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="n">exc</span><span class="o">.</span><span class="n">error_code</span> <span class="o">!=</span> <span class="mi">0</span>
-            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_device_error</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">error_code</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShdlcDevice</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ShdlcDevice.get_product_type"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.device.ShdlcDevice.get_product_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_product_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">as_int</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -498,8 +441,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Execute a device reset (reboot firmware, similar to power cycle).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ShdlcCmdDeviceReset</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_last_error_flag</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Reset &quot;cache&quot;</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ShdlcCmdDeviceReset</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="ShdlcDevice.factory_reset"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.device.ShdlcDevice.factory_reset">[docs]</a>    <span class="k">def</span> <span class="nf">factory_reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -512,39 +454,7 @@
 <span class="sd">                     and thus you might have to adjust the driver&#39;s parameters</span>
 <span class="sd">                     to allow further communication with the device.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ShdlcCmdFactoryReset</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_last_error_flag</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Reset &quot;cache&quot;</span></div>
-
-    <span class="k">def</span> <span class="nf">_register_device_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">errors</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register new device errors for the connected device type. This method</span>
-<span class="sd">        can (and should!) be called by subclasses of ShdlcDevice to register</span>
-<span class="sd">        device-specific errors.</span>
-
-<span class="sd">        :param list errors:</span>
-<span class="sd">            A list of</span>
-<span class="sd">            :py:class:`~sensirion_shdlc_driver.errors.ShdlcDeviceError` (or</span>
-<span class="sd">            subclass) exception instances.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_device_errors</span><span class="p">[</span><span class="n">error</span><span class="o">.</span><span class="n">error_code</span><span class="p">]</span> <span class="o">=</span> <span class="n">error</span>
-
-    <span class="k">def</span> <span class="nf">_get_device_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the device error exception object for a specific device error code.</span>
-
-<span class="sd">        :param byte code:</span>
-<span class="sd">            The device error code received from the device.</span>
-<span class="sd">        :return:</span>
-<span class="sd">            The corresponding exception object</span>
-<span class="sd">            (:py:class:`~sensirion_shdlc_driver.errors.ShdlcDeviceError` or a</span>
-<span class="sd">            subclass of it), or ``None`` if ``code`` is zero.</span>
-<span class="sd">        :rtype: ShdlcDeviceError/None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">code</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_errors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">ShdlcDeviceError</span><span class="p">(</span><span class="n">code</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ShdlcCmdFactoryReset</span><span class="p">())</span></div></div>
 </pre></div>
 
            </div>
