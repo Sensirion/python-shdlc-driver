@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Executing Custom Commands &mdash; Sensirion SHDLC Python Driver 0.1.5 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Logging / Debugging" href="logging_debugging.html" />
+    <link rel="prev" title="Quick Start" href="quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Sensirion SHDLC Python Driver
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="shdlc.html">SHDLC Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Executing Custom Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-shdlccommand-directly">Using ShdlcCommand Directly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deriving-from-shdlccommand">Deriving from ShdlcCommand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-device-class">Creating a Device Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logging_debugging.html">Logging / Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Sensirion SHDLC Python Driver</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Executing Custom Commands</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/custom_commands.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="executing-custom-commands">
+<h1>Executing Custom Commands<a class="headerlink" href="#executing-custom-commands" title="Permalink to this headline">¶</a></h1>
+<p>To communicate with SHDLC devices, usually you won’t use this base driver
+directly since it doesn’t provide device specific commands. Instead, you
+use a dedicated Python driver created for a specific device type, like
+<a class="reference external" href="https://pypi.org/project/sensirion-shdlc-sensorbridge/">sensirion-shdlc-sensorbridge</a> for the <a class="reference external" href="https://www.sensirion.com/sek-sensorbridge/">Sensirion SEK-SensorBridge</a>.</p>
+<p>But if there is no Python driver available (yet) for a particular SHDLC device,
+this base driver could still be used to communicate with that device. There
+are two different ways how to execute custom SHDLC commands with this driver.</p>
+<div class="section" id="using-shdlccommand-directly">
+<h2>Using ShdlcCommand Directly<a class="headerlink" href="#using-shdlccommand-directly" title="Permalink to this headline">¶</a></h2>
+<p>The simplest way is to pass an
+<a class="reference internal" href="api.html#sensirion_shdlc_driver.command.ShdlcCommand" title="sensirion_shdlc_driver.command.ShdlcCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShdlcCommand</span></code></a> object to the
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code> method of the
+device:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sensirion_shdlc_driver</span> <span class="kn">import</span> <span class="n">ShdlcSerialPort</span><span class="p">,</span> <span class="n">ShdlcConnection</span><span class="p">,</span> <span class="n">ShdlcDevice</span>
+<span class="kn">from</span> <span class="nn">sensirion_shdlc_driver.command</span> <span class="kn">import</span> <span class="n">ShdlcCommand</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">unpack</span>
+
+<span class="k">with</span> <span class="n">ShdlcSerialPort</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="s1">&#39;COM1&#39;</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="mi">115200</span><span class="p">)</span> <span class="k">as</span> <span class="n">port</span><span class="p">:</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">ShdlcDevice</span><span class="p">(</span><span class="n">ShdlcConnection</span><span class="p">(</span><span class="n">port</span><span class="p">),</span> <span class="n">slave_address</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Execute custom command</span>
+    <span class="n">raw_response</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ShdlcCommand</span><span class="p">(</span>
+        <span class="nb">id</span><span class="o">=</span><span class="mh">0xD2</span><span class="p">,</span>  <span class="c1"># The command ID as specified in the device documentation</span>
+        <span class="n">data</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x01</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="c1"># The payload data to send</span>
+        <span class="n">max_response_time</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>  <span class="c1"># Maximum response time in Seconds</span>
+    <span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raw Response: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">raw_response</span><span class="p">))</span>
+
+    <span class="c1"># Convert raw response to proper data types</span>
+    <span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;IB&#39;</span><span class="p">,</span> <span class="n">raw_response</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Response: </span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>For more options and detailed information, please take a look at the
+documentation of <a class="reference internal" href="api.html#sensirion_shdlc_driver.command.ShdlcCommand" title="sensirion_shdlc_driver.command.ShdlcCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShdlcCommand</span></code></a>.</p>
+</div>
+<div class="section" id="deriving-from-shdlccommand">
+<h2>Deriving from ShdlcCommand<a class="headerlink" href="#deriving-from-shdlccommand" title="Permalink to this headline">¶</a></h2>
+<p>Another, more powerful way to implement custom commands is to create separate
+classes for each command. Especially if the raw response bytes need to be
+converted to other data types this is handy since it will make the
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code> method
+returning the converted response.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sensirion_shdlc_driver</span> <span class="kn">import</span> <span class="n">ShdlcSerialPort</span><span class="p">,</span> <span class="n">ShdlcConnection</span><span class="p">,</span> <span class="n">ShdlcDevice</span>
+<span class="kn">from</span> <span class="nn">sensirion_shdlc_driver.command</span> <span class="kn">import</span> <span class="n">ShdlcCommand</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">pack</span><span class="p">,</span> <span class="n">unpack</span>
+
+<span class="k">class</span> <span class="nc">MyCustomCommand</span><span class="p">(</span><span class="n">ShdlcCommand</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bool_parameter</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyCustomCommand</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="mh">0xD2</span><span class="p">,</span>  <span class="c1"># Command ID as specified in the device documentation</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;B&quot;</span><span class="p">,</span> <span class="n">bool_parameter</span><span class="p">),</span>  <span class="c1"># Payload data</span>
+            <span class="n">max_response_time</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>  <span class="c1"># Maximum response time in Seconds</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="c1"># Convert the received raw bytes to the proper data types</span>
+        <span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;IB&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span>
+
+
+<span class="k">with</span> <span class="n">ShdlcSerialPort</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="s1">&#39;COM1&#39;</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="mi">115200</span><span class="p">)</span> <span class="k">as</span> <span class="n">port</span><span class="p">:</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">ShdlcDevice</span><span class="p">(</span><span class="n">ShdlcConnection</span><span class="p">(</span><span class="n">port</span><span class="p">),</span> <span class="n">slave_address</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">MyCustomCommand</span><span class="p">(</span><span class="n">bool_parameter</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Response: </span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-device-class">
+<h2>Creating a Device Class<a class="headerlink" href="#creating-a-device-class" title="Permalink to this headline">¶</a></h2>
+<p>To create a more convenient API, it might make sense to wrap the custom
+commands in a new device class. You have two options to create a device class:</p>
+<ul class="simple">
+<li>Inherit from <a class="reference internal" href="api.html#sensirion_shdlc_driver.device_base.ShdlcDeviceBase" title="sensirion_shdlc_driver.device_base.ShdlcDeviceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShdlcDeviceBase</span></code></a>
+and add methods for all the supported SHDLC commands of the device, including
+common commands. This is the preferred way since it leads to a device class
+which perfectly fits the particular device, but it requires additional effort
+to also implement all the common SHDLC commands. To reduce effort, you can
+start by copying the needed methods from
+<a class="reference internal" href="api.html#sensirion_shdlc_driver.device.ShdlcDevice" title="sensirion_shdlc_driver.device.ShdlcDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShdlcDevice</span></code></a>.</li>
+<li>Inherit from <a class="reference internal" href="api.html#sensirion_shdlc_driver.device.ShdlcDevice" title="sensirion_shdlc_driver.device.ShdlcDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShdlcDevice</span></code></a> and add
+only the device-specific commands since the common commands are automatically
+available since the base class already provides them. This is simpler, but
+has the downside that you even inherit methods which the particular device
+might not support, or parameters like response time or post processing time
+might be wrong since they are device specific.</li>
+</ul>
+<p>No matter which way you choose, implementing the device class works exactly
+the same way:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sensirion_shdlc_driver</span> <span class="kn">import</span> <span class="n">ShdlcSerialPort</span><span class="p">,</span> <span class="n">ShdlcConnection</span><span class="p">,</span> <span class="n">ShdlcDeviceBase</span>
+<span class="kn">from</span> <span class="nn">sensirion_shdlc_driver.command</span> <span class="kn">import</span> <span class="n">ShdlcCommand</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">pack</span><span class="p">,</span> <span class="n">unpack</span>
+
+<span class="k">class</span> <span class="nc">MyCustomCommand</span><span class="p">(</span><span class="n">ShdlcCommand</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bool_parameter</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyCustomCommand</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="mh">0xD2</span><span class="p">,</span>  <span class="c1"># Command ID as specified in the device documentation</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;B&quot;</span><span class="p">,</span> <span class="n">bool_parameter</span><span class="p">),</span>  <span class="c1"># Payload data</span>
+            <span class="n">max_response_time</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>  <span class="c1"># Maximum response time in Seconds</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="c1"># Convert the received raw bytes to the proper data types</span>
+        <span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;IB&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span>
+
+
+<span class="k">class</span> <span class="nc">MyCustomShdlcDevice</span><span class="p">(</span><span class="n">ShdlcDeviceBase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyCustomShdlcDevice</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">my_custom_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bool_parameter</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">MyCustomCommand</span><span class="p">(</span><span class="n">bool_parameter</span><span class="p">))</span>
+
+
+<span class="k">with</span> <span class="n">ShdlcSerialPort</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="s1">&#39;COM1&#39;</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="mi">115200</span><span class="p">)</span> <span class="k">as</span> <span class="n">port</span><span class="p">:</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">MyCustomShdlcDevice</span><span class="p">(</span><span class="n">ShdlcConnection</span><span class="p">(</span><span class="n">port</span><span class="p">),</span> <span class="n">slave_address</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">my_custom_command</span><span class="p">(</span><span class="n">bool_parameter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Response: </span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uint32</span><span class="p">,</span> <span class="n">uint8</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="logging_debugging.html" class="btn btn-neutral float-right" title="Logging / Debugging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020 Sensirion AG, Switzerland
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.1.5
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../0.1.0/index.html">0.1.0</a></dd>
+            <dd><a href="../0.1.1/index.html">0.1.1</a></dd>
+            <dd><a href="../0.1.2/index.html">0.1.2</a></dd>
+            <dd><a href="../0.1.3/custom_commands.html">0.1.3</a></dd>
+            <dd><a href="../0.1.4/custom_commands.html">0.1.4</a></dd>
+            <dd><a href="custom_commands.html">0.1.5</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/custom_commands.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
