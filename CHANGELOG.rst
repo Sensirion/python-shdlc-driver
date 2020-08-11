@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+0.1.5
+:::::
+- Move parts of ``ShdlcDevice`` into new base class ``ShdlcDeviceBase``
+
 0.1.4
 :::::
 - Make signature and version offset configurable for ``ShdlcFirmwareImage``
