@@ -26,8 +26,8 @@ long_description = readme.strip() + "\n\n" + changelog.strip() + "\n"
 setup(
     name='sensirion-shdlc-driver',
     version=version_string,
-    author='Urban Bruhin',
-    author_email='urban.bruhin@sensirion.com',
+    author='Sensirion',
+    author_email='info@sensirion.com',
     description='Base Driver for Communicating With Sensirion SHDLC Devices',
     license='BSD',
     keywords='shdlc sensirion sensor driver',
@@ -54,13 +54,15 @@ setup(
         ]
     },
     classifiers=[
-        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Topic :: System :: Hardware :: Hardware Drivers'
     ]
 )
