@@ -46,11 +46,11 @@ setup(
         ],
         # Dependencies for tests
         'test': [
-            'flake8~=3.6.0',
+            'flake8~=3.7.8',
             'intelhex~=2.0',  # from the "fwupdate" extra
             'mock~=3.0.0',
-            'pytest~=3.10.0',
-            'pytest-cov~=2.6.0',
+            'pytest~=4.6.11',
+            'pytest-cov~=2.12.1',
         ]
     },
     classifiers=[
