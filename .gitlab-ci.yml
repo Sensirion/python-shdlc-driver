@@ -6,6 +6,9 @@ variables:
 check_rst_syntax:
   extends: .check_rst_syntax_v2
 
+check_editorconfig:
+  extends: .check_editorconfig_v2
+
 
 py2p7_linux_build:
   extends: .py2p7_linux_build_v2
