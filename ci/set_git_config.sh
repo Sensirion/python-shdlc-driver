@@ -9,7 +9,7 @@ echo "$SSH_DEPLOY_KEY" > ~/.ssh/id_rsa
 chmod 400 ~/.ssh/id_rsa
 
 # change remote URL to SSH to allow pushing with SSH
-git remote set-url --push origin "git@gitlab:${CI_PROJECT_PATH}.git"
+git remote set-url --push origin "git@${CI_SERVER_HOST}:${CI_PROJECT_PATH}.git"
 
 # set git author
 git config --global user.name "GitLab-CI"

@@ -26,6 +26,14 @@ pip install -e .[test]  # Install requirements
 flake8                  # Run style check
 ```
 
+In addition, we check the formatting of files with
+[`editorconfig-checker`](https://editorconfig-checker.github.io/):
+
+```bash
+pip install editorconfig-checker==2.0.3   # Install requirements
+editorconfig-checker                      # Run check
+```
+
 ### Run tests
 
 Unit tests can be run with [`pytest`](https://pytest.org/):

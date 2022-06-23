@@ -1,130 +1,69 @@
-stages:
-  - build
-  - deploy
+include: https://gitlab.sensirion.lokal/Sensirion/Python/ci-config-python/raw/master/gitlab-ci-template-v2.yml
+
+variables:
+  PYTEST_ADDOPTS: '-m "not (needs_serialport or needs_tcp)"'
 
 check_rst_syntax:
-  stage: build
-  tags: [linux, docker]
-  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:3.6-18.04-1.1.0
-  script:
-    - rst-lint *.rst
+  extends: .check_rst_syntax_v2
 
-build_package:linux_py2:
-  stage: build
-  tags: [linux, docker]
-  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:2.7-18.04-1.1.0
-  script:
-    - pip install -e .[test]
-    - flake8
-    - pytest -m "not (needs_serialport or needs_tcp)"
-    - python setup.py sdist
-    - python setup.py bdist_wheel
-  artifacts:
-    expire_in: 1 week
-    paths: [dist]
+check_editorconfig:
+  extends: .check_editorconfig_v2
 
-build_package:linux_py3:
-  stage: build
-  tags: [linux, docker]
-  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:3.6-18.04-1.1.0
-  script:
-    - pip install -e .[test]
-    - flake8
-    - pytest -m "not (needs_serialport or needs_tcp)"
-    - python setup.py bdist_wheel
-  artifacts:
-    expire_in: 1 week
-    paths: [dist]
 
-build_package:windows_py2:
-  stage: build
-  tags: [windows, docker]
-  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:2.7.12-32bit-windowsservercore-ltsc2019-1.1.0
-  script:
-    - pip install -e .[test]
-    - flake8
-    - pytest -m "not (needs_serialport or needs_tcp)"
-    - python setup.py bdist_wheel -q
-  artifacts:
-    expire_in: 1 week
-    paths: [dist]
+py2p7_linux_build:
+  extends: .py2p7_linux_build_v2
 
-build_package:windows_py3:
-  stage: build
-  tags: [windows, docker]
-  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:3.5.4-64bit-windowsservercore-ltsc2019-1.1.0
-  script:
-    - pip install -e .[test]
-    - flake8
-    - pytest -m "not (needs_serialport or needs_tcp)"
-    - python setup.py bdist_wheel -q
-  artifacts:
-    expire_in: 1 week
-    paths: [dist]
+py3p6_linux_build:
+  extends: .py3p6_linux_build_v2
+
+py3p8_linux_build:
+  extends: .py3p8_linux_build_v2
+
+
+py2p7_32bit_win_build:
+  extends: .py2p7_32bit_win_docker_build_v2
+
+py3p5_64bit_win_build:
+  extends: .py3p5_64bit_win_docker_build_v2
+
+py3p8_64bit_win_build:
+  extends: .py3p8_64bit_win_docker_build_v2
+
 
 build_docs:
-  stage: build
-  tags: [linux, docker]
-  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:3.6-18.04-1.1.0
+  extends: .build_docs_v2
   script:
-    - apt-get update && apt-get install -y graphviz
     - python setup.py install
     - pip install -r docs/requirements.txt
     - ./ci/set_git_config.sh
     - sphinx-versioning build -r "$CI_COMMIT_REF_NAME" -w "$CI_COMMIT_REF_NAME" docs docs/_build/html
 
+
 deploy_staging:
-    stage: deploy
-    tags: [linux, docker]
-    image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:2.7-18.04-1.1.0
-    dependencies:
-      - build_package:linux_py2
-      - build_package:linux_py3
-      - build_package:windows_py2
-      - build_package:windows_py3
-    environment:
-      name: $DEVPI_GROUP/staging
-      url: https://pypi.sensirion.lokal/$DEVPI_GROUP/staging/sensirion-shdlc-driver
-    only:
-      - master
-      - tags
-    script:
-      - devpi use https://pypi.sensirion.lokal/$DEVPI_GROUP/staging
-      - devpi login $DEVPI_GROUP --password=$DEVPI_PW
-      - devpi upload --from-dir dist
+  extends: .deploy_staging_v2
 
 deploy_stable:
-    stage: deploy
-    tags: [linux, docker]
-    image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:2.7-18.04-1.1.0
-    dependencies:
-      - build_package:linux_py2
-      - build_package:linux_py3
-      - build_package:windows_py2
-      - build_package:windows_py3
-    environment:
-      name: pypi.org
-      url: https://pypi.org/project/sensirion-shdlc-driver/
-    only:
-      - tags
-    script:
-      - PKG_VERSION=$(grep '^version\s*=\s*['"'"'"]\([0-9\.]*\)["'"'"'].*$' sensirion_shdlc_driver/version.py | sed 's/^version\s*=\s*['"'"'"]\([0-9\.]*\)["'"'"'].*$/\1/')
-      - TAG_VERSION=$(git describe --tags)
-      - if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then echo "Tag Version ($TAG_VERSION) != Package Version ($PKG_VERSION)" && exit 1; fi
-      - pip install twine~=1.12.1
-      - twine upload dist/*
+  extends: .deploy_stable_v2
+  environment:
+    name: pypi.org
+    url: https://pypi.org/project/sensirion-shdlc-driver/
+  before_script:
+    - pip install twine~=1.12.1
+  script:
+    - PKG_VERSION=$(python setup.py --version --quiet | tail -n1)
+    - TAG_VERSION=$(git describe --tags)
+    - if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then echo "Tag Version ($TAG_VERSION) != Package Version ($PKG_VERSION)" && exit 1; fi
+    - twine upload dist/*
+
 
 deploy_docs:
-    stage: deploy
-    tags: [linux, docker]
-    image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:3.6-18.04-1.1.0
-    dependencies: []
-    only:
-      - master
-      - tags
-    script:
-      - apt-get update && apt-get install -y graphviz
-      - python setup.py install
-      - pip install -r docs/requirements.txt
-      - ./ci/set_git_config.sh
-      - sphinx-versioning push docs gh-pages .
+  stage: deploy
+  tags: [linux, docker]
+  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:3.6-18.04-2.7.0
+  dependencies: []
+  only: [master, tags]
+  script:
+    - python setup.py install
+    - pip install -r docs/requirements.txt
+    - ./ci/set_git_config.sh
+    - sphinx-versioning push docs gh-pages .
