@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sensirion_shdlc_driver.types &mdash; Sensirion SHDLC Python Driver 0.1.6 documentation</title>
+  <title>sensirion_shdlc_driver.types &mdash; sensirion-shdlc-driver 0.1.6 documentation</title>
   
 
   
@@ -52,7 +52,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> Sensirion SHDLC Python Driver
+            <a href="../../index.html" class="icon icon-home"> sensirion-shdlc-driver
           
 
           
@@ -107,7 +107,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">Sensirion SHDLC Python Driver</a>
+          <a href="../../index.html">sensirion-shdlc-driver</a>
         
       </nav>
 
@@ -183,9 +183,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">minor</span> <span class="o">=</span> <span class="n">minor</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span></div>
 
-<div class="viewcode-block" id="FirmwareVersion.__str__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.FirmwareVersion.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="ow">and</span> <span class="s1">&#39;-debug&#39;</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">)</span></div></div>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="ow">and</span> <span class="s1">&#39;-debug&#39;</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="HardwareVersion"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.HardwareVersion">[docs]</a><span class="k">class</span> <span class="nc">HardwareVersion</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -204,8 +204,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">major</span> <span class="o">=</span> <span class="n">major</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minor</span> <span class="o">=</span> <span class="n">minor</span></div>
 
-<div class="viewcode-block" id="HardwareVersion.__str__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.HardwareVersion.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">)</span></div></div>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProtocolVersion"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.ProtocolVersion">[docs]</a><span class="k">class</span> <span class="nc">ProtocolVersion</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -224,8 +224,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">major</span> <span class="o">=</span> <span class="n">major</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minor</span> <span class="o">=</span> <span class="n">minor</span></div>
 
-<div class="viewcode-block" id="ProtocolVersion.__str__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.ProtocolVersion.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">)</span></div></div>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Version"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.Version">[docs]</a><span class="k">class</span> <span class="nc">Version</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -250,10 +250,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">hardware</span> <span class="o">=</span> <span class="n">hardware</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span> <span class="o">=</span> <span class="n">protocol</span></div>
 
-<div class="viewcode-block" id="Version.__str__"><a class="viewcode-back" href="../../api.html#sensirion_shdlc_driver.types.Version.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;Firmware </span><span class="si">{}</span><span class="s1">, Hardware </span><span class="si">{}</span><span class="s1">, Protocol </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hardware</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span>
-        <span class="p">)</span></div></div>
+        <span class="p">)</span></div>
 </pre></div>
 
            </div>
@@ -266,7 +266,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2021 Sensirion AG, Switzerland
+        &copy; Copyright 2022 Sensirion AG, Switzerland
 
     </p>
   </div>

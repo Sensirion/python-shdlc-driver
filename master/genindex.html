@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; Sensirion SHDLC Python Driver 0.1.6 documentation</title>
+  <title>Index &mdash; sensirion-shdlc-driver 0.1.6 documentation</title>
   
 
   
@@ -53,7 +53,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Sensirion SHDLC Python Driver
+            <a href="index.html" class="icon icon-home"> sensirion-shdlc-driver
           
 
           
@@ -108,7 +108,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Sensirion SHDLC Python Driver</a>
+          <a href="index.html">sensirion-shdlc-driver</a>
         
       </nav>
 
@@ -178,11 +178,18 @@
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
  
 </div>
 <h2 id="_">_</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcError.__init__">__init__ (sensirion_shdlc_driver.errors.ShdlcError attribute)</a>
+
+      <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcPort.__init__">(sensirion_shdlc_driver.port.ShdlcPort attribute)</a>
+</li>
+      </ul></li>
       <li><a href="api.html#sensirion_shdlc_driver.command.ShdlcCommand.__init__">__init__() (sensirion_shdlc_driver.command.ShdlcCommand method)</a>
 
       <ul>
@@ -298,18 +305,6 @@
 </li>
       </ul></li>
   </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#sensirion_shdlc_driver.types.FirmwareVersion.__str__">__str__() (sensirion_shdlc_driver.types.FirmwareVersion method)</a>
-
-      <ul>
-        <li><a href="api.html#sensirion_shdlc_driver.types.HardwareVersion.__str__">(sensirion_shdlc_driver.types.HardwareVersion method)</a>
-</li>
-        <li><a href="api.html#sensirion_shdlc_driver.types.ProtocolVersion.__str__">(sensirion_shdlc_driver.types.ProtocolVersion method)</a>
-</li>
-        <li><a href="api.html#sensirion_shdlc_driver.types.Version.__str__">(sensirion_shdlc_driver.types.Version method)</a>
-</li>
-      </ul></li>
-  </ul></td>
 </tr></table>
 
 <h2 id="A">A</h2>
@@ -336,6 +331,8 @@
       <ul>
         <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcSerialPort.bitrate">(sensirion_shdlc_driver.port.ShdlcSerialPort attribute)</a>
 </li>
+        <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.bitrate">(sensirion_shdlc_driver.port.ShdlcTcpPort attribute)</a>
+</li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -348,7 +345,71 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.command.ShdlcCommand.check_response_length">check_response_length() (sensirion_shdlc_driver.command.ShdlcCommand method)</a>
+
+      <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase.check_response_length">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase method)</a>
 </li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate.check_response_length">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate.check_response_length">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase.check_response_length">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader.check_response_length">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData.check_response_length">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart.check_response_length">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop.check_response_length">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase.check_response_length">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode.check_response_length">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName.check_response_length">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType.check_response_length">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType.check_response_length">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber.check_response_length">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset.check_response_length">(sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase.check_response_length">(sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase.check_response_length">(sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion.check_response_length">(sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase.check_response_length">(sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState.check_response_length">(sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset.check_response_length">(sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase.check_response_length">(sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay.check_response_length">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase.check_response_length">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay.check_response_length">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress.check_response_length">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress.check_response_length">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase.check_response_length">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.check_response_length">(sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase.check_response_length">(sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.checksum">checksum (sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage attribute)</a>
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcPort.close">close() (sensirion_shdlc_driver.port.ShdlcPort method)</a>
@@ -359,10 +420,12 @@
         <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.close">(sensirion_shdlc_driver.port.ShdlcTcpPort method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#sensirion_shdlc_driver.device_base.ShdlcDeviceBase.connection">connection (sensirion_shdlc_driver.device_base.ShdlcDeviceBase attribute)</a>
+      <li><a href="api.html#sensirion_shdlc_driver.device.ShdlcDevice.connection">connection (sensirion_shdlc_driver.device.ShdlcDevice attribute)</a>
+
+      <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.device_base.ShdlcDeviceBase.connection">(sensirion_shdlc_driver.device_base.ShdlcDeviceBase attribute)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -372,9 +435,71 @@
       <li><a href="api.html#sensirion_shdlc_driver.command.ShdlcCommand.data">data (sensirion_shdlc_driver.command.ShdlcCommand attribute)</a>
 
       <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase.data">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate.data">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate.data">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase.data">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader.data">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData.data">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart.data">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop.data">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase.data">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode.data">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName.data">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType.data">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType.data">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber.data">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset.data">(sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase.data">(sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase.data">(sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion.data">(sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase.data">(sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState.data">(sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset.data">(sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase.data">(sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay.data">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase.data">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay.data">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress.data">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress.data">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase.data">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.data">(sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase.data">(sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase attribute)</a>
+</li>
         <li><a href="api.html#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.data">(sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcPort.description">description (sensirion_shdlc_driver.port.ShdlcPort attribute)</a>
 
       <ul>
@@ -383,8 +508,6 @@
         <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.description">(sensirion_shdlc_driver.port.ShdlcTcpPort attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.device.ShdlcDevice.device_reset">device_reset() (sensirion_shdlc_driver.device.ShdlcDevice method)</a>
 </li>
   </ul></td>
@@ -393,15 +516,45 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcDeviceError.error_code">error_code (sensirion_shdlc_driver.errors.ShdlcDeviceError attribute)</a>
+      <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcAccessRightError.error_code">error_code (sensirion_shdlc_driver.errors.ShdlcAccessRightError attribute)</a>
+
+      <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcChecksumError.error_code">(sensirion_shdlc_driver.errors.ShdlcChecksumError attribute)</a>
 </li>
-      <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcDeviceError.error_message">error_message (sensirion_shdlc_driver.errors.ShdlcDeviceError attribute)</a>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError.error_code">(sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError attribute)</a>
 </li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcCommandParameterError.error_code">(sensirion_shdlc_driver.errors.ShdlcCommandParameterError attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcDeviceError.error_code">(sensirion_shdlc_driver.errors.ShdlcDeviceError attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError.error_code">(sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError.error_code">(sensirion_shdlc_driver.errors.ShdlcUnknownCommandError attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcAccessRightError.error_message">error_message (sensirion_shdlc_driver.errors.ShdlcAccessRightError attribute)</a>
+
+      <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcChecksumError.error_message">(sensirion_shdlc_driver.errors.ShdlcChecksumError attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError.error_message">(sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcCommandParameterError.error_message">(sensirion_shdlc_driver.errors.ShdlcCommandParameterError attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcDeviceError.error_message">(sensirion_shdlc_driver.errors.ShdlcDeviceError attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError.error_message">(sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError.error_message">(sensirion_shdlc_driver.errors.ShdlcUnknownCommandError attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.connection.ShdlcConnection.execute">execute() (sensirion_shdlc_driver.connection.ShdlcConnection method)</a>
 
       <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.device.ShdlcDevice.execute">(sensirion_shdlc_driver.device.ShdlcDevice method)</a>
+</li>
         <li><a href="api.html#sensirion_shdlc_driver.device_base.ShdlcDeviceBase.execute">(sensirion_shdlc_driver.device_base.ShdlcDeviceBase method)</a>
 </li>
         <li><a href="api.html#sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate.execute">(sensirion_shdlc_driver.firmware_update.ShdlcFirmwareUpdate method)</a>
@@ -464,13 +617,91 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.command.ShdlcCommand.id">id (sensirion_shdlc_driver.command.ShdlcCommand attribute)</a>
+
+      <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase.id">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase attribute)</a>
 </li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate.id">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate.id">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase.id">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader.id">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData.id">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart.id">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop.id">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase.id">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode.id">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName.id">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType.id">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType.id">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber.id">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset.id">(sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase.id">(sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase.id">(sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion.id">(sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase.id">(sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState.id">(sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset.id">(sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase.id">(sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay.id">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase.id">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay.id">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress.id">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress.id">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase.id">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.id">(sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase.id">(sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase attribute)</a>
+</li>
+      </ul></li>
       <li><a href="api.html#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.interpret_data">interpret_data() (sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder method)</a>
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.command.ShdlcCommand.interpret_response">interpret_response() (sensirion_shdlc_driver.command.ShdlcCommand method)</a>
 
       <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase.interpret_response">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase method)</a>
+</li>
         <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate.interpret_response">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate.interpret_response">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase.interpret_response">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader.interpret_response">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData.interpret_response">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart.interpret_response">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop.interpret_response">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase.interpret_response">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase method)</a>
 </li>
         <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode.interpret_response">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode method)</a>
 </li>
@@ -482,15 +713,37 @@
 </li>
         <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber.interpret_response">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber method)</a>
 </li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset.interpret_response">(sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase.interpret_response">(sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase.interpret_response">(sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase method)</a>
+</li>
         <li><a href="api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion.interpret_response">(sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase.interpret_response">(sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase method)</a>
 </li>
         <li><a href="api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState.interpret_response">(sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState method)</a>
 </li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset.interpret_response">(sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase.interpret_response">(sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase method)</a>
+</li>
         <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay.interpret_response">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase.interpret_response">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay.interpret_response">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay method)</a>
 </li>
         <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress.interpret_response">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress method)</a>
 </li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress.interpret_response">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase.interpret_response">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase method)</a>
+</li>
         <li><a href="api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.interpret_response">(sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase.interpret_response">(sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -509,8 +762,14 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#sensirion_shdlc_driver.device_base.ShdlcDeviceBase.last_error_flag">last_error_flag (sensirion_shdlc_driver.device_base.ShdlcDeviceBase attribute)</a>
+      <li><a href="api.html#sensirion_shdlc_driver.device.ShdlcDevice.last_error_flag">last_error_flag (sensirion_shdlc_driver.device.ShdlcDevice attribute)</a>
+
+      <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.device_base.ShdlcDeviceBase.last_error_flag">(sensirion_shdlc_driver.device_base.ShdlcDeviceBase attribute)</a>
 </li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcPort.lock">lock (sensirion_shdlc_driver.port.ShdlcPort attribute)</a>
 
       <ul>
@@ -526,7 +785,69 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.command.ShdlcCommand.max_response_time">max_response_time (sensirion_shdlc_driver.command.ShdlcCommand attribute)</a>
+
+      <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase.max_response_time">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase attribute)</a>
 </li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate.max_response_time">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate.max_response_time">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase.max_response_time">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader.max_response_time">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData.max_response_time">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart.max_response_time">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop.max_response_time">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase.max_response_time">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode.max_response_time">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName.max_response_time">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType.max_response_time">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType.max_response_time">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber.max_response_time">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset.max_response_time">(sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase.max_response_time">(sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase.max_response_time">(sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion.max_response_time">(sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase.max_response_time">(sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState.max_response_time">(sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset.max_response_time">(sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase.max_response_time">(sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay.max_response_time">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase.max_response_time">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay.max_response_time">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress.max_response_time">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress.max_response_time">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase.max_response_time">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.max_response_time">(sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase.max_response_time">(sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -550,7 +871,69 @@
       <li><a href="api.html#sensirion_shdlc_driver.connection.ShdlcConnection.port">port (sensirion_shdlc_driver.connection.ShdlcConnection attribute)</a>
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.command.ShdlcCommand.post_processing_time">post_processing_time (sensirion_shdlc_driver.command.ShdlcCommand attribute)</a>
+
+      <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase.post_processing_time">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdBaudrateBase attribute)</a>
 </li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate.post_processing_time">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdGetBaudrate attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate.post_processing_time">(sensirion_shdlc_driver.commands.baudrate.ShdlcCmdSetBaudrate attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase.post_processing_time">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdBootloaderBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader.post_processing_time">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdEnterBootloader attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData.post_processing_time">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateData attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart.post_processing_time">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStart attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop.post_processing_time">(sensirion_shdlc_driver.commands.bootloader.ShdlcCmdFirmwareUpdateStop attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase.post_processing_time">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdDeviceInfoBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode.post_processing_time">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetArticleCode attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName.post_processing_time">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductName attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType.post_processing_time">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType.post_processing_time">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber.post_processing_time">(sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset.post_processing_time">(sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceReset attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase.post_processing_time">(sensirion_shdlc_driver.commands.device_reset.ShdlcCmdDeviceResetBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase.post_processing_time">(sensirion_shdlc_driver.commands.device_version.ShdlcCmdDeviceVersionBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion.post_processing_time">(sensirion_shdlc_driver.commands.device_version.ShdlcCmdGetVersion attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase.post_processing_time">(sensirion_shdlc_driver.commands.error_state.ShdlcCmdErrorStateBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState.post_processing_time">(sensirion_shdlc_driver.commands.error_state.ShdlcCmdGetErrorState attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset.post_processing_time">(sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryReset attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase.post_processing_time">(sensirion_shdlc_driver.commands.factory_reset.ShdlcCmdFactoryResetBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay.post_processing_time">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase.post_processing_time">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdReplyDelayBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay.post_processing_time">(sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdSetReplyDelay attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress.post_processing_time">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdGetSlaveAddress attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress.post_processing_time">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSetSlaveAddress attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase.post_processing_time">(sensirion_shdlc_driver.commands.slave_address.ShdlcCmdSlaveAddressBase attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime.post_processing_time">(sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdGetSystemUpTime attribute)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase.post_processing_time">(sensirion_shdlc_driver.commands.system_up_time.ShdlcCmdSystemUpTimeBase attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.product_type">product_type (sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage attribute)</a>
@@ -649,10 +1032,10 @@
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductSubType">ShdlcCmdGetProductSubType (class in sensirion_shdlc_driver.commands.device_info)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetProductType">ShdlcCmdGetProductType (class in sensirion_shdlc_driver.commands.device_info)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_shdlc_driver.commands.reply_delay.ShdlcCmdGetReplyDelay">ShdlcCmdGetReplyDelay (class in sensirion_shdlc_driver.commands.reply_delay)</a>
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.commands.device_info.ShdlcCmdGetSerialNumber">ShdlcCmdGetSerialNumber (class in sensirion_shdlc_driver.commands.device_info)</a>
@@ -721,8 +1104,12 @@
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage.size">size (sensirion_shdlc_driver.firmware_image.ShdlcFirmwareImage attribute)</a>
 </li>
-      <li><a href="api.html#sensirion_shdlc_driver.device_base.ShdlcDeviceBase.slave_address">slave_address (sensirion_shdlc_driver.device_base.ShdlcDeviceBase attribute)</a>
+      <li><a href="api.html#sensirion_shdlc_driver.device.ShdlcDevice.slave_address">slave_address (sensirion_shdlc_driver.device.ShdlcDevice attribute)</a>
+
+      <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.device_base.ShdlcDeviceBase.slave_address">(sensirion_shdlc_driver.device_base.ShdlcDeviceBase attribute)</a>
 </li>
+      </ul></li>
       <li><a href="api.html#sensirion_shdlc_driver.port.ShdlcTcpPort.socket_timeout">socket_timeout (sensirion_shdlc_driver.port.ShdlcTcpPort attribute)</a>
 </li>
       <li><a href="api.html#sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder.start_received">start_received (sensirion_shdlc_driver.serial_frame_builder.ShdlcSerialMisoFrameBuilder attribute)</a>
@@ -756,6 +1143,38 @@
   </ul></td>
 </tr></table>
 
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcAccessRightError.with_traceback">with_traceback() (sensirion_shdlc_driver.errors.ShdlcAccessRightError method)</a>
+
+      <ul>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcChecksumError.with_traceback">(sensirion_shdlc_driver.errors.ShdlcChecksumError method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError.with_traceback">(sensirion_shdlc_driver.errors.ShdlcCommandDataSizeError method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcCommandParameterError.with_traceback">(sensirion_shdlc_driver.errors.ShdlcCommandParameterError method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcDeviceError.with_traceback">(sensirion_shdlc_driver.errors.ShdlcDeviceError method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcError.with_traceback">(sensirion_shdlc_driver.errors.ShdlcError method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareImageIncompatibilityError.with_traceback">(sensirion_shdlc_driver.errors.ShdlcFirmwareImageIncompatibilityError method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareImageSignatureError.with_traceback">(sensirion_shdlc_driver.errors.ShdlcFirmwareImageSignatureError method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError.with_traceback">(sensirion_shdlc_driver.errors.ShdlcFirmwareUpdateError method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcResponseError.with_traceback">(sensirion_shdlc_driver.errors.ShdlcResponseError method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcTimeoutError.with_traceback">(sensirion_shdlc_driver.errors.ShdlcTimeoutError method)</a>
+</li>
+        <li><a href="api.html#sensirion_shdlc_driver.errors.ShdlcUnknownCommandError.with_traceback">(sensirion_shdlc_driver.errors.ShdlcUnknownCommandError method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
 
 
            </div>
@@ -768,7 +1187,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2021 Sensirion AG, Switzerland
+        &copy; Copyright 2022 Sensirion AG, Switzerland
 
     </p>
   </div>

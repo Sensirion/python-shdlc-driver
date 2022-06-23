@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Executing Custom Commands &mdash; Sensirion SHDLC Python Driver 0.1.6 documentation</title>
+  <title>Executing Custom Commands &mdash; sensirion-shdlc-driver 0.1.6 documentation</title>
   
 
   
@@ -54,7 +54,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Sensirion SHDLC Python Driver
+            <a href="index.html" class="icon icon-home"> sensirion-shdlc-driver
           
 
           
@@ -114,7 +114,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Sensirion SHDLC Python Driver</a>
+          <a href="index.html">sensirion-shdlc-driver</a>
         
       </nav>
 
@@ -177,7 +177,7 @@ are two different ways how to execute custom SHDLC commands with this driver.</p
 <h2>Using ShdlcCommand Directly<a class="headerlink" href="#using-shdlccommand-directly" title="Permalink to this headline">¶</a></h2>
 <p>The simplest way is to pass an
 <a class="reference internal" href="api.html#sensirion_shdlc_driver.command.ShdlcCommand" title="sensirion_shdlc_driver.command.ShdlcCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShdlcCommand</span></code></a> object to the
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code> method of the
+<a class="reference internal" href="api.html#sensirion_shdlc_driver.device.ShdlcDevice.execute" title="sensirion_shdlc_driver.device.ShdlcDevice.execute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code></a> method of the
 device:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sensirion_shdlc_driver</span> <span class="kn">import</span> <span class="n">ShdlcSerialPort</span><span class="p">,</span> <span class="n">ShdlcConnection</span><span class="p">,</span> <span class="n">ShdlcDevice</span>
 <span class="kn">from</span> <span class="nn">sensirion_shdlc_driver.command</span> <span class="kn">import</span> <span class="n">ShdlcCommand</span>
@@ -207,7 +207,7 @@ documentation of <a class="reference internal" href="api.html#sensirion_shdlc_dr
 <p>Another, more powerful way to implement custom commands is to create separate
 classes for each command. Especially if the raw response bytes need to be
 converted to other data types this is handy since it will make the
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code> method
+<a class="reference internal" href="api.html#sensirion_shdlc_driver.device.ShdlcDevice.execute" title="sensirion_shdlc_driver.device.ShdlcDevice.execute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code></a> method
 returning the converted response.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sensirion_shdlc_driver</span> <span class="kn">import</span> <span class="n">ShdlcSerialPort</span><span class="p">,</span> <span class="n">ShdlcConnection</span><span class="p">,</span> <span class="n">ShdlcDevice</span>
 <span class="kn">from</span> <span class="nn">sensirion_shdlc_driver.command</span> <span class="kn">import</span> <span class="n">ShdlcCommand</span>
@@ -310,7 +310,7 @@ the same way:</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2021 Sensirion AG, Switzerland
+        &copy; Copyright 2022 Sensirion AG, Switzerland
 
     </p>
   </div>
