@@ -74,5 +74,5 @@ def test_interpret_response(input, expected_time):
     cmd = ShdlcCmdGetSystemUpTime()
     cmd.check_response_length(input)
     time = cmd.interpret_response(input)
-    assert type(time) == type(expected_time)
+    assert type(time) is type(expected_time)
     assert time == expected_time

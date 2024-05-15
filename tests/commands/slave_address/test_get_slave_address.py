@@ -74,5 +74,5 @@ def test_interpret_response(input, expected_address):
     cmd = ShdlcCmdGetSlaveAddress()
     cmd.check_response_length(input)
     address = cmd.interpret_response(input)
-    assert type(address) == type(expected_address)
+    assert type(address) is type(expected_address)
     assert address == expected_address
