@@ -49,8 +49,8 @@ setup(
             'flake8~=3.7.8',
             'intelhex~=2.0',  # from the "fwupdate" extra
             'mock~=3.0.0',
-            'pytest~=4.6.11',
-            'pytest-cov~=2.12.1',
+            'pytest~=6.2.5',
+            'pytest-cov~=3.0.0',
         ]
     },
     classifiers=[
