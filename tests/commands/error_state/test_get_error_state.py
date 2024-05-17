@@ -77,7 +77,7 @@ def test_interpret_response(input, expected_state, expected_last_error):
     cmd = ShdlcCmdGetErrorState(clear=False)
     cmd.check_response_length(input)
     state, last_error = cmd.interpret_response(input)
-    assert type(state) == type(expected_state)
-    assert type(last_error) == type(expected_last_error)
+    assert type(state) is type(expected_state)
+    assert type(last_error) is type(expected_last_error)
     assert state == expected_state
     assert last_error == expected_last_error

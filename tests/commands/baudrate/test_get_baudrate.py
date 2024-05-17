@@ -73,5 +73,5 @@ def test_interpret_response(input, expected_baudrate):
     cmd = ShdlcCmdGetBaudrate()
     cmd.check_response_length(input)
     address = cmd.interpret_response(input)
-    assert type(address) == type(expected_baudrate)
+    assert type(address) is type(expected_baudrate)
     assert address == expected_baudrate
