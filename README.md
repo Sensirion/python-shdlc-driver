@@ -2,11 +2,11 @@
 
 This repository contains the base driver for Sensirion SHDLC devices as a Python
 package. For details, please read the package description in
-[README.rst](README.rst).
+[README.rst](https://github.com/Sensirion/python-shdlc-driver/blob/master/README.rst).
 
 ## Usage
 
-See package description in [README.rst](README.rst) and user manual at
+See package description in [README.rst](https://github.com/Sensirion/python-shdlc-driver/blob/master/README.rst) and user manual at
 https://sensirion.github.io/python-shdlc-driver/.
 
 ## Development
@@ -70,4 +70,4 @@ sphinx-versioning build docs docs/_build/html  # Build documentation
 
 ## License
 
-See [LICENSE](LICENSE).
+See [LICENSE](https://github.com/Sensirion/python-shdlc-driver/blob/master/LICENSE).
