@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling >= 1.26", "wheel >= 0.45.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sensirion-shdlc-driver"
+description = "Base Driver for Communicating With SHDLC Devices"
+
+readme = "README.md"
+version = "1.0.1"
+requires-python = ">=3.8,<4.0"
+
+authors = [
+    { name = "Sensirion", email = "info@sensirion.com" },
+]
+
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+
+keywords = ["sensirion", "shldc", "driver"]
+
+classifiers = [
+    "Intended Audience :: Developers",
+    "Topic :: System :: Hardware :: Hardware Drivers",
+    "Topic :: Software Development :: Build Tools",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = ['pyserial~=3.0', 'intelhex>=2.3.0']
+
+[project.optional-dependencies]
+
+docs = [
+
+    "sphinx-rtd-theme==3.0.2",
+    "sphinx==8.2.3"
+]
+
+test = [
+    "flake8>=7.1.0",
+    "mock~=5.2.0",
+    "pytest>=8.3.5",
+    "pytest-cov>=5.0.0",
+    "setuptools>=73.2.0"
+]
+
+[project.urls]
+Changelog = "https://github.com/Sensirion/python-shdlc-driver/blob/master/CHANGELOG.rst"
+Repository = "https://github.com/sensirion/python-shdlc-driver"
+Documentation = "https://sensirion.github.io/python-shdlc-driver"
+
