@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+0.1.6
+:::::
+- Update project structure
+
 0.1.5
 :::::
 - Move parts of ``ShdlcDevice`` into new base class ``ShdlcDeviceBase``

@@ -9,13 +9,13 @@ def pytest_addoption(parser):
     """
     Register command line options
     """
-    parser.addoption("--serial-port", action="store", type="string")
-    parser.addoption("--serial-bitrate", action="store", type="int",
+    parser.addoption("--serial-port", action="store", type=str)
+    parser.addoption("--serial-bitrate", action="store", type=int,
                      default=115200)
-    parser.addoption("--serial-address", action="store", type="int", default=0)
-    parser.addoption("--tcp-ip", action="store", type="string")
-    parser.addoption("--tcp-port", action="store", type="int")
-    parser.addoption("--tcp-address", action="store", type="int", default=0)
+    parser.addoption("--serial-address", action="store", type=int, default=0)
+    parser.addoption("--tcp-ip", action="store", type=str)
+    parser.addoption("--tcp-port", action="store", type=int)
+    parser.addoption("--tcp-address", action="store", type=int, default=0)
 
 
 def _get_serial_port(config, validate=False):
