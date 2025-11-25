@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+1.0.2
+:::::
+- Fix version
+
 0.1.6
 :::::
 - Update project structure
