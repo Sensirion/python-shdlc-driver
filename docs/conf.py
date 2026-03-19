@@ -11,15 +11,15 @@ import sys
 import sphinx.ext.autodoc
 from datetime import datetime
 
-import importlib.metadata as metadata
+import pkg_resources
 
 # Add project directory such that sphinx can detect the package.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # -- Project information -----------------------------------------------------
-distribution = metadata.distribution('sensirion-shdlc-driver')
+distribution = pkg_resources.get_distribution('sensirion_shdlc_driver')
 
-project = distribution.name
+project = distribution.project_name
 copyright = u'{} Sensirion AG, Switzerland'.format(datetime.now().year)
 author = 'Sensirion AG'
 version = distribution.version
