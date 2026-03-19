@@ -11,4 +11,4 @@ jobs:
       uses: sensirion/.github/.github/workflows/driver.python.documentation.yml@main
       with:
         run-environment: "ubuntu-24.04"
-        build-python-version: 3.6
+        build-python-version: 3.8
