@@ -17,7 +17,7 @@ import importlib.metadata as metadata
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # -- Project information -----------------------------------------------------
-distribution = metadata.distribution('sensirion_shdlc_driver')
+distribution = metadata.distribution('sensirion-shdlc-driver')
 
 project = distribution.name
 copyright = u'{} Sensirion AG, Switzerland'.format(datetime.now().year)
