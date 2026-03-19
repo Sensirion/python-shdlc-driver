@@ -8,4 +8,4 @@ documentation is not publicly available (yet). If you need it, please contact
 our `customer support`_.
 
 .. _ISO HDLC: https://en.wikipedia.org/wiki/High-Level_Data_Link_Control
-.. _customer support: https://www.sensirion.com/en/about-us/contact/
+.. _customer support: https://sensirion.com/forms/technical-support
