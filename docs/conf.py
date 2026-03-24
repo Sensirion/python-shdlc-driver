@@ -6,12 +6,10 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import importlib.metadata as metadata
 import os
 import sys
-import sphinx.ext.autodoc
 from datetime import datetime
-
-import importlib.metadata as metadata
 
 # Add project directory such that sphinx can detect the package.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -48,7 +46,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
-
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -58,18 +55,14 @@ html_theme = 'sphinx_rtd_theme'
 
 html_favicon = 'favicon.ico'
 
-# Workaround for weirdly formatted function parameters. See https://github.com/readthedocs/sphinx_rtd_theme/issues/766
-html4_writer = True
-
-
 # -- Extension configuration -------------------------------------------------
 
 autodoc_member_order = 'bysource'
 
 autodoc_default_flags = [
     'members',
-    'special-members',      # To see __init__()
-    'inherited-members',    # To see the methods from base classes
+    'special-members',  # To see __init__()
+    'inherited-members',  # To see the methods from base classes
 ]
 
 
@@ -81,13 +74,3 @@ def autodoc_skip_member(app, what, name, obj, skip, options):
 
 def setup(app):
     app.connect('autodoc-skip-member', autodoc_skip_member)
-
-
-# Workaround for "=None" documentation of instance attributes
-# (see https://github.com/sphinx-doc/sphinx/issues/2044)
-sphinx.ext.autodoc.InstanceAttributeDocumenter.add_directive_header = \
-    sphinx.ext.autodoc.ClassLevelDocumenter.add_directive_header
-
-scv_whitelist_branches = ('master',)
-
-scv_grm_exclude = ('.gitignore', '.nojekyll')
