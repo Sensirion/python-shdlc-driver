@@ -5,6 +5,8 @@ on:
       - master
     tags:
       - "[0-9]+.[0-9]+.[0-9]+"
+  workflow_dispatch:
+
 
 jobs:
   documentation:
@@ -12,3 +14,4 @@ jobs:
       with:
         run-environment: "ubuntu-24.04"
         build-python-version: 3.11
+        use-project-requirements: true
