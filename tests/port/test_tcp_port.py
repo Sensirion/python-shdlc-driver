@@ -166,7 +166,6 @@ def test_transceive_timeout(tcp_ip, tcp_port):
                 response_timeout=0.1)
 
 
-@pytest.mark.xfail(strict=True, reason="not handling partial send (#14)")
 def test_send_frame_handles_partial_send():
     """
     Test if the transceive() transmits the complete frame even if the

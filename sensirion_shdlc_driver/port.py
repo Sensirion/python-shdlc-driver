@@ -484,12 +484,17 @@ class ShdlcTcpPort(ShdlcPort):
         :param byte slave_address: Slave address.
         :param byte command_id: SHDLC command ID.
         :param bytes-like data: Payload.
+        :raise ~sensirion_shdlc_driver.errors.ShdlcTimeoutError:
+            If request transmit failed.
         """
         builder = ShdlcSerialMosiFrameBuilder(slave_address, command_id, data)
         tx_data = builder.to_bytes()
         log.debug("ShdlcTcpPort send raw: [{}]".format(
                   ", ".join(["0x%.2X" % i for i in bytearray(tx_data)])))
-        self._socket.send(tx_data)
+        try:
+            self._socket.sendall(tx_data)
+        except socket.error:
+            raise ShdlcTimeoutError()
 
     def _receive_frame(self):
         """
