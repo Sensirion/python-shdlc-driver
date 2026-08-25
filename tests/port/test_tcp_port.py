@@ -82,7 +82,7 @@ class ShdlcTcpServer(object):
                 if data is not None:
                     self.received_data.append(data)
                     for response in self.response_data:
-                        sock.send(response)
+                        sock.sendall(response)
             self._socket.close()
         except IOError:
             pass  # Probably client disconnected, which is fine
