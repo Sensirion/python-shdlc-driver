@@ -9,6 +9,30 @@ import socket
 import threading
 
 
+class FakePartialSendSocket(object):
+    """
+    Fake socket which only accepts a limited number of bytes per send() call,
+    mimicking a real socket whose OS send buffer is temporarily full.
+    """
+
+    def __init__(self, max_chunk_size=2):
+        self.sent = b""
+        self._max_chunk_size = max_chunk_size
+
+    def send(self, data):
+        chunk = data[: self._max_chunk_size]
+        self.sent += chunk
+        return len(chunk)
+
+    def sendall(self, data):
+        while data:
+            sent_size = self.send(data)
+            data = data[sent_size:]
+
+    def settimeout(self, *args, **kwargs):
+        pass
+
+
 class ShdlcTcpServer(object):
     """
     Helper class to run a virtual SHDLC TCP server on localhost. The
@@ -140,6 +164,21 @@ def test_transceive_timeout(tcp_ip, tcp_port):
             addr, cmd, state, data = port.transceive(
                 slave_address=42, command_id=0xD1, data=b'',
                 response_timeout=0.1)
+
+
+@pytest.mark.xfail(strict=True, reason="not handling partial send (#14)")
+def test_send_frame_handles_partial_send():
+    """
+    Test if the transceive() transmits the complete frame even if the
+    underlying socket only accepts part of the data per send(). Emulates slow
+    or congested network link condition.
+    """
+    port = ShdlcTcpPort("localhost", 0, do_open=False)
+    port._socket = FakePartialSendSocket(max_chunk_size=2)
+
+    data = b"\x01\x02\x03\x04\x05"
+    port._send_frame(slave_address=42, command_id=0xD1, data=data)
+    assert port._socket.sent == b"\x7e\x2a\xd1\x05\x01\x02\x03\x04\x05\xf0\x7e"
 
 
 def test_transceive_segmented(tcp_server):
