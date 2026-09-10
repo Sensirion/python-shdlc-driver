@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+Unreleased
+:::::
+- Fix handling of incomplete SHDLC frame transmit over TCP
+
 1.0.2
 :::::
 - Fix version
