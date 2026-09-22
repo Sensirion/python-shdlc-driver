@@ -373,6 +373,7 @@ class ShdlcTcpPort(ShdlcPort):
         self._is_open = False
         self._lock = RLock()
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self._socket.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         self._socket.settimeout(self._socket_timeout)
         if do_open:
             self.open()

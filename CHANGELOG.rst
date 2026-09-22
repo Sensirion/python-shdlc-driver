@@ -4,6 +4,7 @@ CHANGELOG
 Unreleased
 :::::
 - Fix handling of incomplete SHDLC frame transmit over TCP
+- Configure TCP socket to disable Nagle for SHDLC frame transmit
 
 1.0.2
 :::::
