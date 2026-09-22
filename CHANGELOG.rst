@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+Unreleased
+:::::
+- Configure TCP socket to disable Nagle for SHDLC frame transmit
+
 1.0.2
 :::::
 - Fix version
